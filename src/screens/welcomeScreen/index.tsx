@@ -19,18 +19,13 @@ import {
     LOGIN_TEXT,
     VERSION_TEXT,
     SPONSERS_DATA,
-    INPUT_DATA_SINGUP,
-    INPUT_DATA_SINGIN,
     SIGNIN_TEXT,
-    SIGNIN_BUTTON_TEXT,
-    SIGNUP_BUTTON_TEXT
 } from "@/constants";
 import { ligthTheme } from "@/theme";
 import SingUpButton from "@/components/singUpButton";
 import React, { useState } from "react";
 import ModalContainer from "@/components/ModalContainer";
 import SingModal from "@/components/SingModal";
-
 
 interface SingUpButtonData {
     onClick: () => void
@@ -55,18 +50,16 @@ function WelcomeScreen() {
     function handleCreateAccount() {
         handleToggleModel()
         handleSetModalContent(<SingModal
-            headerText={SIGNUP_CREATE_ACCOUNT_TEXT}
-            buttonText={SIGNUP_BUTTON_TEXT}
-            flatlistData={INPUT_DATA_SINGUP}
+            title={SIGNUP_CREATE_ACCOUNT_TEXT}
+            type="SingUp"
             onPress={handleCloseModel} />)
     }
 
     function handleLogin() {
         handleToggleModel()
         handleSetModalContent(<SingModal
-            headerText={SIGNIN_TEXT}
-            buttonText={SIGNIN_BUTTON_TEXT}
-            flatlistData={INPUT_DATA_SINGIN}
+            title={SIGNIN_TEXT}
+            type="SingIn"
             onPress={handleCloseModel} />)
     }
 
@@ -145,7 +138,6 @@ function WelcomeScreen() {
                     </Text>
                 </View>
             </View>
-
 
             <View style={styles.footer}>
                 <View style={styles.sponsoresContainer}>
