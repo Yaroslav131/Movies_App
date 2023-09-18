@@ -30,39 +30,3 @@ export const ALREADY_HAS_ACCOUNT_TEXT = "Already has an account? ";
 export const LOGIN_TEXT = " Login please."
 export const VERSION_TEXT = "2023 Version 0.0.1."
 export const CREATE_ACC_TEXT = "Create an account"
-
-export const INPUT_DATA_SINGUP: singInput[] = [
-    {
-        image: IMAGES.yourName,
-        type: "Name",
-        placeholder: "Enter your name"
-    },
-    {
-        image: IMAGES.yourSername,
-        type: "Name",
-        placeholder: "Enter your name"
-    },
-    {
-        image: IMAGES.yourEmail,
-        type: "Mail",
-        placeholder: "Enter your email"
-    },
-    {
-        image: IMAGES.yourPassword,
-        type: "Password",
-        placeholder: "Enter strong password"
-    },
-];
-
-export const INPUT_DATA_SINGIN: singInput[] = [
-    {
-        image: IMAGES.yourEmail,
-        type: "Mail",
-        placeholder: "Enter your email"
-    },
-    {
-        image: IMAGES.yourPassword,
-        type: "Password",
-        placeholder: "Enter your password"
-    },
-];

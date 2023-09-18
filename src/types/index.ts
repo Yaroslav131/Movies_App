@@ -1,17 +1,17 @@
 import { ImageProps } from "react-native";
 
 export interface sponsorsDataType {
-
     image: ImageProps;
 }
 
-type inputType = "Name" | "Password" | "Mail"
-
-
 export interface singInput {
+    onChangeText: (e: string | React.ChangeEvent<any>) => void
+    onBlur: (e: any) => void
+    value: string
+    errorText: string | undefined;
     image: ImageProps;
-    type: inputType
     placeholder: string
+    touched: any
 }
 
 export interface Theme {
@@ -50,4 +50,5 @@ export interface Theme {
         buttonBackgroundColor: string;
         color: string;
     };
+
 }
