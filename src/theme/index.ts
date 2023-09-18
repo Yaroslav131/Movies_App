@@ -1,4 +1,6 @@
-export const ligthTheme = {
+import { Theme } from "@/types";
+
+export const ligthTheme: Theme = {
     singUpButton: {
         addAcc: {
             backgroundColor: "#404040",
@@ -17,5 +19,21 @@ export const ligthTheme = {
             color: "#FFF"
         }
     },
-
+    welcomScreen: {
+        backgroundColor: "#1E1F27",
+        color: "#FFF"
+    },
+    modals: {
+        backgroundColor: "#2E2E2E",
+    },
+    singInput: {
+        placeholderTextColor: "#FFF",
+        textColor: "#FFF",
+        borderColor: "#FFF",
+    },
+    singModal: {
+        headerTextColor: "#DBDBDB",
+        buttonBackgroundColor: "#D98639",
+        color: "#FFF",
+    },
 }

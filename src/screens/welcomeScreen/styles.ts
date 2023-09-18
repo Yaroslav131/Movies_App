@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#1E1F27",
         alignItems: "center",
         justifyContent: "space-between"
     },
@@ -17,7 +16,6 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     welcomText: {
-        color: "#FFF",
         fontSize: 32,
         width: "70%",
         fontFamily: "inriaSans-lightItalic"
@@ -26,7 +24,6 @@ const styles = StyleSheet.create({
         fontFamily: "inter-regular",
         fontSize: 15,
         fontStyle: "italic",
-        color: "#FFF"
     },
     loginText: {
         textDecorationLine: "underline"
@@ -39,7 +36,6 @@ const styles = StyleSheet.create({
     },
     versionText: {
         fontFamily: "inter-light",
-        color: "#FFF",
         fontSize: 15
     },
     mainContant: {
@@ -51,7 +47,6 @@ const styles = StyleSheet.create({
     footer: {
         flex: 1,
         width: "100%",
-      
         gap: 20,
         justifyContent: "center",
         alignItems: "center",

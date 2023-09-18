@@ -8,4 +8,9 @@ export const IMAGES = {
     dcIcon: require('./dcIcon.png'),
     warnerIcon: require('./warnerIcon.png'),
     netflixIcon: require('./netflixIcon.png'),
+    cancel: require('./cancel.png'),
+    yourName: require('./yourName.png'),
+    yourEmail: require('./yourEmail.png'),
+    yourPassword: require('./yourPassword.png'),
+    yourSername: require('./yourSername.png'),
 };
