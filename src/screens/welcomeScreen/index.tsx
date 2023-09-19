@@ -26,7 +26,7 @@ import SingUpButton from "@/components/singUpButton";
 import React, { useState } from "react";
 import ModalContainer from "@/components/ModalContainer";
 import SingModal from "@/components/SingModal";
-import { googleSingIn } from "@/api/firebase";
+import { googleSingIn, facebookSingIn } from "@/api/firebase";
 
 interface SingUpButtonData {
     onClick: () => void
@@ -95,7 +95,7 @@ function WelcomeScreen() {
             buttonText: SIGNUP_CONTINUE_WITH_FACEBOOK_TEXT,
         },
         {
-            onClick: () => { },
+            onClick: () => { facebookSingIn() },
 
             image: IMAGES.addGithubButton,
             colors: theme.singUpButton.gitHubAcc,

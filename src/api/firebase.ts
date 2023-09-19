@@ -1,6 +1,8 @@
+import { onFacebookButtonPress } from '@/config/firebase/FacebookConfig';
 import { singInWithGoogle } from '@/config/firebase/GoogleSingIn';
 import auth from '@react-native-firebase/auth';
 import { firebase } from '@react-native-firebase/database';
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 
 
 export function handleEmailSingUp(email: string, password: string, name: string, sername: string) {
@@ -44,3 +46,15 @@ export async function googleSingIn() {
         console.log("Seccess", data)
     })
 }
+
+export async function facebookSingIn() {
+    onFacebookButtonPress().then(data => {
+        if (!data) {
+            console.log("No data")
+            return
+        }
+
+        console.log("Seccess", data)
+    })
+}
+
