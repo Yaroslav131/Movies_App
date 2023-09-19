@@ -3,6 +3,7 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import auth from '@react-native-firebase/auth';
 import { firebase } from '@react-native-firebase/database';
 import Snackbar from 'react-native-snackbar';
+import Config from 'react-native-config';
 
 export function handleEmailSingUp(email: string, password: string, name: string, sername: string) {
     auth()
@@ -12,7 +13,7 @@ export function handleEmailSingUp(email: string, password: string, name: string,
 
             await firebase
                 .app()
-                .database('https://moviesapp-d573f-default-rtdb.europe-west1.firebasedatabase.app/')
+                .database(Config.FIREBASE_DATABASE_URL)
                 .ref(`/users/${user.uid}`)
                 .set({
                     firstName: name,
@@ -51,7 +52,7 @@ export const signInWithGoogle = async () => {
     try {
         GoogleSignin.configure({
             offlineAccess: false,
-            webClientId: "149137953667-70q5mtem75rqpo31e3n54kvueudoo56u.apps.googleusercontent.com",
+            webClientId: Config.WEB_CLIENT_ID,
             scopes: ["profile", "email"]
         })
 
@@ -69,7 +70,7 @@ export const signInWithGoogle = async () => {
 
             await firebase
                 .app()
-                .database('https://moviesapp-d573f-default-rtdb.europe-west1.firebasedatabase.app/')
+                .database(Config.FIREBASE_DATABASE_URL)
                 .ref(`/users/${user.uid}`)
                 .set({
                     firstName: userInfo.user.givenName,
@@ -106,7 +107,7 @@ export async function onFacebookButtonPress() {
         if (userCredential.additionalUserInfo?.isNewUser) {
             await firebase
                 .app()
-                .database('https://moviesapp-d573f-default-rtdb.europe-west1.firebasedatabase.app/')
+                .database(Config.FIREBASE_DATABASE_URL)
                 .ref(`/users/${user.uid}`)
                 .set({
                     firstName: user.displayName,
