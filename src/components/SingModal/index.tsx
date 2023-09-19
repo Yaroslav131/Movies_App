@@ -10,6 +10,11 @@ import styles from "./styles";
 import { ligthTheme } from "@/theme";
 import { IMAGES } from "@assets/images";
 import {
+    CREATE_PASSWORD_PLACE_HOLDER,
+    EMAIL_PLACE_HOLDER,
+    NAME_PLACE_HOLDER,
+    PASSWORD_PLACE_HOLDER,
+    SERNAME_PLACE_HOLDER,
     SIGNIN_BUTTON_TEXT,
     SIGNUP_BUTTON_TEXT,
 } from "@/constants";
@@ -52,12 +57,12 @@ function SingModal({ onPress, type, title }: SingModalProps) {
                         image={IMAGES.yourName}
                         component={AppFormField}
                         name="name"
-                        placeholder="Enter your name" />
+                        placeholder={NAME_PLACE_HOLDER} />
                     <Field
                         image={IMAGES.yourSername}
                         component={AppFormField}
                         name="sername"
-                        placeholder="Enter your sername" />
+                        placeholder={SERNAME_PLACE_HOLDER} />
                     <Field
                         image={IMAGES.yourEmail}
                         component={AppFormField}
@@ -65,12 +70,12 @@ function SingModal({ onPress, type, title }: SingModalProps) {
                         autoCompleteType="email"
                         keyboardType="email-address"
                         textContentType="emailAddress"
-                        placeholder="Enter your email" />
+                        placeholder={EMAIL_PLACE_HOLDER} />
                     <Field
                         image={IMAGES.yourEmail}
                         component={AppFormField}
                         name="password"
-                        placeholder="Enter strong password"
+                        placeholder={CREATE_PASSWORD_PLACE_HOLDER}
                         secureTextEntry
                         textContentType="password"
                     />
@@ -89,12 +94,12 @@ function SingModal({ onPress, type, title }: SingModalProps) {
                         autoCompleteType="email"
                         keyboardType="email-address"
                         textContentType="emailAddress"
-                        placeholder="Enter your email" />
+                        placeholder={EMAIL_PLACE_HOLDER} />
                     <Field
                         image={IMAGES.yourEmail}
                         component={AppFormField}
                         name="password"
-                        placeholder="Enter your password"
+                        placeholder={PASSWORD_PLACE_HOLDER}
                         secureTextEntry
                         textContentType="password"
                     />
