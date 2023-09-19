@@ -1,9 +1,7 @@
-import { onFacebookButtonPress } from '@/config/firebase/FacebookConfig';
-import { singInWithGoogle } from '@/config/firebase/GoogleSingIn';
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import auth from '@react-native-firebase/auth';
 import { firebase } from '@react-native-firebase/database';
-import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
-
 
 export function handleEmailSingUp(email: string, password: string, name: string, sername: string) {
     auth()
@@ -35,26 +33,77 @@ export function handleEmailSingUp(email: string, password: string, name: string,
         });
 }
 
+export const signInWithGoogle = async () => {
+    try {
+        GoogleSignin.configure({
+            offlineAccess: false,
+            webClientId: "149137953667-70q5mtem75rqpo31e3n54kvueudoo56u.apps.googleusercontent.com",
+            scopes: ["profile", "email"]
+        })
 
-export async function googleSingIn() {
-    singInWithGoogle().then(data => {
-        if (!data) {
-            console.log("No data")
-            return
+        await GoogleSignin.hasPlayServices();
+
+        const userInfo = await GoogleSignin.signIn();
+        const { idToken } = userInfo;
+        const googleCredentials = auth.GoogleAuthProvider.credential(idToken);
+
+        const userCredential = await auth().signInWithCredential(googleCredentials);
+        const user = userCredential.user;
+
+
+        if (userCredential.additionalUserInfo?.isNewUser) {
+
+            await firebase
+                .app()
+                .database('https://moviesapp-d573f-default-rtdb.europe-west1.firebasedatabase.app/')
+                .ref(`/users/${user.uid}`)
+                .set({
+                    firstName: userInfo.user.givenName,
+                    lastName: userInfo.user.familyName,
+                });
         }
 
-        console.log("Seccess", data)
-    })
+        console.log("Success", userInfo);
+
+    } catch (error: any) {
+        console.log("Google Sign in Error", error);
+    }
 }
 
-export async function facebookSingIn() {
-    onFacebookButtonPress().then(data => {
-        if (!data) {
-            console.log("No data")
-            return
+export async function onFacebookButtonPress() {
+    try {
+        const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+
+        if (result.isCancelled) {
+            throw 'User cancelled the login process';
         }
 
-        console.log("Seccess", data)
-    })
-}
+        const data = await AccessToken.getCurrentAccessToken();
 
+        if (!data) {
+            throw 'Something went wrong obtaining access token';
+        }
+
+        const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
+
+        const userCredential = await auth().signInWithCredential(facebookCredential);
+        const user = userCredential.user;
+
+        if (userCredential.additionalUserInfo?.isNewUser) {
+            // Save user data to Firebase Realtime Database
+            await firebase
+                .app()
+                .database('https://moviesapp-d573f-default-rtdb.europe-west1.firebasedatabase.app/')
+                .ref(`/users/${user.uid}`)
+                .set({
+                    firstName: user.displayName, 
+                    lastName: "",
+                });
+        }
+
+        return userCredential;
+    } catch (error) {
+        console.log('Facebook Sign in Error', error);
+        throw error;
+    }
+}
