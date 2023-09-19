@@ -27,8 +27,6 @@ export const validationSingUpSchema = Yup.object().shape({
 });
 
 export const validationSingInSchema = Yup.object().shape({
-    name: Yup.string().required(NAME_IS_REQUIRED).label('Name'),
-    sername: Yup.string().required(NAME_IS_REQUIRED).label('Name'),
     email: Yup.string()
         .email(VALID_EMAIL)
         .required(EMAIL_IS_REQUIRED)

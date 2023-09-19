@@ -23,7 +23,7 @@ import AppFormField from "../AppFormField";
 import AppForm from "../AppForm";
 import AppFormSubmitButton from "../AppFormSubmitButton";
 import { validationSingInSchema, validationSingUpSchema } from "./constans";
-import { handleEmailSingUp } from "@/api/firebase";
+import { handleEmailSignIn, handleEmailSingUp } from "@/api/firebase";
 
 interface SingModalProps {
     title: string
@@ -50,8 +50,10 @@ function SingModal({ onPress, type, title }: SingModalProps) {
                 <AppForm
                     initialValues={{ name: '', sername: "", email: '', password: '' }}
                     validationSchema={validationSingUpSchema}
-                    onSubmit={(values: { name: string, sername: string, email: string, password: string }) =>
-                        handleEmailSingUp(values.email, values.password, values.name, values.sername)}>
+                    onSubmit={(values: { name: string, sername: string, email: string, password: string }) => {
+                        handleEmailSingUp(values.email, values.password, values.name, values.sername);
+                        onPress();
+                    }}>
 
                     <Field
                         image={IMAGES.yourName}
@@ -85,8 +87,10 @@ function SingModal({ onPress, type, title }: SingModalProps) {
                 <AppForm
                     initialValues={{ email: '', password: '' }}
                     validationSchema={validationSingInSchema}
-                    onSubmit={(values: any) => console.log(values)}>
-
+                    onSubmit={(values: { name: string, sername: string, email: string, password: string }) => {
+                        handleEmailSignIn(values.email, values.password)
+                        onPress();
+                    }}>
                     <Field
                         image={IMAGES.yourEmail}
                         component={AppFormField}
