@@ -36,4 +36,7 @@ export const ligthTheme: Theme = {
         buttonBackgroundColor: "#D98639",
         color: "#FFF",
     },
+    statusBar:{
+        color: "#1E1F27",
+    }
 }

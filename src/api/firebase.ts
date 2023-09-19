@@ -2,6 +2,7 @@ import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import auth from '@react-native-firebase/auth';
 import { firebase } from '@react-native-firebase/database';
+import Snackbar from 'react-native-snackbar';
 
 export function handleEmailSingUp(email: string, password: string, name: string, sername: string) {
     auth()
@@ -18,18 +19,31 @@ export function handleEmailSingUp(email: string, password: string, name: string,
                     lastName: sername,
                 });
 
-            console.log('User account created & signed in!');
+            Snackbar.show({
+                text: `User account created & signed in!`,
+                duration: Snackbar.LENGTH_LONG,
+
+            });
         })
         .catch((error) => {
             if (error.code === 'auth/email-already-in-use') {
-                console.log('That email address is already in use!');
+                Snackbar.show({
+                    text: 'That email address is already in use!',
+                    duration: Snackbar.LENGTH_LONG,
+                });
             }
 
             if (error.code === 'auth/invalid-email') {
-                console.log('That email address is invalid!');
+                Snackbar.show({
+                    text: 'That email address is invalid!',
+                    duration: Snackbar.LENGTH_LONG,
+                });
             }
 
-            console.error(error);
+            Snackbar.show({
+                text: error,
+                duration: Snackbar.LENGTH_LONG,
+            });
         });
 }
 
@@ -62,11 +76,11 @@ export const signInWithGoogle = async () => {
                     lastName: userInfo.user.familyName,
                 });
         }
-
-        console.log("Success", userInfo);
-
     } catch (error: any) {
-        console.log("Google Sign in Error", error);
+        Snackbar.show({
+            text: `Google Sign in Error ${error}`,
+            duration: Snackbar.LENGTH_LONG,
+        });
     }
 }
 
@@ -90,20 +104,21 @@ export async function onFacebookButtonPress() {
         const user = userCredential.user;
 
         if (userCredential.additionalUserInfo?.isNewUser) {
-            // Save user data to Firebase Realtime Database
             await firebase
                 .app()
                 .database('https://moviesapp-d573f-default-rtdb.europe-west1.firebasedatabase.app/')
                 .ref(`/users/${user.uid}`)
                 .set({
-                    firstName: user.displayName, 
+                    firstName: user.displayName,
                     lastName: "",
                 });
         }
 
         return userCredential;
     } catch (error) {
-        console.log('Facebook Sign in Error', error);
-        throw error;
+        Snackbar.show({
+            text: `Google Sign in Error ${error}`,
+            duration: Snackbar.LENGTH_LONG,
+        });
     }
 }

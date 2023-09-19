@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { StatusBar, Appearance } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import WelcomeScreen from './src/screens/welcomeScreen';
 import auth from '@react-native-firebase/auth';
+import { ligthTheme } from '@/theme';
 
 function App(): JSX.Element {
   const [initializing, setInitializing] = useState(true);
@@ -22,10 +23,19 @@ function App(): JSX.Element {
 
   if (initializing) return <></>;
 
+  const theme = Appearance.getColorScheme()
+
+  const background = theme === "light" ? ligthTheme.statusBar.color
+    : ligthTheme.statusBar.color
+
   // if (!user) {
-    return (
+  return (
+    <>
+      <StatusBar backgroundColor={background} 
+      barStyle={theme === "light" ? "light-content" : "light-content"} />
       <WelcomeScreen />
-    );
+    </>
+  );
   // }
 
   // return (

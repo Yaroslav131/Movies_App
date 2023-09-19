@@ -50,5 +50,8 @@ export interface Theme {
         buttonBackgroundColor: string;
         color: string;
     };
+    statusBar: {
+        color: string,
+    }
 
 }
