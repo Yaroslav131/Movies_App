@@ -1,11 +1,7 @@
+import { singInWithGoogle } from '@/config/firebase/GoogleSingIn';
 import auth from '@react-native-firebase/auth';
 import { firebase } from '@react-native-firebase/database';
 
-// import { GoogleSignin } from '@react-native-google-signin/google-signin';
-
-// GoogleSignin.configure({
-//     webClientId: '149137953667-70q5mtem75rqpo31e3n54kvueudoo56u.apps.googleusercontent.com"',
-// });
 
 export function handleEmailSingUp(email: string, password: string, name: string, sername: string) {
     auth()
@@ -38,15 +34,13 @@ export function handleEmailSingUp(email: string, password: string, name: string,
 }
 
 
-// export async function onGoogleButtonPress() {
+export async function googleSingIn() {
+    singInWithGoogle().then(data => {
+        if (!data) {
+            console.log("No data")
+            return
+        }
 
-//     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-
-//     const { idToken } = await GoogleSignin.signIn();
-
-
-//     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-
-//     return auth().signInWithCredential(googleCredential);
-// }
+        console.log("Seccess", data)
+    })
+}
