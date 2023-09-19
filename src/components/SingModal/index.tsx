@@ -18,14 +18,15 @@ import AppFormField from "../AppFormField";
 import AppForm from "../AppForm";
 import AppFormSubmitButton from "../AppFormSubmitButton";
 import { validationSingInSchema, validationSingUpSchema } from "./constans";
+import { handleEmailSingUp } from "@/api/firebase";
 
 interface SingModalProps {
-    title:string
+    title: string
     onPress: () => void,
     type: "SingIn" | "SingUp"
 }
 
-function SingModal({ onPress, type,title }: SingModalProps) {
+function SingModal({ onPress, type, title }: SingModalProps) {
     const theme = useColorScheme() === "dark" ? ligthTheme : ligthTheme
 
     return (
@@ -44,7 +45,8 @@ function SingModal({ onPress, type,title }: SingModalProps) {
                 <AppForm
                     initialValues={{ name: '', sername: "", email: '', password: '' }}
                     validationSchema={validationSingUpSchema}
-                    onSubmit={(values: any) => console.log(values)}>
+                    onSubmit={(values: { name: string, sername: string, email: string, password: string }) =>
+                        handleEmailSingUp(values.email, values.password, values.name, values.sername)}>
 
                     <Field
                         image={IMAGES.yourName}
