@@ -35,14 +35,36 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         padding: 5,
         width: "40%",
-        alignSelf:"center",
-        borderRadius:15,
-        marginTop:20
+        alignSelf: "center",
+        borderRadius: 15,
+        marginTop: 20
     },
 
     singUpButtonText: {
         fontFamily: "poppins-light",
         fontSize: 20,
+    },
+    difficultyLevelContainer: {
+        width: "80%",
+        alignSelf: "center"
+    },
+    difficultyLevelText: {
+        fontSize: 18,
+        fontFamily: "poppins-light",
+    },
+    levelBarContainer: {
+        width: '100%',
+        height: 20,
+        backgroundColor: 'lightgray',
+        borderRadius: 10,
+        
+    },
+    levelBar: {
+        width: '100%',
+
+        height: 20,
+        borderRadius: 10,
+        backgroundColor: "#D98639",
     }
 })
 

@@ -46,3 +46,5 @@ export const PASSWORD_SMALL_LETTER = 'Password must have a lowercase letter';
 export const PASSWORD_CAPITAL_LETTER = 'Password must have an uppercase letter';
 export const PASSWORD_NUMBER = 'Password must have a number';
 export const PASSWORD_MIN_LENGTH = (min: number) => `Password must be at least ${min} characters`;
+
+export const PASSWORD_DIFFICULTY_TEXT ="Password complexity:"

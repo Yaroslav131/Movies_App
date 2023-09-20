@@ -4,6 +4,7 @@ import { ligthTheme } from "@/theme";
 
 function AppFormField(props: any) {
     const {
+        onChangePassword,
         placeholder,
         image: ImageProps,
         field: { name, onBlur, onChange, value },
@@ -24,7 +25,13 @@ function AppFormField(props: any) {
                     <Image style={styles.image} source={props.image} />
                 </View>
                 <TextInput
-                    onChangeText={text => onChange(name)(text)}
+                    onChangeText={text => {
+                        if (name === "password") {
+                            onChangePassword(text)
+                        }
+
+                        onChange(name)(text)
+                    }}
                     placeholderTextColor={theme.singInput.placeholderTextColor}
                     placeholder={placeholder}
                     onBlur={() => {

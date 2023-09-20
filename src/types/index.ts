@@ -53,5 +53,6 @@ export interface Theme {
     statusBar: {
         color: string,
     }
-
 }
+
+export type passwordComplexityType = "Low" | "Medium" | "High" | "Invalid"

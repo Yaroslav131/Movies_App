@@ -18,10 +18,7 @@ export const validationSingUpSchema = Yup.object().shape({
         .required(EMAIL_IS_REQUIRED)
         .label('Email'),
     password: Yup.string()
-        .matches(/\w*[a-z]\w*/, PASSWORD_SMALL_LETTER)
-        .matches(/\w*[A-Z]\w*/, PASSWORD_CAPITAL_LETTER)
-        .matches(/\d/, PASSWORD_NUMBER)
-        .min(8, PASSWORD_MIN_LENGTH(8))
+        .min(4, PASSWORD_MIN_LENGTH(4))
         .required(PASSWORD_IS_REQUIRED)
         .label('Password'),
 });
