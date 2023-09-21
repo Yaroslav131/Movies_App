@@ -59,7 +59,14 @@ export interface Theme {
     homeScreen: {
         backgroundColor: string,
         color: string
+    },
+    FilmTopicButton: {
+        backgroundColor: string,
+        color: string
     }
 }
 
 export type passwordComplexityType = "Low" | "Medium" | "High" | "Invalid"
+
+export type filmTopicType = "Action" | "Comedy" | "Romance" | "Thiller" | "Fantasy" 
+

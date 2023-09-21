@@ -49,4 +49,8 @@ export const PASSWORD_MIN_LENGTH = (min: number) => `Password must be at least $
 
 export const PASSWORD_DIFFICULTY_TEXT = "Password complexity:"
 
-export const COMING_SOON_TEXT = "Coming soon"
+export const COMING_SOON_TEXT = "Coming Soon"
+export const NOW_SHOWING_TEXT = "Now Showing"
+
+export const FILM_TOPICS = ["Action", "Comedy", "Romance", "Thiller", "Fantasy"]
+

@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     },
 
     topContainer: {
-        flex:1
+        flex: 1
     },
     bottomContainer: {
         flex: 1
@@ -17,6 +17,11 @@ const styles = StyleSheet.create({
     },
     playerContainer: {
 
+    },
+    topicContainer: {
+        justifyContent: "space-evenly",
+        flexDirection: "row",
+        flexWrap: "wrap"
     }
 })
 

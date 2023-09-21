@@ -21,7 +21,10 @@ function Route() {
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarStyle: [styles.tabBar,
-                    { backgroundColor: theme.tabNavigation.backgroundColor }],
+                    {
+                        backgroundColor: theme.tabNavigation.backgroundColor,
+                        borderColor: theme.tabNavigation.backgroundColor
+                    }],
                 }}
                 initialRouteName="Home"
             >
