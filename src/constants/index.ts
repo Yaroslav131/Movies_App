@@ -1,4 +1,4 @@
-import { singInput, sponsorsDataType } from "@/types";
+import { sponsorsDataType } from "@/types";
 import { IMAGES } from "@assets/images";
 
 export const SPONSERS_DATA: sponsorsDataType[] = [
@@ -31,11 +31,11 @@ export const LOGIN_TEXT = " Login please."
 export const VERSION_TEXT = "2023 Version 0.0.1."
 export const CREATE_ACC_TEXT = "Create an account"
 
-export const NAME_PLACE_HOLDER="Enter your name"
-export const SERNAME_PLACE_HOLDER="Enter your sername"
-export const EMAIL_PLACE_HOLDER="Enter your email"
-export const PASSWORD_PLACE_HOLDER="Enter your password"
-export const CREATE_PASSWORD_PLACE_HOLDER="Enter strong password"
+export const NAME_PLACE_HOLDER = "Enter your name"
+export const SERNAME_PLACE_HOLDER = "Enter your sername"
+export const EMAIL_PLACE_HOLDER = "Enter your email"
+export const PASSWORD_PLACE_HOLDER = "Enter your password"
+export const CREATE_PASSWORD_PLACE_HOLDER = "Enter strong password"
 
 
 export const NAME_IS_REQUIRED = 'Name is required';
@@ -47,4 +47,6 @@ export const PASSWORD_CAPITAL_LETTER = 'Password must have an uppercase letter';
 export const PASSWORD_NUMBER = 'Password must have a number';
 export const PASSWORD_MIN_LENGTH = (min: number) => `Password must be at least ${min} characters`;
 
-export const PASSWORD_DIFFICULTY_TEXT ="Password complexity:"
+export const PASSWORD_DIFFICULTY_TEXT = "Password complexity:"
+
+export const COMING_SOON_TEXT = "Coming soon"

@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeStack from './HomeStack';
 import TopFilmStack from './TopFilmStack';
-import BookingFilms from '@/screens/bookingFilms';
+import BookingFilms from '@/screens/BookingFilms';
 import ProfileScreen from '@/screens/ProfileScreen';
 import { IMAGES } from '@assets/images';
 import CustomTabButton from '@/components/CustomTabButton';

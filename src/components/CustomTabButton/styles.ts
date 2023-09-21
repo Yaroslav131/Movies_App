@@ -4,10 +4,10 @@ export const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         alignItems: "center",
-        gap: 10
+        gap: 10,
     },
     imageStyle: {
-        resizeMode: "stretch"
+        resizeMode: "cover"
     },
     imageContainer: {
         justifyContent: "flex-end",

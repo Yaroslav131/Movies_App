@@ -55,6 +55,10 @@ export interface Theme {
     };
     tabNavigation: {
         backgroundColor: string
+    };
+    homeScreen: {
+        backgroundColor: string,
+        color: string
     }
 }
 

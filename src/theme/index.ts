@@ -41,5 +41,9 @@ export const ligthTheme: Theme = {
     },
     tabNavigation: {
         backgroundColor: '#16171F'
+    },
+    homeScreen:{
+        backgroundColor: "#1E1F27",
+        color:"#FFF"
     }
 }
