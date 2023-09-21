@@ -107,6 +107,8 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation project(':react-native-fbsdk-next')
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+implementation 'com.google.android.exoplayer:exoplayer:2.14.0'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation("com.facebook.react:react-android")
 apply plugin: 'com.google.gms.google-services'

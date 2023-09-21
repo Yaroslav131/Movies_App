@@ -54,3 +54,5 @@ export const NOW_SHOWING_TEXT = "Now Showing"
 
 export const FILM_TOPICS = ["Action", "Comedy", "Romance", "Thiller", "Fantasy"]
 
+export const FILM_NAME = "The Batman"
+export const BUY_TICKET = "Tickets Available"

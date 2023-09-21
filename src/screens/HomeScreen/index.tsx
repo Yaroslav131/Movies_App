@@ -5,6 +5,7 @@ import { COMING_SOON_TEXT, FILM_TOPICS, NOW_SHOWING_TEXT } from "@/constants";
 import FilmTopicButton from "@/components/FilmTopicButton";
 import { useState } from "react";
 import { filmTopicType } from "@/types";
+import VideoPlayer from "@/components/VideoPlayer";
 
 function HomeScreen() {
     const theme = useColorScheme() === "dark" ? ligthTheme : ligthTheme
@@ -21,7 +22,9 @@ function HomeScreen() {
                 { color: theme.homeScreen.color }]}>
                     {COMING_SOON_TEXT}
                 </Text>
-                <View style={styles.playerContainer}></View>
+
+                <VideoPlayer />
+
                 <View style={styles.topicContainer}>
                     {FILM_TOPICS.map((x, index) => <FilmTopicButton
                         onClick={handleSetChosenTopic}
@@ -29,15 +32,14 @@ function HomeScreen() {
                         chosenTopic={chosenTopic}
                         title={x as filmTopicType} />)}
                 </View>
+
             </View>
             <View style={styles.bottomContainer}>
                 <Text style={[styles.titleText,
                 { color: theme.homeScreen.color }]}>
                     {NOW_SHOWING_TEXT}
                 </Text>
-                <View style={styles.playerContainer}>
-
-                </View>
+            
             </View>
         </View>
     );

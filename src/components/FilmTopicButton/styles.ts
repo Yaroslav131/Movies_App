@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     textStyle: {
-        fontSize: 18,
+        fontSize: 16,
         fontFamily: "poppins-regular"
     }
 })

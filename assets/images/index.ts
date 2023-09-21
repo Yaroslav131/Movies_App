@@ -22,4 +22,9 @@ export const IMAGES = {
     ticketTab: require('./ticketTab.png'),
     userTab: require('./userTab.png'),
     chosenUserTab: require('./chosenUserTab.png'),
+    share: require('./share.png'),
+    ticket: require('./ticket.png'),
+    ellipsePlay: require('./ellipsePlay.png'),
+    mediaPlay: require('./mediaPlay.png'),
+    batmanPoster: require('./batmanPoster.jpeg'),
 };

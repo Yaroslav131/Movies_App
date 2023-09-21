@@ -26,26 +26,24 @@ function Route() {
                         borderColor: theme.tabNavigation.backgroundColor
                     }],
                 }}
-                initialRouteName="Home"
+                initialRouteName="HomeStack"
             >
                 <Tab.Screen
                     options={{
                         tabBarIcon: ({ focused }) => (
                             <CustomTabButton
-                                userIcon={false}
                                 choosenImage={IMAGES.choseHomeTab}
                                 image={IMAGES.homeTab}
                                 focused={focused}
                             />
                         ),
                     }}
-                    name="Home"
+                    name="HomeStack"
                     component={HomeStack} />
                 <Tab.Screen
                     options={{
                         tabBarIcon: ({ focused }) => (
                             <CustomTabButton
-                                userIcon={false}
                                 choosenImage={IMAGES.chosenAwardTab}
                                 image={IMAGES.awardTab}
                                 focused={focused}
@@ -58,7 +56,6 @@ function Route() {
                     options={{
                         tabBarIcon: ({ focused }) => (
                             <CustomTabButton
-                                userIcon={false}
                                 choosenImage={IMAGES.chosenTiicketTab}
                                 image={IMAGES.ticketTab}
                                 focused={focused}
@@ -71,7 +68,6 @@ function Route() {
                     options={{
                         tabBarIcon: ({ focused }) => (
                             <CustomTabButton
-                                userIcon={true}
                                 choosenImage={IMAGES.chosenUserTab}
                                 image={IMAGES.userTab}
                                 focused={focused}

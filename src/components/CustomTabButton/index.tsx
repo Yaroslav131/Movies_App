@@ -6,12 +6,11 @@ interface CustomTabButtonProps {
     choosenImage: ImageProps,
     image: ImageProps,
     focused: boolean,
-    userIcon: boolean
 }
 
-const CustomTabButton = ({ choosenImage, image, focused, userIcon }: CustomTabButtonProps) => (
+const CustomTabButton = ({ choosenImage, image, focused }: CustomTabButtonProps) => (
     <View style={styles.container}>
-        <View style={[styles.imageContainer, { padding: userIcon && focused ? 6 : 0 }]}>
+        <View style={[styles.imageContainer]}>
             <Image style={styles.imageStyle}
                 source={focused ? choosenImage : image} />
         </View>
