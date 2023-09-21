@@ -52,6 +52,9 @@ export interface Theme {
     };
     statusBar: {
         color: string,
+    };
+    tabNavigation: {
+        backgroundColor: string
     }
 }
 

@@ -4,6 +4,7 @@ import SplashScreen from 'react-native-splash-screen';
 import WelcomeScreen from './src/screens/welcomeScreen';
 import auth from '@react-native-firebase/auth';
 import { ligthTheme } from '@/theme';
+import Route from '@/route/Route';
 
 function App(): JSX.Element {
   const [initializing, setInitializing] = useState(true);
@@ -31,9 +32,10 @@ function App(): JSX.Element {
   // if (!user) {
   return (
     <>
-      <StatusBar backgroundColor={background} 
-      barStyle={theme === "light" ? "light-content" : "light-content"} />
-      <WelcomeScreen />
+      <StatusBar backgroundColor={background}
+        barStyle={theme === "light" ? "light-content" : "light-content"} />
+      <Route />
+      {/* <WelcomeScreen /> */}
     </>
   );
   // }

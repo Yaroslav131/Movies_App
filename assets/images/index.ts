@@ -13,4 +13,13 @@ export const IMAGES = {
     yourEmail: require('./yourEmail.png'),
     yourPassword: require('./yourPassword.png'),
     yourSername: require('./yourSername.png'),
+    chosenEllipse: require('./chosenEllipse.png'),
+    choseHomeTab: require('./chosenHomeTab.png'),
+    homeTab: require('./homeTab.png'),
+    awardTab: require('./awardTab.png'),
+    chosenAwardTab: require('./chosenAwardTab.png'),
+    chosenTiicketTab: require('./chosenTiicketTab.png'),
+    ticketTab: require('./ticketTab.png'),
+    userTab: require('./userTab.png'),
+    chosenUserTab: require('./chosenUserTab.png'),
 };
