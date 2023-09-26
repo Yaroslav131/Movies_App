@@ -1,4 +1,4 @@
-import { sponsorsDataType } from "@/types";
+import { filmCategory, sponsorsDataType } from "@/types";
 import { IMAGES } from "@assets/images";
 
 export const SPONSERS_DATA: sponsorsDataType[] = [
@@ -52,7 +52,14 @@ export const PASSWORD_DIFFICULTY_TEXT = "Password complexity:"
 export const COMING_SOON_TEXT = "Coming Soon"
 export const NOW_SHOWING_TEXT = "Now Showing"
 
-export const FILM_TOPICS = ["Action", "Comedy", "Romance", "Thiller", "Fantasy"]
-
 export const FILM_NAME = "The Batman"
 export const BUY_TICKET = "Tickets Available"
+
+export const FILM_CATEGORIES: filmCategory[] = [
+    { value: "drama", label: "Drama" },
+    { value: "comedy", label: "Comedy" },
+    { value: "action", label: "Action" },
+    { value: "fantasy", label: "Fantasy" },
+    { value: "animation", label: "Animation" },
+];
+

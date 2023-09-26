@@ -60,7 +60,11 @@ export interface Theme {
         backgroundColor: string,
         color: string
     },
-    FilmTopicButton: {
+    filmTopicButton: {
+        backgroundColor: string,
+        color: string
+    },
+    horizontalSwiper: {
         backgroundColor: string,
         color: string
     }
@@ -68,5 +72,18 @@ export interface Theme {
 
 export type passwordComplexityType = "Low" | "Medium" | "High" | "Invalid"
 
-export type filmTopicType = "Action" | "Comedy" | "Romance" | "Thiller" | "Fantasy" 
+export type filmCategory = {
+    value: string;
+    label: string;
+};
 
+export interface Movie {
+    genre: string[];
+    imageurl: string[];
+    imdbid: string;
+    imdbrating: number;
+    released: number;
+    synopsis: string;
+    title: string;
+    type: string;
+}

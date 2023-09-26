@@ -27,4 +27,6 @@ export const IMAGES = {
     ellipsePlay: require('./ellipsePlay.png'),
     mediaPlay: require('./mediaPlay.png'),
     batmanPoster: require('./batmanPoster.jpeg'),
+    mockFilmPoter: require('./mockFilmPoter.png'),
+    noposter: require('./noposter.png'),
 };

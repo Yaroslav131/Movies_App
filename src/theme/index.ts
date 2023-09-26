@@ -46,8 +46,13 @@ export const ligthTheme: Theme = {
         backgroundColor: "#1E1F27",
         color: "#FFF"
     },
-    FilmTopicButton: {
+    filmTopicButton: {
         backgroundColor: "#D98639",
+        color: "#FFF"
+    },
+    horizontalSwiper:{
+        backgroundColor:"#484747",
         color: "#FFF"
     }
 }
+

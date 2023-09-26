@@ -1,23 +1,22 @@
 import { Text, TouchableOpacity, useColorScheme } from "react-native";
 import styles from "./styles";
-import { ligthTheme } from "@/theme";
-import { filmTopicType } from "@/types";
+import { filmCategory, ligthTheme } from "@/theme";
 
 interface FilmTopicButtonProps {
-    title: filmTopicType
-    chosenTopic: filmTopicType
-    onClick: (topic: filmTopicType) => void
+    film: filmCategory
+    chosenTopic: filmCategory
+    onClick: (topic: filmCategory) => void
 }
 
 function FilmTopicButton(props: FilmTopicButtonProps) {
     const theme = useColorScheme() === "dark" ? ligthTheme : ligthTheme
     return (
-        <TouchableOpacity onPress={() => { props.onClick(props.title) }}
+        <TouchableOpacity onPress={() => { props.onClick(props.film) }}
             style={[styles.buttonStyle,
-            props.title === props.chosenTopic ?
-                { backgroundColor: theme.FilmTopicButton.backgroundColor }
+            props.film.label === props.chosenTopic.label ?
+                { backgroundColor: theme.filmTopicButton.backgroundColor }
                 : {}]}>
-            <Text style={[styles.textStyle, { color: theme.FilmTopicButton.color }]}>{props.title}</Text>
+            <Text style={[styles.textStyle, { color: theme.filmTopicButton.color }]}>{props.film.label}</Text>
         </TouchableOpacity>
     );
 }

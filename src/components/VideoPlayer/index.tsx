@@ -12,9 +12,6 @@ function VideoPlayer() {
     const [paused, setPaused] = useState(true)
     const [isPosterShow, setIsPosterShow] = useState(true)
 
-    useEffect(() => {
-        setIsPosterShow(true)
-    }, [])
 
     function handleSetpPaused() {
         setPaused(!paused)

@@ -1,19 +1,34 @@
 import { Text, View, useColorScheme } from "react-native";
 import styles from "./styles";
 import { ligthTheme } from "@/theme";
-import { COMING_SOON_TEXT, FILM_TOPICS, NOW_SHOWING_TEXT } from "@/constants";
+import { COMING_SOON_TEXT, FILM_CATEGORIES, NOW_SHOWING_TEXT } from "@/constants";
 import FilmTopicButton from "@/components/FilmTopicButton";
-import { useState } from "react";
-import { filmTopicType } from "@/types";
+import { useEffect, useState } from "react";
+
 import VideoPlayer from "@/components/VideoPlayer";
+import HorizontalSwiper from "@/components/HorizontalSwiper";
+import { fetchDataByCategory } from "@/api/rapid";
+import { Movie, filmCategory } from "@/types";
 
 function HomeScreen() {
     const theme = useColorScheme() === "dark" ? ligthTheme : ligthTheme
-    const [chosenTopic, setChosenTopic] = useState<filmTopicType>("Action")
+    const [chosenTopic, setChosenTopic] = useState<filmCategory>(FILM_CATEGORIES[0])
+    const [movies, setMovies] = useState<Movie[] | null>(null)
 
-    function handleSetChosenTopic(topic: filmTopicType) {
-        setChosenTopic(topic)
+    useEffect(() => {
+        fetchData(chosenTopic)
+    }, [])
+
+    async function fetchData(film: filmCategory) {
+        const respons = await fetchDataByCategory(film.value)
+        setMovies(respons.splice(0, 7))
     }
+
+    function handleSetChosenTopic(film: filmCategory) {
+        setChosenTopic(film)
+        fetchData(film)
+    }
+
     return (
         <View style={[styles.container,
         { backgroundColor: theme.homeScreen.backgroundColor }]}>
@@ -22,15 +37,13 @@ function HomeScreen() {
                 { color: theme.homeScreen.color }]}>
                     {COMING_SOON_TEXT}
                 </Text>
-
                 <VideoPlayer />
-
                 <View style={styles.topicContainer}>
-                    {FILM_TOPICS.map((x, index) => <FilmTopicButton
+                    {FILM_CATEGORIES.map((x, index) => <FilmTopicButton
                         onClick={handleSetChosenTopic}
                         key={index}
                         chosenTopic={chosenTopic}
-                        title={x as filmTopicType} />)}
+                        film={x} />)}
                 </View>
 
             </View>
@@ -39,7 +52,8 @@ function HomeScreen() {
                 { color: theme.homeScreen.color }]}>
                     {NOW_SHOWING_TEXT}
                 </Text>
-            
+
+                {movies && <HorizontalSwiper movies={movies} />}
             </View>
         </View>
     );

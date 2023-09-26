@@ -116,7 +116,7 @@ function SingModal({ onPress, type, title }: SingModalProps) {
                         placeholder={EMAIL_PLACE_HOLDER} />
                     <Field
                         onChangePassword={handleSetComplexity}
-                        image={IMAGES.yourEmail}
+                        image={IMAGES.yourPassword}
                         component={AppFormField}
                         name="password"
                         placeholder={CREATE_PASSWORD_PLACE_HOLDER}
@@ -154,7 +154,7 @@ function SingModal({ onPress, type, title }: SingModalProps) {
                         textContentType="emailAddress"
                         placeholder={EMAIL_PLACE_HOLDER} />
                     <Field
-                        image={IMAGES.yourEmail}
+                        image={IMAGES.yourPassword}
                         component={AppFormField}
                         name="password"
                         placeholder={PASSWORD_PLACE_HOLDER}

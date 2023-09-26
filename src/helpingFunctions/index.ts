@@ -16,3 +16,15 @@ export function checkPasswordComplexity(password: string): passwordComplexityTyp
         return "Invalid";
     }
 }
+
+export function getMiddleIndex(length: number) {
+    return Math.floor((length-2) / 2)
+}
+
+export function getMiddleOffset(middleIndex: number, width: number) {
+    return (middleIndex * (width / 2))
+}
+
+export function getLenghtOffset(length: number, width: number) {
+    return ((length - 1) * width / 2) - width / 2
+}
