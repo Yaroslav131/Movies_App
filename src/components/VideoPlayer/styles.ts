@@ -2,10 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     playerConatiner: {
-        width: "90%",
-        height: "60%",
-        alignSelf: "center",
-
+        flex: 1
     },
     playerWrapper: {
         flex: 1,
@@ -15,16 +12,16 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 15,
+ 
     },
     poster: {
         position: "absolute",
         width: "100%",
         height: "100%",
-        zIndex:2,
+        zIndex: 2,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 15,
+    
     },
     posterImage: {
         resizeMode: "stretch"
@@ -56,23 +53,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
-    buyTicktButton: {
-        flexDirection: "row",
-        position: "absolute",
-        bottom: 15,
-        right: 30,
-        gap: 2,
-        zIndex: 15
-    },
-    ticketImage: {
-        resizeMode: "cover",
-        marginTop: 1
-    },
-    buyTicktText: {
-        fontSize: 14,
-        fontFamily: "poppins-light",
-        color: "#FFF"
-    },
+
     playButtonContainer: {
         position: "absolute",
         width: "100%",

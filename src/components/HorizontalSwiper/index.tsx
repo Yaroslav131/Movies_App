@@ -5,6 +5,8 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import { getLenghtOffset, getMiddleIndex, getMiddleOffset } from "@/helpingFunctions";
 import { Movie } from "@/types";
 import { ligthTheme } from "@/theme";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigation } from "@/route/HomeStack";
 
 const width = Dimensions.get("screen").width
 
@@ -22,6 +24,7 @@ interface HorizontalSwiperProps {
 
 function HorizontalSwiper(props: HorizontalSwiperProps) {
     const theme = useColorScheme() === "dark" ? ligthTheme : ligthTheme
+    const navigation = useNavigation<StackNavigation>();
 
     const movies: ItemProps[] = useMemo(() => handleSetMovies(), [props.movies]);
     const middleIndex = useMemo(() => getMiddleIndex(movies.length), [movies.length]);
@@ -80,8 +83,16 @@ function HorizontalSwiper(props: HorizontalSwiperProps) {
         }
     };
 
+    function handleNavigateToFilm(id: string) {
+        navigation.navigate("Details", { moive: props.movies.find(x => x.imdbid == id)! })
+    }
+
     const renderItem = ({ item }: { item: ItemProps }) => (
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={() => {
+            if (item.id != "sideItemWidth") {
+                handleNavigateToFilm(item.filmId!)
+            }
+        }}>
             <View key={item.id} style={[styles.itemContainer,
             { width: item.id === "sideItemWidth" ? sideItemWidth : itemWidth },
             item.id === focusedItemIndex.toString() ? styles.focusedContainer : styles.smallContainer,

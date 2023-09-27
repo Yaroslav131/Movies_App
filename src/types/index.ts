@@ -67,6 +67,17 @@ export interface Theme {
     horizontalSwiper: {
         backgroundColor: string,
         color: string
+    },
+    detailScreen: {
+        backgroundColor: string,
+        buttonBackgroundColor: string,
+        color: string,
+        iconBackgroundColor: string,
+    },
+    commentFormField: {
+        placeholderTextColor: string;
+        textColor: string;
+        borderColor: string;
     }
 }
 
@@ -86,4 +97,15 @@ export interface Movie {
     synopsis: string;
     title: string;
     type: string;
+}
+
+export type FilmCommentsType = {
+    comment: string,
+    userid: string,
+    date: string
+}
+
+export type UserType = {
+    firstName: string,
+    lastName: string
 }

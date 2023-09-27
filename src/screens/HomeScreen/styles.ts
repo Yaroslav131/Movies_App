@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
 
     topContainer: {
         flex: 1,
-       
+
         justifyContent: "space-evenly"
     },
     bottomContainer: {
@@ -16,13 +16,18 @@ const styles = StyleSheet.create({
     titleText: {
         fontFamily: "poppins-regular",
         fontSize: 28,
-        marginLeft:25
+        marginLeft: 25
     },
 
     topicContainer: {
         justifyContent: "space-evenly",
         flexDirection: "row",
         flexWrap: "wrap"
+    },
+    videoPlayerConatiner:{
+        width: "90%",
+        height: "60%",
+        alignSelf: "center",
     }
 })
 

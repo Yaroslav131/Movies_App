@@ -1,5 +1,6 @@
 import { filmCategory, sponsorsDataType } from "@/types";
 import { IMAGES } from "@assets/images";
+import { Dimensions } from "react-native";
 
 export const SPONSERS_DATA: sponsorsDataType[] = [
     {
@@ -54,6 +55,7 @@ export const NOW_SHOWING_TEXT = "Now Showing"
 
 export const FILM_NAME = "The Batman"
 export const BUY_TICKET = "Tickets Available"
+export const GET_TICKET = "Get Tickets"
 
 export const FILM_CATEGORIES: filmCategory[] = [
     { value: "drama", label: "Drama" },
@@ -63,3 +65,14 @@ export const FILM_CATEGORIES: filmCategory[] = [
     { value: "animation", label: "Animation" },
 ];
 
+export const MAX_SYNOPSIS_LENGTH = 100;
+export const LESS_TEXT = "less";
+export const MORE_TEXT = "more";
+
+export const COMMENTS = "Comments";
+
+export const COMMENT_IS_REQUIRED = 'Comment is required';
+export const COMMENT_PLACE_HOLDER = "Your comment"
+export const COMMENT_TOO_LONG = "Your comment too long"
+
+export const SEND = "Send"

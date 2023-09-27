@@ -5,6 +5,8 @@ import WelcomeScreen from './src/screens/welcomeScreen';
 import auth from '@react-native-firebase/auth';
 import { ligthTheme } from '@/theme';
 import Route from '@/route/Route';
+import DetailScreen from '@/screens/DetailsScreen';
+import { getFilmData, handleAddComent } from '@/api/firebase';
 
 function App(): JSX.Element {
   const [initializing, setInitializing] = useState(true);
@@ -34,6 +36,7 @@ function App(): JSX.Element {
     <>
       <StatusBar backgroundColor={background}
         barStyle={theme === "light" ? "light-content" : "light-content"} />
+      {/* <DetailScreen/> */}
       <Route />
       {/* <WelcomeScreen /> */}
     </>

@@ -50,9 +50,20 @@ export const ligthTheme: Theme = {
         backgroundColor: "#D98639",
         color: "#FFF"
     },
-    horizontalSwiper:{
-        backgroundColor:"#484747",
+    horizontalSwiper: {
+        backgroundColor: "#484747",
         color: "#FFF"
+    },
+    detailScreen: {
+        backgroundColor: "#1E1F27",
+        buttonBackgroundColor: "#D98639",
+        color: "#FFF",
+        iconBackgroundColor: "#C4C4C4"
+    },
+    commentFormField: {
+        borderColor: "#646464",
+        placeholderTextColor: "#646464",
+        textColor: "#FFF",
     }
 }
 

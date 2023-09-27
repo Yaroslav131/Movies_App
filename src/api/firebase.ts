@@ -4,6 +4,120 @@ import auth from '@react-native-firebase/auth';
 import { firebase } from '@react-native-firebase/database';
 import Snackbar from 'react-native-snackbar';
 import Config from 'react-native-config';
+import { FilmCommentsType, UserType } from '@/types';
+import { convertCommentsObjectToArray } from '@/helpingFunctions';
+
+export function listenForFilmDataChanges(filmId: string, setFilmComments: (comments: FilmCommentsType[]) => void) {
+    const filmsRef = firebase.database().ref(`/films/${filmId}`);
+    filmsRef.on('value', (snapshot) => {
+        const updatedFilmData = snapshot.val();
+        if (updatedFilmData) {
+            const updatedFilmCommentsArray = convertCommentsObjectToArray(updatedFilmData);
+            console.log(updatedFilmCommentsArray)
+            setFilmComments(updatedFilmCommentsArray);
+        }
+    });
+
+    return () => {
+        filmsRef.off('value');
+    };
+}
+
+export function handleAddComent(filmId: string, comment: string) {
+    try {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                const userId = user.uid;
+
+                firebase
+                    .app()
+                    .database(Config.FIREBASE_DATABASE_URL)
+                    .ref(`/films/${filmId}`)
+                    .push({
+                        data: new Date().toString(),
+                        comment: comment,
+                        userId: userId,
+                    });
+            }
+        });
+
+        Snackbar.show({
+            text: `Comment added`,
+            duration: Snackbar.LENGTH_LONG,
+
+        });
+    }
+    catch {
+        (error: any) =>
+            Snackbar.show({
+                text: error,
+                duration: Snackbar.LENGTH_LONG,
+            });
+    };
+}
+
+export function getCurrentUser() {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+            unsubscribe();
+            if (user) {
+                resolve(getUserById(user.uid));
+            } else {
+                reject(new Error("User error"));
+            }
+        });
+    });
+}
+
+export async function getFilmData(filmId: string) {
+    const database = firebase.database();
+    const filmsRef = database.ref(`/films/${filmId}`);
+
+    try {
+        const snapshot = await filmsRef.once('value');
+        const filmData = snapshot.val();
+        return filmData;
+    } catch (error) {
+        Snackbar.show({
+            text: 'Error while retrieving data from the database',
+            duration: Snackbar.LENGTH_LONG,
+
+        });
+    }
+}
+
+
+
+export async function getUserById(userId: string): Promise<UserType | null> {
+    const database = firebase.database();
+    const filmsRef = database.ref(`/users/${userId}`);
+
+    try {
+        const snapshot = await filmsRef.once('value');
+        const user = snapshot.val();
+        return user;
+    } catch (error) {
+        Snackbar.show({
+            text: 'Error while retrieving data from the database',
+            duration: Snackbar.LENGTH_LONG,
+
+        });
+
+        return null;
+    }
+}
+
+
+
+export function startListeningToComments(filmId: string) {
+    const database = firebase.database();
+    const commentsRef = database.ref(`/films/${filmId}`);
+
+    commentsRef.on('value', (snapshot) => {
+        const commentsData = snapshot.val();
+        return (commentsData);
+    });
+}
 
 export function handleEmailSingUp(email: string, password: string, name: string, sername: string) {
     auth()

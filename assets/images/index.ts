@@ -29,4 +29,6 @@ export const IMAGES = {
     batmanPoster: require('./batmanPoster.jpeg'),
     mockFilmPoter: require('./mockFilmPoter.png'),
     noposter: require('./noposter.png'),
+    ticketLarge: require('./ticketLarge.png'),
+    backButton: require('./backButton.png'),
 };

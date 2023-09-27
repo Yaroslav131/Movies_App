@@ -1,7 +1,7 @@
-import { Text, View, useColorScheme } from "react-native";
+import { Text, View, useColorScheme, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { ligthTheme } from "@/theme";
-import { COMING_SOON_TEXT, FILM_CATEGORIES, NOW_SHOWING_TEXT } from "@/constants";
+import {  COMING_SOON_TEXT, FILM_CATEGORIES, NOW_SHOWING_TEXT } from "@/constants";
 import FilmTopicButton from "@/components/FilmTopicButton";
 import { useEffect, useState } from "react";
 
@@ -9,6 +9,8 @@ import VideoPlayer from "@/components/VideoPlayer";
 import HorizontalSwiper from "@/components/HorizontalSwiper";
 import { fetchDataByCategory } from "@/api/rapid";
 import { Movie, filmCategory } from "@/types";
+
+import MainVideoControls from "@/components/MainVideoControls";
 
 function HomeScreen() {
     const theme = useColorScheme() === "dark" ? ligthTheme : ligthTheme
@@ -37,7 +39,11 @@ function HomeScreen() {
                 { color: theme.homeScreen.color }]}>
                     {COMING_SOON_TEXT}
                 </Text>
-                <VideoPlayer />
+                <View style={styles.videoPlayerConatiner}>
+                    <VideoPlayer isPlayerRound={true}>
+                        <MainVideoControls />
+                    </VideoPlayer>
+                </View>
                 <View style={styles.topicContainer}>
                     {FILM_CATEGORIES.map((x, index) => <FilmTopicButton
                         onClick={handleSetChosenTopic}

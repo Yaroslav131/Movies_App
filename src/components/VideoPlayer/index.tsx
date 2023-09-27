@@ -6,8 +6,13 @@ import { IMAGES } from '@assets/images';
 import { useEffect, useState } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 
+interface VideoPlayerProps {
+    children: React.ReactNode;
+    isPlayerRound: boolean
+}
 
-function VideoPlayer() {
+
+function VideoPlayer(props: VideoPlayerProps) {
     const [isControlsVisible, setIsControlsVisible] = useState(true)
     const [paused, setPaused] = useState(true)
     const [isPosterShow, setIsPosterShow] = useState(true)
@@ -39,7 +44,9 @@ function VideoPlayer() {
                 <Video
                     source={require('@assets/videos/trailler.mp4')}
                     paused={paused}
-                    style={styles.player}
+                    style={[props.isPlayerRound ?
+                        { borderRadius: 15, }
+                        : { borderRadius: 0, }, styles.player]}
                     repeat={false}
                     controls={false}
                     resizeMode='cover'
@@ -48,24 +55,14 @@ function VideoPlayer() {
 
             <View style={[styles.poster,
             { display: isPosterShow ? "flex" : "none" }]}>
-                <Image style={styles.poster}
+                <Image style={[props.isPlayerRound ?
+                    { borderRadius: 15, }
+                    : { borderRadius: 0, }, styles.poster,]}
                     source={IMAGES.batmanPoster} />
             </View>
 
             <View style={[styles.buttonsConatiner, { display: isControlsVisible ? "flex" : "none" }]}>
-                <View style={styles.topButtons}>
-                    <Text style={styles.title}>{FILM_NAME}</Text>
-                    <TouchableOpacity style={styles.shareButton}>
-                        <Image source={IMAGES.share} />
-                    </TouchableOpacity>
-                </View>
-
-                <TouchableOpacity
-                    onPress={() => { }}
-                    style={styles.buyTicktButton}>
-                    <Image style={styles.ticketImage} source={IMAGES.ticket} />
-                    <Text style={styles.buyTicktText}>{BUY_TICKET}</Text>
-                </TouchableOpacity>
+                {props.children}
 
                 <View style={styles.playButtonContainer}>
                     <TouchableOpacity
