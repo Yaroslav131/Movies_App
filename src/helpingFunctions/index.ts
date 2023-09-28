@@ -1,4 +1,5 @@
 import { FilmCommentsType, passwordComplexityType } from "@/types";
+import Sound from 'react-native-sound';
 
 export function checkPasswordComplexity(password: string): passwordComplexityType {
     const passwordLength = password.length;
@@ -61,3 +62,23 @@ export function timeAgo(date: string): string {
         return `${seconds}s`;
     }
 }
+
+// export function playSound() {
+//     const soundFile = new Sound('comment_sound.mp3', Sound.MAIN_BUNDLE, error => {
+//         if (error) {
+//             console.log('Не удалось загрузить звук:', error);
+//         }
+//     });
+
+//     if (soundFile.isLoaded()) {
+//         soundFile.play(success => {
+//             if (success) {
+//                 console.log('Звук воспроизведен успешно');
+//             } else {
+//                 console.log('Не удалось воспроизвести звук');
+//             }
+//         });
+//     } else {
+//         console.log('Звук не загружен');
+//     }
+// }

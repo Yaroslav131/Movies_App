@@ -58,12 +58,14 @@ export const ligthTheme: Theme = {
         backgroundColor: "#1E1F27",
         buttonBackgroundColor: "#D98639",
         color: "#FFF",
-        iconBackgroundColor: "#C4C4C4"
+        iconBackgroundColor: "#C4C4C4",
+        transparentColor: "rgba(30, 31, 39, 0)"
     },
     commentFormField: {
         borderColor: "#646464",
         placeholderTextColor: "#646464",
         textColor: "#FFF",
+     
     }
 }
 

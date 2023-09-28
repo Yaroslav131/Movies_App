@@ -1,13 +1,13 @@
 import Video from 'react-native-video';
 import styles from './styles';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { BUY_TICKET, FILM_NAME } from '@/constants';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { IMAGES } from '@assets/images';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 
 interface VideoPlayerProps {
     children: React.ReactNode;
+    centerButton?: React.ReactNode;
     isPlayerRound: boolean
 }
 
@@ -64,7 +64,7 @@ function VideoPlayer(props: VideoPlayerProps) {
             <View style={[styles.buttonsConatiner, { display: isControlsVisible ? "flex" : "none" }]}>
                 {props.children}
 
-                <View style={styles.playButtonContainer}>
+                <View style={styles.centerButtonContainer}>
                     <TouchableOpacity
                         onPress={handleSetpPaused}
                         style={[styles.playButton, { display: paused ? "flex" : "none" }]}>
@@ -72,6 +72,7 @@ function VideoPlayer(props: VideoPlayerProps) {
                         <Image style={styles.playImage}
                             source={IMAGES.mediaPlay} />
                     </TouchableOpacity>
+                    {props.centerButton}
                 </View>
             </View>
         </View>

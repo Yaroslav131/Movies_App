@@ -73,11 +73,13 @@ export interface Theme {
         buttonBackgroundColor: string,
         color: string,
         iconBackgroundColor: string,
+        transparentColor: string;
     },
     commentFormField: {
         placeholderTextColor: string;
         textColor: string;
         borderColor: string;
+
     }
 }
 

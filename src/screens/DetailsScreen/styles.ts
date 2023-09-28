@@ -3,13 +3,15 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     playerContainer: {
-        flex: 2,
+        width: "100%",
+        height: "40%"
     },
     container: {
         flex: 1,
     },
     descriptionContainer: {
-        flex: 3,
+        width: "100%",
+        height: "60%"
     },
     descriptionContant: {
         paddingVertical: 15,
@@ -17,9 +19,7 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
     buyTickerButton: {
-        position: "absolute",
-        zIndex: 16,
-        bottom: 50,
+      
         alignSelf: "center",
         flexDirection: "row",
         justifyContent: "center",
@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     },
     flatList: {
         width: "100%",
-        height: "50%"
+        height: "100%"
     },
     commemtContainer: {
         width: "100%",
@@ -86,6 +86,6 @@ export const styles = StyleSheet.create({
         flex: 5
     },
     fieldContainer: {
-     
+
     }
 })

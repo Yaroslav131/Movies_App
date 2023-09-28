@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, StatusBar, Image, Text, useColorScheme, FlatList, KeyboardAvoidingView } from "react-native";
+import { View, TouchableOpacity, StatusBar, Image, Text, useColorScheme, FlatList, KeyboardAvoidingView, Platform } from "react-native";
 import { styles } from "./styles";
 import VideoPlayer from "@/components/VideoPlayer";
 import { IMAGES } from "@assets/images";
@@ -16,7 +16,6 @@ import { Field } from "formik";
 import AppForm from "@/components/AppForm";
 import * as Yup from 'yup';
 import CommentFormField from "@/components/CommentFormField";
-import AppFormSubmitButton from "@/components/AppFormSubmitButton";
 
 export const validationCommentSchema = Yup.object().shape({
     comment: Yup.string()
@@ -37,6 +36,11 @@ function DetailScreen() {
 
     StatusBar.setHidden(true);
 
+    function updateFilmComments(filmComments: FilmCommentsType[]) {
+        setFilmComments(filmComments);
+        // playSound()
+    }
+
     useEffect(() => {
         async function fetchFilmDataAndComments(imdbId: string) {
             try {
@@ -53,7 +57,7 @@ function DetailScreen() {
 
         fetchFilmDataAndComments(movie.imdbid)
 
-        const stopListening = listenForFilmDataChanges(movie.imdbid, setFilmComments);
+        const stopListening = listenForFilmDataChanges(movie.imdbid, updateFilmComments);
 
         getCurrentUser().then(user => {
             setCurrentUser(user as UserType)
@@ -79,24 +83,28 @@ function DetailScreen() {
         <Comment item={item} theme={theme} />
     );
 
+    const buyTicketButton = <TouchableOpacity style={[styles.buyTickerButton,
+    { backgroundColor: theme.detailScreen.buttonBackgroundColor }]}>
+        <Image style={styles.buttonImage}
+            source={IMAGES.ticketLarge} />
+        <Text style={[styles.buyTickerButtonText,
+        { color: theme.detailScreen.color }]}>
+            {GET_TICKET}
+        </Text>
+    </TouchableOpacity>
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => { navigation.goBack() }} style={styles.backButton}>
                 <Image source={IMAGES.backButton} />
             </TouchableOpacity>
             <View style={styles.playerContainer}>
-                <VideoPlayer isPlayerRound={false}>
-                    <TouchableOpacity style={[styles.buyTickerButton,
-                    { backgroundColor: theme.detailScreen.buttonBackgroundColor }]}>
-                        <Image style={styles.buttonImage}
-                            source={IMAGES.ticketLarge} />
-                        <Text style={[styles.buyTickerButtonText,
-                        { color: theme.detailScreen.color }]}>
-                            {GET_TICKET}
-                        </Text>
-                    </TouchableOpacity>
+                <VideoPlayer
+                    centerButton={buyTicketButton}
+                    isPlayerRound={false}>
+
                     <LinearGradient
-                        colors={['rgba(30, 31, 39, 0)', theme.detailScreen.backgroundColor]}
+                        colors={[theme.detailScreen.transparentColor, theme.detailScreen.backgroundColor]}
                         style={styles.gradient}
                     />
                 </VideoPlayer>
@@ -128,24 +136,26 @@ function DetailScreen() {
                         { color: theme.detailScreen.color }]}>
                             {filmComments.length} COMMENTS
                         </Text>
-                        <KeyboardAvoidingView
-                        >
-                            <AppForm
-                                initialValues={{ comment: '' }}
-                                validationSchema={validationCommentSchema}
-                                onSubmit={(values: { comment: string }) => {
-                                    handleAddComent(movie.imdbid, values.comment)
-                                    values.comment = ""
-                                }}>
+
+                        <AppForm
+                            initialValues={{ comment: '' }}
+                            validationSchema={validationCommentSchema}
+                            onSubmit={(values: { comment: string }) => {
+                                handleAddComent(movie.imdbid, values.comment)
+                                values.comment = ""
+                            }}>
+                            <KeyboardAvoidingView
+                                behavior="padding"
+                                keyboardVerticalOffset={50}>
                                 <Field
                                     userName={currentUser?.firstName}
                                     userLastName={currentUser?.lastName}
                                     component={CommentFormField}
                                     name="comment"
                                     placeholder={COMMENT_PLACE_HOLDER} />
+                            </KeyboardAvoidingView>
+                        </AppForm>
 
-                            </AppForm>
-                        </KeyboardAvoidingView>
                         <FlatList
                             style={styles.flatList}
                             showsVerticalScrollIndicator={false}
@@ -155,6 +165,7 @@ function DetailScreen() {
                             renderItem={renderItem}
                             keyExtractor={(item, index) => index.toString()}
                         />
+
                     </View>
                 </View>
             </View >

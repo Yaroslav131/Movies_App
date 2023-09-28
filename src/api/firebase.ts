@@ -13,7 +13,6 @@ export function listenForFilmDataChanges(filmId: string, setFilmComments: (comme
         const updatedFilmData = snapshot.val();
         if (updatedFilmData) {
             const updatedFilmCommentsArray = convertCommentsObjectToArray(updatedFilmData);
-            console.log(updatedFilmCommentsArray)
             setFilmComments(updatedFilmCommentsArray);
         }
     });
