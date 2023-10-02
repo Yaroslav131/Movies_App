@@ -88,7 +88,8 @@ export const ligthTheme: Theme = {
         monthTextColor:"#FFF",
         disableBackground:"#8F8F8F",
         selectedBackground:"#D98639",
-        dateBackground:"#FFF"
+        dateBackground:"#FFF",
+        color:"#FFF",
     }
 }
 

@@ -5,10 +5,12 @@ import { styles } from './styles';
 import { ligthTheme } from '@/theme';
 import { IMAGES } from '@assets/images';
 import DayButton from './DayButton';
+import { CHOOSE_DAY } from '@/constants';
 
 interface MyCalendarProps {
     onSelect: (date: string) => void
-    selectedDate: Date
+    selectedDate: Date,
+    onClose:()=>void
 }
 
 const MyCalendar = (props: MyCalendarProps) => {
@@ -26,6 +28,15 @@ const MyCalendar = (props: MyCalendarProps) => {
     return (
         <View style={[styles.container,
         { backgroundColor: theme.calendar.backgroundColor }]}>
+            <View style={styles.header}>
+                <Text style={[styles.headerTitle,
+                { color: theme.calendar.color }]}>
+                    {CHOOSE_DAY}
+                </Text>
+                <TouchableOpacity onPress={props.onClose} style={styles.headerImage}>
+                    <Image  source={IMAGES.cancel} />
+                </TouchableOpacity>
+            </View>
             <Calendar
                 style={styles.calendar}
                 theme={{
@@ -66,6 +77,7 @@ const MyCalendar = (props: MyCalendarProps) => {
                 minDate={minDate}
                 maxDate={maxDate}
             />
+            <Image style={styles.logoImage} source={IMAGES.dateLogo} />
         </View >
     );
 };

@@ -35,4 +35,5 @@ export const IMAGES = {
     recliner: require('./recliner.png'),
     arrowLeftIcon: require('./arrowLeftIcon.png'),
     arrowRightIcon: require('./arrowRightIcon.png'),
+    dateLogo: require('./dateLogo.png'),
 };

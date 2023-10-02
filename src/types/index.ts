@@ -102,7 +102,8 @@ export interface Theme {
         monthTextColor: string,
         disableBackground: string,
         selectedBackground: string,
-        dateBackground: string
+        dateBackground: string,
+        color:string
     }
 }
 

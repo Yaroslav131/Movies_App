@@ -90,7 +90,7 @@ export const SEAT_BUTTONS: SeatButtonType[] = ["Available", "Reserved", "Selecte
 
 export const MOKING_PRICE = 15
 export const BOOK_NOW = "Book Now"
-
+export const CHOOSE_DAY = "Choose visiting day"
 
 export const mockFilmSessions: FilmSession[] = [
     {
@@ -116,11 +116,14 @@ function generateSeats(rows: number, seatsPerRow: number): Seat[] {
     for (let row = 1; row <= rows; row++) {
         for (let seatNumber = 1; seatNumber <= seatsPerRow; seatNumber++) {
             seats.push({
-                isAvailable: Math.random() < 0.5,
+                isAvailable: false,
                 row,
+                ticketId: "",
                 seatNumber
             });
         }
     }
     return seats;
 }
+
+export const NATIFICATIONS_DELAY = 24

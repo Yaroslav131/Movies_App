@@ -1,5 +1,10 @@
 import { FilmCommentsType, FilmSession, Seat, passwordComplexityType } from "@/types";
 import Sound from 'react-native-sound';
+import uuid from 'react-native-uuid';
+
+export function getId() {
+    return uuid.v4().toString();
+  }
 
 export function checkPasswordComplexity(password: string): passwordComplexityType {
     const passwordLength = password.length;

@@ -8,13 +8,14 @@ import { RootRouteProps, StackNavigation } from "@/route/HomeStack";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { FilmSession, Seat } from "@/types";
 import SessionButton from "@/components/SessionButton";
-import { isSeatInArray, divideSeatsBySeatNumber, formatDate, getFilmSessionsByDate, updateSeatsInFilmSessions } from "@/helpingFunctions";
+import { isSeatInArray, divideSeatsBySeatNumber, formatDate, getFilmSessionsByDate, updateSeatsInFilmSessions, getId } from "@/helpingFunctions";
 import SeatButtonType from "@/components/SeatButtonType";
 import ModalContainer from "@/components/ModalContainer";
 import MyCalendar from "@/components/Calendar";
 import { ScrollView } from "react-native";
 import { getFilmseSessions, handleBuyTicket, handleUpdateSession } from "@/api/firebase";
-import uuid from 'react-native-uuid';
+import { onDisplayNotification } from "@/notifications";
+
 
 function BookingFilms() {
     const theme = useColorScheme() === "dark" ? ligthTheme : ligthTheme
@@ -104,11 +105,13 @@ function BookingFilms() {
 
     function onSubmitBuy() {
         if (chosenSeats.length != 0) {
-            const ticketId = uuid.v1().toString();
+            const ticketId = getId();
             const updatedSessions = updateSeatsInFilmSessions(ticketId, sessions, chosenSession, chosenSeats)
 
+            const session = sessions.find(x => x.id === chosenSession)
             handleUpdateSession(movie.imdbid, updatedSessions)
             handleBuyTicket(ticketId, movie.imdbid, chosenSession, chosenSeats.length)
+            onDisplayNotification(new Date(session!.date), movie.title, session!.timeStart)
             setChosenSeats([])
             handleSetSessions()
         }
@@ -231,7 +234,7 @@ function BookingFilms() {
             <ModalContainer
                 isModalVisible={isDateModalVisible}
                 toggleModal={tonggleModalVisible}>
-                <MyCalendar selectedDate={pickedDate} onSelect={handleSetSelectedDate} />
+                <MyCalendar onClose={tonggleModalVisible} selectedDate={pickedDate} onSelect={handleSetSelectedDate} />
             </ModalContainer>
         </View >
     );
