@@ -65,7 +65,30 @@ export const ligthTheme: Theme = {
         borderColor: "#646464",
         placeholderTextColor: "#646464",
         textColor: "#FFF",
-     
+    },
+    bookingFilms: {
+        backgroundColor: "#1E1F27",
+        color: "#FFF",
+        borderColor: "#D98639",
+        sessionButtonColor: "#5A5A5CCC",
+        buyButton: "#D98639"
+    },
+    seatButton: {
+        available: "transparent",
+        reserved: "#C4C4C4",
+        selected: "#D98639",
+        borderColor: "#787878"
+    },
+    calendar: {
+        backgroundColor: "#2E2E2E",
+        textSectionTitleColor: "#FFF",
+        dayTextColor: "black",
+        selectedDayBackgroundColor: "#D98639",
+        textDisabledColor:"#0000004D",
+        monthTextColor:"#FFF",
+        disableBackground:"#8F8F8F",
+        selectedBackground:"#D98639",
+        dateBackground:"#FFF"
     }
 }
 

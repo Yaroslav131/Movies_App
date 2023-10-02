@@ -24,6 +24,7 @@
     "formik": "^2.4.5",
     "react": "18.2.0",
     "react-native": "0.72.4",
+    "react-native-calendars": "^1.1301.0",
     "react-native-config": "^1.5.1",
     "react-native-fbsdk-next": "^12.1.0",
     "react-native-gesture-handler": "^2.13.1",
@@ -36,11 +37,13 @@
     "react-native-sound": "^0.11.2",
     "react-native-splash-screen": "^3.3.0",
     "react-native-swipe-gestures": "^1.0.5",
+    "react-native-uuid": "^2.0.1",
     "react-native-video": "^5.2.1",
     "react-redux": "^8.1.2",
     "redux": "^4.2.1",
     "save": "^2.9.0",
     "styled-components": "^6.0.8",
+    "uuid": "^9.0.1",
     "yup": "^1.2.0"
   },
   "devDependencies": {

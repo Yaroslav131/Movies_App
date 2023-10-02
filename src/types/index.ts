@@ -79,7 +79,30 @@ export interface Theme {
         placeholderTextColor: string;
         textColor: string;
         borderColor: string;
-
+    },
+    bookingFilms: {
+        backgroundColor: string,
+        color: string,
+        borderColor: string,
+        sessionButtonColor: string,
+        buyButton: string
+    },
+    seatButton: {
+        reserved: string,
+        selected: string
+        available: string,
+        borderColor: string
+    },
+    calendar: {
+        backgroundColor: string,
+        textSectionTitleColor: string,
+        dayTextColor: string,
+        selectedDayBackgroundColor: string,
+        textDisabledColor: string,
+        monthTextColor: string,
+        disableBackground: string,
+        selectedBackground: string,
+        dateBackground: string
     }
 }
 
@@ -111,3 +134,27 @@ export type UserType = {
     firstName: string,
     lastName: string
 }
+
+export interface FilmSession {
+    id: string,
+    timeStart: string,
+    timeEnd: string,
+    date: string,
+    cinema: string,
+    seats: Seat[]
+}
+
+export interface Seat {
+    ticketId:string,
+    isAvailable: boolean,
+    row: number,
+    seatNumber: number
+}
+
+export interface Ticket {
+    ticketCount: number,
+    filmId: string,
+    sessionId: string
+}
+
+export type SeatButtonType = "Available" | "Reserved" | "Selected"

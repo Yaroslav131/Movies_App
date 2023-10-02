@@ -1,7 +1,7 @@
 import { Text, View, useColorScheme, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { ligthTheme } from "@/theme";
-import {  COMING_SOON_TEXT, FILM_CATEGORIES, NOW_SHOWING_TEXT } from "@/constants";
+import { COMING_SOON_TEXT, FILM_CATEGORIES, NOW_SHOWING_TEXT } from "@/constants";
 import FilmTopicButton from "@/components/FilmTopicButton";
 import { useEffect, useState } from "react";
 
@@ -41,7 +41,7 @@ function HomeScreen() {
                 </Text>
                 <View style={styles.videoPlayerConatiner}>
                     <VideoPlayer isPlayerRound={true}>
-                        <MainVideoControls />
+                        {movies && <MainVideoControls movie={movies[0]} />}
                     </VideoPlayer>
                 </View>
                 <View style={styles.topicContainer}>

@@ -31,4 +31,8 @@ export const IMAGES = {
     noposter: require('./noposter.png'),
     ticketLarge: require('./ticketLarge.png'),
     backButton: require('./backButton.png'),
+    calendar: require('./calendar.png'),
+    recliner: require('./recliner.png'),
+    arrowLeftIcon: require('./arrowLeftIcon.png'),
+    arrowRightIcon: require('./arrowRightIcon.png'),
 };

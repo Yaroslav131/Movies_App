@@ -1,4 +1,5 @@
-import { filmCategory, sponsorsDataType } from "@/types";
+import { formatDateToYYYYMMDD } from "@/helpingFunctions";
+import { FilmSession, Seat, SeatButtonType, filmCategory, sponsorsDataType } from "@/types";
 import { IMAGES } from "@assets/images";
 import { Dimensions } from "react-native";
 
@@ -76,3 +77,50 @@ export const COMMENT_PLACE_HOLDER = "Your comment"
 export const COMMENT_TOO_LONG = "Your comment too long"
 
 export const SEND = "Send"
+
+export const BOKKING_HEADER_TEXT = "Choose Cinema & Seats"
+export const SCHEDULE = "Schedule"
+export const DATE = "Date"
+export const CINEMA = "Cinema"
+export const SEATS_AVAILABLE = "Seats available"
+export const SEATS = "Seats"
+export const SCREEN = "Screen"
+
+export const SEAT_BUTTONS: SeatButtonType[] = ["Available", "Reserved", "Selected"]
+
+export const MOKING_PRICE = 15
+export const BOOK_NOW = "Book Now"
+
+
+export const mockFilmSessions: FilmSession[] = [
+    {
+        id: "1",
+        timeStart: "15:00",
+        timeEnd: "17:00",
+        date: formatDateToYYYYMMDD(new Date()),
+        cinema: "Cinema City",
+        seats: generateSeats(7, 8)
+    },
+    {
+        id: "2",
+        timeStart: "18:30",
+        timeEnd: "20:30",
+        date: formatDateToYYYYMMDD(new Date()),
+        cinema: "Movieplex",
+        seats: generateSeats(7, 8)
+    },
+];
+
+function generateSeats(rows: number, seatsPerRow: number): Seat[] {
+    const seats: Seat[] = [];
+    for (let row = 1; row <= rows; row++) {
+        for (let seatNumber = 1; seatNumber <= seatsPerRow; seatNumber++) {
+            seats.push({
+                isAvailable: Math.random() < 0.5,
+                row,
+                seatNumber
+            });
+        }
+    }
+    return seats;
+}

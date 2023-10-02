@@ -8,7 +8,7 @@ import LinearGradient from "react-native-linear-gradient";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { RootRouteProps, StackNavigation } from "@/route/HomeStack";
 import { useEffect, useState } from "react";
-import { getCurrentUser, getFilmData, handleAddComent, listenForFilmDataChanges } from "@/api/firebase";
+import { getCurrentUser, getFilmComments, handleAddComent, listenForFilmDataChanges } from "@/api/firebase";
 import { convertCommentsObjectToArray } from "@/helpingFunctions";
 import { FilmCommentsType, UserType } from "@/types";
 import Comment from "@/components/Comment";
@@ -44,14 +44,13 @@ function DetailScreen() {
     useEffect(() => {
         async function fetchFilmDataAndComments(imdbId: string) {
             try {
-                const filmData = await getFilmData(imdbId);
+                const filmData = await getFilmComments(imdbId);
                 if (filmData) {
                     const filmCommentsArray = convertCommentsObjectToArray(filmData);
                     setFilmComments(filmCommentsArray);
                 }
             } catch (error) {
                 setFilmComments([]);
-                console.error('Произошла ошибка:', error);
             }
         }
 
@@ -83,8 +82,10 @@ function DetailScreen() {
         <Comment item={item} theme={theme} />
     );
 
-    const buyTicketButton = <TouchableOpacity style={[styles.buyTickerButton,
-    { backgroundColor: theme.detailScreen.buttonBackgroundColor }]}>
+    const buyTicketButton = <TouchableOpacity
+        onPress={() => { navigation.navigate("Booking", { moive: movie }) }}
+        style={[styles.buyTickerButton,
+        { backgroundColor: theme.detailScreen.buttonBackgroundColor }]}>
         <Image style={styles.buttonImage}
             source={IMAGES.ticketLarge} />
         <Text style={[styles.buyTickerButtonText,
@@ -155,18 +156,17 @@ function DetailScreen() {
                                     placeholder={COMMENT_PLACE_HOLDER} />
                             </KeyboardAvoidingView>
                         </AppForm>
-
-                        <FlatList
-                            style={styles.flatList}
-                            showsVerticalScrollIndicator={false}
-                            showsHorizontalScrollIndicator={false}
-                            overScrollMode={"never"}
-                            data={filmComments}
-                            renderItem={renderItem}
-                            keyExtractor={(item, index) => index.toString()}
-                        />
-
                     </View>
+
+                    <FlatList
+                        style={styles.flatList}
+                        showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}
+                        overScrollMode={"never"}
+                        data={filmComments}
+                        renderItem={renderItem}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
                 </View>
             </View >
         </View >

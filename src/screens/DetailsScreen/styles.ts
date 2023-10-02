@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
         height: "60%"
     },
     descriptionContant: {
-        paddingVertical: 15,
+        paddingTop: 15,
         paddingHorizontal: 30,
         flex: 1,
     },

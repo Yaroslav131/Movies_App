@@ -4,11 +4,11 @@ import auth from '@react-native-firebase/auth';
 import { firebase } from '@react-native-firebase/database';
 import Snackbar from 'react-native-snackbar';
 import Config from 'react-native-config';
-import { FilmCommentsType, UserType } from '@/types';
+import { FilmCommentsType, UserType, FilmSession, Ticket } from '@/types';
 import { convertCommentsObjectToArray } from '@/helpingFunctions';
 
 export function listenForFilmDataChanges(filmId: string, setFilmComments: (comments: FilmCommentsType[]) => void) {
-    const filmsRef = firebase.database().ref(`/films/${filmId}`);
+    const filmsRef = firebase.database().ref(`/films/comments/${filmId}`);
     filmsRef.on('value', (snapshot) => {
         const updatedFilmData = snapshot.val();
         if (updatedFilmData) {
@@ -31,7 +31,7 @@ export function handleAddComent(filmId: string, comment: string) {
                 firebase
                     .app()
                     .database(Config.FIREBASE_DATABASE_URL)
-                    .ref(`/films/${filmId}`)
+                    .ref(`/films/comments/${filmId}`)
                     .push({
                         data: new Date().toString(),
                         comment: comment,
@@ -55,6 +55,75 @@ export function handleAddComent(filmId: string, comment: string) {
     };
 }
 
+export function handleUpdateSession(filmId: string, session: FilmSession[]) {
+    try {
+        firebase
+            .app()
+            .database(Config.FIREBASE_DATABASE_URL)
+            .ref(`/films/sessions/${filmId}`)
+            .set(session);
+
+        Snackbar.show({
+            text: `session updated`,
+            duration: Snackbar.LENGTH_LONG,
+        });
+    }
+    catch {
+        (error: any) =>
+            Snackbar.show({
+                text: error,
+                duration: Snackbar.LENGTH_LONG,
+            });
+    };
+}
+
+export function handleBuyTicket(tickedId: string, filmId: string, sessionId: string, ticketCount: number,) {
+    const ticket: Ticket = {
+        filmId: filmId,
+        sessionId: sessionId,
+        ticketCount: ticketCount
+    }
+    console.log()
+    getCurrentUser().then(x => {
+        try {
+            firebase
+                .app()
+                .database(Config.FIREBASE_DATABASE_URL)
+                .ref(`/users/${x}/tickets/${tickedId}/`)
+                .set(ticket);
+
+            Snackbar.show({
+                text: `ticket bought`,
+                duration: Snackbar.LENGTH_LONG,
+            });
+        }
+        catch {
+            (error: any) =>
+                Snackbar.show({
+                    text: error,
+                    duration: Snackbar.LENGTH_LONG,
+                });
+        };
+    })
+}
+
+export async function getFilmseSessions(filmId: string) {
+    const database = firebase.database();
+    const filmsRef = database.ref(`/films/sessions/${filmId}`);
+
+    try {
+        const snapshot = await filmsRef.once('value');
+        const filmData = snapshot.val();
+        return filmData;
+    } catch (error) {
+        Snackbar.show({
+            text: 'Error while retrieving data from the database',
+            duration: Snackbar.LENGTH_LONG,
+
+        });
+    }
+}
+
 export function getCurrentUser() {
     return new Promise((resolve, reject) => {
         const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -68,9 +137,9 @@ export function getCurrentUser() {
     });
 }
 
-export async function getFilmData(filmId: string) {
+export async function getFilmComments(filmId: string) {
     const database = firebase.database();
-    const filmsRef = database.ref(`/films/${filmId}`);
+    const filmsRef = database.ref(`/films/comments/${filmId}`);
 
     try {
         const snapshot = await filmsRef.once('value');
@@ -110,7 +179,7 @@ export async function getUserById(userId: string): Promise<UserType | null> {
 
 export function startListeningToComments(filmId: string) {
     const database = firebase.database();
-    const commentsRef = database.ref(`/films/${filmId}`);
+    const commentsRef = database.ref(`/films/comments/${filmId}`);
 
     commentsRef.on('value', (snapshot) => {
         const commentsData = snapshot.val();
