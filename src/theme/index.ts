@@ -84,12 +84,31 @@ export const ligthTheme: Theme = {
         textSectionTitleColor: "#FFF",
         dayTextColor: "black",
         selectedDayBackgroundColor: "#D98639",
-        textDisabledColor:"#0000004D",
-        monthTextColor:"#FFF",
-        disableBackground:"#8F8F8F",
-        selectedBackground:"#D98639",
-        dateBackground:"#FFF",
-        color:"#FFF",
+        textDisabledColor: "#0000004D",
+        monthTextColor: "#FFF",
+        disableBackground: "#8F8F8F",
+        selectedBackground: "#D98639",
+        dateBackground: "#FFF",
+        color: "#FFF",
+    },
+    topScreen: {
+        backgroundColor: "#1E1F27",
+        color: "#FFF",
+        searchContainer: "#D9D9D9",
+        inputColor: "#696969",
+        moreButton: "#D98639"
+    },
+    filterModal: {
+        backgroundColor: "#1E1F27",
+        color: "#FFF",
+        outboundColor: "#D9D9D9",
+        inboundColor: "#D98639",
+        borderColor: "#FFF",
+        resetButtonColor: "#D98639"
+    },
+    detailTopScreen: {
+        backgroundColor: "#1E1F27",
+        color: "#FFF",
     }
 }
 

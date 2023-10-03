@@ -50,7 +50,7 @@ function Route() {
                             />
                         ),
                     }}
-                    name="TopFilm"
+                    name="TopFilmStack"
                     component={TopFilmStack} />
                 <Tab.Screen
                     options={{

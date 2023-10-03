@@ -1,4 +1,4 @@
-import { Movie } from "@/types";
+import { Movie, TopMovie } from "@/types";
 import axios from "axios";
 import Snackbar from "react-native-snackbar";
 
@@ -814,4 +814,224 @@ export const fetchDataByCategory = async (category: string): Promise<Movie[]> =>
             "type": "movie"
         }
     ]
+}
+
+export async function getTop100Movies(): Promise<TopMovie[]> {
+    const options = {
+        method: 'GET',
+        url: 'https://imdb-top-100-movies.p.rapidapi.com/',
+        headers: {
+            'X-RapidAPI-Key': '6dfe802731msh7c87e1d09eb105ep1671f0jsnd54f8c71fc1e',
+            'X-RapidAPI-Host': 'imdb-top-100-movies.p.rapidapi.com'
+        }
+    };
+
+
+    try {
+        // const response = await axios.request(options);
+        // console.log(response.data)
+        return [
+            {
+                rank: 1,
+                title: "The Shawshank Redemption",
+                thumbnail:
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UY67_CR0,0,45,67_AL_.jpg",
+                rating: "9.3",
+                id: "top1",
+                year: 1994,
+                image:
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_QL75_UX380_CR0,1,380,562_.jpg",
+                description:
+                    "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                trailer: "https://www.youtube.com/embed/NmzuHjWmXOc",
+                genre: ["Drama"],
+                director: ["Frank Darabont"],
+                writers: [
+                    "Stephen King (based on the short novel 'Rita Hayworth and the Shawshank Redemption' by)",
+                    "Frank Darabont (screenplay by)",
+                ],
+                imdbid: "tt0111161",
+            },
+            {
+                rank: 2,
+                title: "The Godfather",
+                thumbnail:
+                    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX67_CR0,0,67,98_AL_.jpg",
+                rating: "9.2",
+                id: "top2",
+                year: 1972,
+                image:
+                    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_SX677_AL_.jpg",
+                description:
+                    "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+                trailer: "https://www.youtube.com/embed/sY1S34973zA",
+                genre: ["Crime", "Drama"],
+                director: ["Francis Ford Coppola"],
+                writers: ["Mario Puzo (screenplay by)", "Francis Ford Coppola (screenplay by)"],
+                imdbid: "tt0068646",
+            },
+            {
+                rank: 1,
+                title: "The Shawshank Redemption",
+                thumbnail:
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UY67_CR0,0,45,67_AL_.jpg",
+                rating: "9.3",
+                id: "top1",
+                year: 1994,
+                image:
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_QL75_UX380_CR0,1,380,562_.jpg",
+                description:
+                    "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                trailer: "https://www.youtube.com/embed/NmzuHjWmXOc",
+                genre: ["Drama"],
+                director: ["Frank Darabont"],
+                writers: [
+                    "Stephen King (based on the short novel 'Rita Hayworth and the Shawshank Redemption' by)",
+                    "Frank Darabont (screenplay by)",
+                ],
+                imdbid: "tt0111161",
+            },
+            {
+                rank: 2,
+                title: "The Godfather",
+                thumbnail:
+                    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX67_CR0,0,67,98_AL_.jpg",
+                rating: "9.2",
+                id: "top2",
+                year: 1972,
+                image:
+                    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_SX677_AL_.jpg",
+                description:
+                    "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+                trailer: "https://www.youtube.com/embed/sY1S34973zA",
+                genre: ["Crime", "Drama"],
+                director: ["Francis Ford Coppola"],
+                writers: ["Mario Puzo (screenplay by)", "Francis Ford Coppola (screenplay by)"],
+                imdbid: "tt0068646",
+            }, {
+                rank: 1,
+                title: "The Shawshank Redemption",
+                thumbnail:
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UY67_CR0,0,45,67_AL_.jpg",
+                rating: "9.3",
+                id: "top1",
+                year: 1994,
+                image:
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_QL75_UX380_CR0,1,380,562_.jpg",
+                description:
+                    "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                trailer: "https://www.youtube.com/embed/NmzuHjWmXOc",
+                genre: ["Drama"],
+                director: ["Frank Darabont"],
+                writers: [
+                    "Stephen King (based on the short novel 'Rita Hayworth and the Shawshank Redemption' by)",
+                    "Frank Darabont (screenplay by)",
+                ],
+                imdbid: "tt0111161",
+            },
+            {
+                rank: 2,
+                title: "The Godfather",
+                thumbnail:
+                    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX67_CR0,0,67,98_AL_.jpg",
+                rating: "9.2",
+                id: "top2",
+                year: 1972,
+                image:
+                    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_SX677_AL_.jpg",
+                description:
+                    "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+                trailer: "https://www.youtube.com/embed/sY1S34973zA",
+                genre: ["Crime", "Drama"],
+                director: ["Francis Ford Coppola"],
+                writers: ["Mario Puzo (screenplay by)", "Francis Ford Coppola (screenplay by)"],
+                imdbid: "tt0068646",
+            }, {
+                rank: 1,
+                title: "The Shawshank Redemption",
+                thumbnail:
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UY67_CR0,0,45,67_AL_.jpg",
+                rating: "9.3",
+                id: "top1",
+                year: 1994,
+                image:
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_QL75_UX380_CR0,1,380,562_.jpg",
+                description:
+                    "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                trailer: "https://www.youtube.com/embed/NmzuHjWmXOc",
+                genre: ["Drama"],
+                director: ["Frank Darabont"],
+                writers: [
+                    "Stephen King (based on the short novel 'Rita Hayworth and the Shawshank Redemption' by)",
+                    "Frank Darabont (screenplay by)",
+                ],
+                imdbid: "tt0111161",
+            },
+            {
+                rank: 2,
+                title: "The Godfather",
+                thumbnail:
+                    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX67_CR0,0,67,98_AL_.jpg",
+                rating: "9.2",
+                id: "top2",
+                year: 1972,
+                image:
+                    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_SX677_AL_.jpg",
+                description:
+                    "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+                trailer: "https://www.youtube.com/embed/sY1S34973zA",
+                genre: ["Crime", "Drama"],
+                director: ["Francis Ford Coppola"],
+                writers: ["Mario Puzo (screenplay by)", "Francis Ford Coppola (screenplay by)"],
+                imdbid: "tt0068646",
+            }, {
+                rank: 1,
+                title: "The Shawshank Redemption",
+                thumbnail:
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UY67_CR0,0,45,67_AL_.jpg",
+                rating: "9.3",
+                id: "top1",
+                year: 1994,
+                image:
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_QL75_UX380_CR0,1,380,562_.jpg",
+                description:
+                    "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                trailer: "https://www.youtube.com/embed/NmzuHjWmXOc",
+                genre: ["Drama"],
+                director: ["Frank Darabont"],
+                writers: [
+                    "Stephen King (based on the short novel 'Rita Hayworth and the Shawshank Redemption' by)",
+                    "Frank Darabont (screenplay by)",
+                ],
+                imdbid: "tt0111161",
+            },
+            {
+                rank: 2,
+                title: "The Godfather",
+                thumbnail:
+                    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX67_CR0,0,67,98_AL_.jpg",
+                rating: "9.2",
+                id: "top2",
+                year: 1972,
+                image:
+                    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_SX677_AL_.jpg",
+                description:
+                    "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+                trailer: "https://www.youtube.com/embed/sY1S34973zA",
+                genre: ["Crime", "Drama"],
+                director: ["Francis Ford Coppola"],
+                writers: ["Mario Puzo (screenplay by)", "Francis Ford Coppola (screenplay by)"],
+                imdbid: "tt0068646",
+            },
+        ];
+
+    } catch (error) {
+        Snackbar.show({
+            text: `Error ${error}`,
+            duration: Snackbar.LENGTH_LONG,
+        });
+
+        return []
+    }
+
 }

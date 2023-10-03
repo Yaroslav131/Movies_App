@@ -92,6 +92,34 @@ export const MOKING_PRICE = 15
 export const BOOK_NOW = "Book Now"
 export const CHOOSE_DAY = "Choose visiting day"
 
+export const SEARCH_MOVIE = "Search movie in the top"
+
+export const GENRE = "Genre"
+
+export const AUTHORS = "Authors"
+
+export const MORE = "More"
+
+export const TOO_LONG = "Too long"
+
+export const FILTERS = "FILTERS"
+
+export const YEAR = "Year"
+export const RAITING = "Raiting"
+export const DIRECTORS = "Directors"
+export const SELECT_DIRECTORS = "Select derector"
+export const GENRES = "Genres"
+export const SELECT_GENRES = "Select genre"
+export const RESET = "RESET"
+
+export const FILM_RATING = `Film's rating`
+
+export const MIN_FILTER_YEAR = 1920
+export const MAX_FILTER_YEAR = new Date().getFullYear()
+
+export const MIN_FILTER_RANING = 0
+export const MAX_FILTER_RANING = 10
+
 export const mockFilmSessions: FilmSession[] = [
     {
         id: "1",

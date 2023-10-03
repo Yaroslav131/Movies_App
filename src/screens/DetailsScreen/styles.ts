@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-
 export const styles = StyleSheet.create({
     playerContainer: {
         width: "100%",
@@ -19,7 +18,6 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
     buyTickerButton: {
-      
         alignSelf: "center",
         flexDirection: "row",
         justifyContent: "center",

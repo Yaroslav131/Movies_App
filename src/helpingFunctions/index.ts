@@ -1,10 +1,10 @@
-import { FilmCommentsType, FilmSession, Seat, passwordComplexityType } from "@/types";
+import { FilmCommentsType, FilmSession, Seat, TopMovie, passwordComplexityType } from "@/types";
 import Sound from 'react-native-sound';
 import uuid from 'react-native-uuid';
 
 export function getId() {
     return uuid.v4().toString();
-  }
+}
 
 export function checkPasswordComplexity(password: string): passwordComplexityType {
     const passwordLength = password.length;
@@ -166,4 +166,77 @@ export function updateSeatsInFilmSessions(
 export function countAvailableSeatsInSession(session: FilmSession): number {
     const availableSeats = session.seats.filter((seat) => seat.isAvailable === true);
     return availableSeats.length;
+}
+
+export function toUpperCase(str: string): string {
+    return str.toUpperCase();
+}
+
+export function findMoviesByPartialTitle(movies: TopMovie[], partialTitle: string): TopMovie[] {
+    const matchingMovies: TopMovie[] = [];
+
+    for (const movie of movies) {
+        if (movie.title.toLowerCase().includes(partialTitle.toLowerCase())) {
+            matchingMovies.push(movie);
+        }
+    }
+
+    return matchingMovies;
+}
+
+export const filterMovies = (movies: TopMovie[], options: {
+    directorName?: string;
+    genreName?: string;
+    rankingRange?: [number, number];
+    yearsRange?: [number, number];
+}): TopMovie[] => {
+    const { directorName, genreName, rankingRange, yearsRange } = options;
+
+    if (directorName) {
+        movies = movies.filter((movie) => movie.director.includes(directorName));
+    }
+
+    if (genreName) {
+        movies = movies.filter((movie) => movie.genre.includes(genreName));
+    }
+
+    if (rankingRange) {
+        movies = movies.filter((movie) => {
+            const isRankInRange = parseFloat(movie.rating) >= rankingRange[0] && parseFloat(movie.rating) <= rankingRange[1];
+            return isRankInRange;
+        });
+    }
+
+    if (yearsRange) {
+        movies = movies.filter((movie) => {
+            const isYearInRange = movie.year >= yearsRange[0] && movie.year <= yearsRange[1];
+            return isYearInRange;
+        });
+    }
+
+    return movies;
+};
+
+export function getUniqueDirectorsAlphabetically(movies: TopMovie[]): string[] {
+    const allDirectors: string[] = [];
+
+    movies.forEach((movie) => {
+        allDirectors.push(...movie.director);
+    });
+
+    const uniqueDirectors = [...new Set(allDirectors)].sort();
+
+    return uniqueDirectors;
+}
+
+export function getUniqueGenresAlphabetically(movies: TopMovie[]): string[] {
+    const allGenres: string[] = [];
+
+    movies.forEach((movie) => {
+        allGenres.push(...movie.genre);
+    });
+
+    const uniqueGenres = [...new Set(allGenres)].sort();
+
+    return uniqueGenres;
 }

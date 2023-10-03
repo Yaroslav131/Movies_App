@@ -36,4 +36,9 @@ export const IMAGES = {
     arrowLeftIcon: require('./arrowLeftIcon.png'),
     arrowRightIcon: require('./arrowRightIcon.png'),
     dateLogo: require('./dateLogo.png'),
+    searchIcon: require('./searchIcon.png'),
+    settingIcon: require('./settingIcon.png'),
+    starIcon: require('./starIcon.png'),
+    arrowMore: require('./arrowMore.png'),
+    thumbImage: require('./thumbImage.png'),
 };

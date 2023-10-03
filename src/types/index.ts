@@ -103,7 +103,26 @@ export interface Theme {
         disableBackground: string,
         selectedBackground: string,
         dateBackground: string,
-        color:string
+        color: string
+    },
+    topScreen: {
+        backgroundColor: string,
+        color: string,
+        searchContainer: string,
+        inputColor: string,
+        moreButton: string
+    },
+    filterModal: {
+        backgroundColor: string,
+        color: string,
+        outboundColor: string,
+        inboundColor: string,
+        borderColor: string,
+        resetButtonColor: string
+    },
+    detailTopScreen: {
+        backgroundColor:string,
+        color: string,
     }
 }
 
@@ -146,7 +165,7 @@ export interface FilmSession {
 }
 
 export interface Seat {
-    ticketId:string,
+    ticketId: string,
     isAvailable: boolean,
     row: number,
     seatNumber: number
@@ -156,6 +175,28 @@ export interface Ticket {
     ticketCount: number,
     filmId: string,
     sessionId: string
+}
+
+
+export interface TopMovie {
+    rank: number;
+    title: string;
+    thumbnail: string;
+    rating: string;
+    id: string;
+    year: number;
+    image: string;
+    description: string;
+    trailer: string;
+    genre: string[];
+    director: string[];
+    writers: string[];
+    imdbid: string;
+}
+
+export interface DropButtonItem {
+    label: string,
+    value: string
 }
 
 export type SeatButtonType = "Available" | "Reserved" | "Selected"
