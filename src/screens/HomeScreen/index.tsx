@@ -1,4 +1,4 @@
-import { Text, View, useColorScheme, Image, TouchableOpacity } from "react-native";
+import { Text, View, useColorScheme, StatusBar } from "react-native";
 import styles from "./styles";
 import { ligthTheme } from "@/theme";
 import { COMING_SOON_TEXT, FILM_CATEGORIES, NOW_SHOWING_TEXT } from "@/constants";
@@ -32,36 +32,40 @@ function HomeScreen() {
     }
 
     return (
-        <View style={[styles.container,
-        { backgroundColor: theme.homeScreen.backgroundColor }]}>
-            <View style={styles.topContainer}>
-                <Text style={[styles.titleText,
-                { color: theme.homeScreen.color }]}>
-                    {COMING_SOON_TEXT}
-                </Text>
-                <View style={styles.videoPlayerConatiner}>
-                    <VideoPlayer isPlayerRound={true}>
-                        {movies && <MainVideoControls movie={movies[0]} />}
-                    </VideoPlayer>
-                </View>
-                <View style={styles.topicContainer}>
-                    {FILM_CATEGORIES.map((x, index) => <FilmTopicButton
-                        onClick={handleSetChosenTopic}
-                        key={index}
-                        chosenTopic={chosenTopic}
-                        film={x} />)}
-                </View>
+        <>
+            <StatusBar backgroundColor={theme.homeScreen.backgroundColor} />
+            <View style={[styles.container,
+            { backgroundColor: theme.homeScreen.backgroundColor }]}>
+                <View style={styles.topContainer}>
+                    <Text style={[styles.titleText,
+                    { color: theme.homeScreen.color }]}>
+                        {COMING_SOON_TEXT}
+                    </Text>
+                    <View style={styles.videoPlayerConatiner}>
+                        <VideoPlayer isPlayerRound={true}>
+                            {movies && <MainVideoControls movie={movies[0]} />}
+                        </VideoPlayer>
+                    </View>
+                    <View style={styles.topicContainer}>
+                        {FILM_CATEGORIES.map((x, index) =>
+                            <FilmTopicButton
+                                onClick={handleSetChosenTopic}
+                                key={index}
+                                chosenTopic={chosenTopic}
+                                film={x} />)}
+                    </View>
 
-            </View>
-            <View style={styles.bottomContainer}>
-                <Text style={[styles.titleText,
-                { color: theme.homeScreen.color }]}>
-                    {NOW_SHOWING_TEXT}
-                </Text>
+                </View>
+                <View style={styles.bottomContainer}>
+                    <Text style={[styles.titleText,
+                    { color: theme.homeScreen.color }]}>
+                        {NOW_SHOWING_TEXT}
+                    </Text>
 
-                {movies && <HorizontalSwiper movies={movies} />}
+                    {movies && <HorizontalSwiper movies={movies} />}
+                </View>
             </View>
-        </View>
+        </>
     );
 }
 

@@ -1,7 +1,7 @@
 import { FlatList, Image, Text, TouchableOpacity, View, useColorScheme } from "react-native";
 import { styles } from "./styles";
 import { IMAGES } from "@assets/images";
-import { BOKKING_HEADER_TEXT, BOOK_NOW, DATE, MOKING_PRICE, SCHEDULE, SCREEN, SEATS, SEAT_BUTTONS, mockFilmSessions } from "@/constants";
+import { BOKKING_HEADER_TEXT, BOOK_NOW, DATE, SCHEDULE, SCREEN, SEATS, SEAT_BUTTONS, mockFilmSessions } from "@/constants";
 import { ligthTheme } from "@/theme";
 import { useEffect, useState } from "react";
 import { RootRouteProps, StackNavigation } from "@/route/HomeStack";
@@ -13,7 +13,7 @@ import SeatButtonType from "@/components/SeatButtonType";
 import ModalContainer from "@/components/ModalContainer";
 import MyCalendar from "@/components/Calendar";
 import { ScrollView } from "react-native";
-import { getFilmseSessions, handleBuyTicket, handleUpdateSession } from "@/api/firebase";
+import { getFilmSessions, handleBuyTicket, handleUpdateSession } from "@/api/firebase";
 import { onDisplayNotification } from "@/notifications";
 
 
@@ -32,33 +32,44 @@ function BookingFilms() {
 
     const [seats, setSeats] = useState<[Seat[], Seat[]]>([[], []])
 
+    const chosenSeatsCount = chosenSeats ? chosenSeats.length : 0;
+    const chosenSessionObject = sessions.find(x => x.id === chosenSession);
+    const totalPrice = chosenSessionObject ? chosenSeatsCount * chosenSessionObject.coast : 0;
+
+
     useEffect(() => {
         handleSetSessions()
     }, [])
 
     useEffect(() => {
+        const currentSessions = getFilmSessionsByDate(sessions, pickedDate)
+        
         if (sessions.length != 0) {
-            setTodaySessions(getFilmSessionsByDate(sessions, pickedDate))
+            setTodaySessions(currentSessions)
         }
 
-        if (todaySessions.length != 0) {
+        if (currentSessions.length != 0) {
             setSeats(divideSeatsBySeatNumber(todaySessions.find(x => x.id === chosenSession)!.seats))
             setChosenSeats([])
+        }
+        else {
+            setSeats([[], []])
         }
     }, [chosenSession, pickedDate])
 
     function handleSetSessions() {
-        getFilmseSessions(movie.imdbid).then(result => {
+        getFilmSessions(movie.imdbid).then(result => {
             if (result === null) {
                 handleUpdateSession(movie.imdbid, mockFilmSessions)
             }
             else {
                 const sessions = getFilmSessionsByDate(result, pickedDate)
-
-                setSessions(result)
-                handleChooseSession(sessions[0].id)
-                setTodaySessions(sessions)
-                setSeats(divideSeatsBySeatNumber(sessions[0].seats))
+                if (sessions.length !== 0) {
+                    setSessions(result)
+                    handleChooseSession(sessions[0].id)
+                    setTodaySessions(sessions)
+                    setSeats(divideSeatsBySeatNumber(sessions[0].seats))
+                }
             }
         })
     }
@@ -136,107 +147,110 @@ function BookingFilms() {
     );
 
     return (
-        <View style={[styles.container,
-        { backgroundColor: theme.bookingFilms.backgroundColor }]}>
-            <View style={styles.header}>
-                <TouchableOpacity
-                    onPress={() => { navigation.goBack() }}
-                    style={styles.backButton}>
-                    <Image source={IMAGES.backButton} />
-                </TouchableOpacity>
-                <View style={styles.headerTextContainer}>
-                    <Text style={[styles.headerText,
-                    { color: theme.bookingFilms.color }]}>
-                        {BOKKING_HEADER_TEXT}
-                    </Text>
+        <>
+            <View style={[styles.container,
+            { backgroundColor: theme.bookingFilms.backgroundColor }]}>
+                <View style={styles.header}>
+                    <TouchableOpacity
+                        onPress={() => { navigation.goBack() }}
+                        style={styles.backButton}>
+                        <Image source={IMAGES.backButton} />
+                    </TouchableOpacity>
+                    <View style={styles.headerTextContainer}>
+                        <Text style={[styles.headerText,
+                        { color: theme.bookingFilms.color }]}>
+                            {BOKKING_HEADER_TEXT}
+                        </Text>
+                    </View>
                 </View>
-            </View>
-            <View style={[styles.scheduleContainer]}>
-                <Text style={[styles.title,
-                { color: theme.bookingFilms.color }]}>
-                    {SCHEDULE}
-                </Text>
-                <View style={[styles.datepickerContainer]}>
-                    <Text style={[styles.dateTitle,
+                <View style={[styles.scheduleContainer]}>
+                    <Text style={[styles.title,
                     { color: theme.bookingFilms.color }]}>
-                        {DATE}: {formatDate(pickedDate)}
+                        {SCHEDULE}
                     </Text>
-                    <TouchableOpacity onPress={tonggleModalVisible}>
-                        <Image source={IMAGES.calendar} />
+                    <View style={[styles.datepickerContainer]}>
+                        <Text style={[styles.dateTitle,
+                        { color: theme.bookingFilms.color }]}>
+                            {DATE}: {formatDate(pickedDate)}
+                        </Text>
+                        <TouchableOpacity onPress={tonggleModalVisible}>
+                            <Image source={IMAGES.calendar} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <FlatList
+                    style={styles.flatList}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal
+                    data={todaySessions}
+                    renderItem={renderSessionItem}
+                    keyExtractor={(item, index) => index.toString()}
+                />
+                <View style={styles.seatContainer}>
+                    <Text style={[styles.title,
+                    { color: theme.bookingFilms.color }]}>
+                        {SEATS}
+                    </Text>
+                    <Text style={[styles.screenText,
+                    { color: theme.bookingFilms.color }]}>
+                        {SCREEN}
+                    </Text>
+                    <ScrollView
+                        contentContainerStyle={styles.seatWebContainer}>
+                        <FlatList
+                            contentContainerStyle={styles.leftFlatListContainer}
+                            showsVerticalScrollIndicator={false}
+                            showsHorizontalScrollIndicator={false}
+                            scrollEnabled={false}
+                            numColumns={4}
+                            data={seats[0]}
+                            renderItem={renderSeatItem}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
+                        <FlatList
+                            contentContainerStyle={styles.rightFlatListContainer}
+                            showsVerticalScrollIndicator={false}
+                            showsHorizontalScrollIndicator={false}
+                            scrollEnabled={false}
+                            numColumns={4}
+                            data={seats[1]}
+                            renderItem={renderSeatItem}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
+                    </ScrollView>
+                    <View style={styles.seatButtonsConainer} >
+                        {SEAT_BUTTONS.map((x, index) =>
+                            <SeatButtonType text={x} type={x} key={index} />)}
+                    </View>
+                </View>
+                <View style={styles.bottomContainer}>
+                    <View style={styles.priceContainer}>
+                        <Text style={[styles.seatsCounter,
+                        { color: theme.bookingFilms.color }]}>
+                            {chosenSeats?.length} {SEATS}
+                        </Text>
+                        {<Text style={[styles.priceText,
+                        { color: theme.bookingFilms.color }]}>
+                            {totalPrice} $
+                        </Text>}
+                    </View>
+                    <TouchableOpacity
+                        onPress={() => { onSubmitBuy() }}
+                        style={[styles.buyButton,
+                        { backgroundColor: theme.bookingFilms.buyButton }]}>
+                        <Text style={[styles.buyButtonText,
+                        { color: theme.bookingFilms.color }]}>{BOOK_NOW}</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
-            <FlatList
-                style={styles.flatList}
-                showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}
-                horizontal
-                data={todaySessions}
-                renderItem={renderSessionItem}
-                keyExtractor={(item, index) => index.toString()}
-            />
-            <View style={styles.seatContainer}>
-                <Text style={[styles.title,
-                { color: theme.bookingFilms.color }]}>
-                    {SEATS}
-                </Text>
-                <Text style={[styles.screenText,
-                { color: theme.bookingFilms.color }]}>
-                    {SCREEN}
-                </Text>
-                <ScrollView
-                    contentContainerStyle={styles.seatWebContainer}>
-                    <FlatList
-                        contentContainerStyle={styles.leftFlatListContainer}
-                        showsVerticalScrollIndicator={false}
-                        showsHorizontalScrollIndicator={false}
-                        scrollEnabled={false}
-                        numColumns={4}
-                        data={seats[0]}
-                        renderItem={renderSeatItem}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
-                    <FlatList
-                        contentContainerStyle={styles.rightFlatListContainer}
-                        showsVerticalScrollIndicator={false}
-                        showsHorizontalScrollIndicator={false}
-                        scrollEnabled={false}
-                        numColumns={4}
-                        data={seats[1]}
-                        renderItem={renderSeatItem}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
-                </ScrollView>
-                <View style={styles.seatButtonsConainer} >
-                    {SEAT_BUTTONS.map((x, index) =>
-                        <SeatButtonType text={x} type={x} key={index} />)}
-                </View>
-            </View>
-            <View style={styles.bottomContainer}>
-                <View style={styles.priceContainer}>
-                    <Text style={[styles.seatsCounter,
-                    { color: theme.bookingFilms.color }]}>
-                        {chosenSeats?.length} {SEATS}
-                    </Text>
-                    {<Text style={[styles.priceText,
-                    { color: theme.bookingFilms.color }]}>
-                        {(chosenSeats ? chosenSeats?.length : 0) * MOKING_PRICE} $
-                    </Text>}
-                </View>
-                <TouchableOpacity
-                    onPress={() => { onSubmitBuy() }}
-                    style={[styles.buyButton,
-                    { backgroundColor: theme.bookingFilms.buyButton }]}>
-                    <Text style={[styles.buyButtonText,
-                    { color: theme.bookingFilms.color }]}>{BOOK_NOW}</Text>
-                </TouchableOpacity>
-            </View>
+
+            </View >
             <ModalContainer
                 isModalVisible={isDateModalVisible}
                 toggleModal={tonggleModalVisible}>
                 <MyCalendar onClose={tonggleModalVisible} selectedDate={pickedDate} onSelect={handleSetSelectedDate} />
             </ModalContainer>
-        </View >
+        </>
     );
 }
 

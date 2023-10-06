@@ -9,6 +9,7 @@ import CustomTabButton from '@/components/CustomTabButton';
 import { styles } from './styles';
 import { useColorScheme } from 'react-native';
 import { ligthTheme } from '@/theme';
+import TicketRoute from './TicketRoute';
 
 const Tab = createBottomTabNavigator();
 
@@ -62,8 +63,8 @@ function Route() {
                             />
                         ),
                     }}
-                    name="BookingFilms"
-                    component={BookingFilms} />
+                    name="TicketsStack"
+                    component={TicketRoute} />
                 <Tab.Screen
                     options={{
                         tabBarIcon: ({ focused }) => (

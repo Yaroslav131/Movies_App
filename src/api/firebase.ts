@@ -6,6 +6,7 @@ import Snackbar from 'react-native-snackbar';
 import Config from 'react-native-config';
 import { FilmCommentsType, UserType, FilmSession, Ticket } from '@/types';
 import { convertCommentsObjectToArray } from '@/helpingFunctions';
+import { USER_ID } from '@/constants';
 
 export function listenForFilmDataChanges(filmId: string, setFilmComments: (comments: FilmCommentsType[]) => void) {
     const filmsRef = firebase.database().ref(`/films/comments/${filmId}`);
@@ -79,18 +80,20 @@ export function handleUpdateSession(filmId: string, session: FilmSession[]) {
 
 export function handleBuyTicket(tickedId: string, filmId: string, sessionId: string, ticketCount: number,) {
     const ticket: Ticket = {
+        past: false,
+        ticketId: tickedId,
         filmId: filmId,
         sessionId: sessionId,
         ticketCount: ticketCount
     }
-    console.log()
+
     getCurrentUser().then(x => {
         try {
             firebase
                 .app()
                 .database(Config.FIREBASE_DATABASE_URL)
-                .ref(`/users/${x}/tickets/${tickedId}/`)
-                .set(ticket);
+                .ref(`/users/${USER_ID}/tickets/`)
+                .push(ticket);
 
             Snackbar.show({
                 text: `ticket bought`,
@@ -107,7 +110,35 @@ export function handleBuyTicket(tickedId: string, filmId: string, sessionId: str
     })
 }
 
-export async function getFilmseSessions(filmId: string) {
+export async function handleDeleteTicket(ticketId: string) {
+    let tickets = await getTickets()
+  
+  tickets = tickets.filter(ticket => ticket.ticketId !== ticketId);
+  
+    getCurrentUser().then(userId => {
+        try {
+            firebase
+                .app()
+                .database(Config.FIREBASE_DATABASE_URL)
+                .ref(`/users/${USER_ID}/tickets`)
+                .set(tickets);
+
+            Snackbar.show({
+                text: `ticket deleted`,
+                duration: Snackbar.LENGTH_LONG,
+            });
+        }
+        catch {
+            (error: any) =>
+                Snackbar.show({
+                    text: error,
+                    duration: Snackbar.LENGTH_LONG,
+                });
+        };
+    })
+}
+
+export async function getFilmSessions(filmId: string) {
     const database = firebase.database();
     const filmsRef = database.ref(`/films/sessions/${filmId}`);
 
@@ -123,6 +154,51 @@ export async function getFilmseSessions(filmId: string) {
         });
     }
 }
+
+export async function getFilmSession(filmId: string, sessionId: string): Promise<FilmSession | null> {
+    const database = firebase.database();
+    const filmsRef = database.ref(`/films/sessions/${filmId}/${sessionId}`);
+
+    try {
+        const snapshot = await filmsRef.once('value');
+        const filmData = snapshot.val();
+        return filmData;
+    } catch (error) {
+        Snackbar.show({
+            text: 'Error while retrieving data from the database',
+            duration: Snackbar.LENGTH_LONG,
+
+        });
+
+        return null
+    }
+}
+
+export async function getTickets(): Promise<Ticket[]> {
+    try {
+        const currentUser = await getCurrentUser();
+        const database = firebase.database();
+        const filmsRef = database.ref(`/users/${USER_ID}/tickets`);
+
+        const snapshot = await filmsRef.once('value');
+        const ticketData = snapshot.val();
+
+        if (!ticketData) {
+            return [];
+        }
+        
+        const tickets: Ticket[] = Object.values(ticketData);
+        return tickets;
+    } catch (error) {
+        Snackbar.show({
+            text: 'Error while retrieving data from the database',
+            duration: Snackbar.LENGTH_LONG,
+        });
+
+        return [];
+    }
+}
+
 
 export function getCurrentUser() {
     return new Promise((resolve, reject) => {

@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity, useColorScheme } from "react-native";
 import styles from "./styles";
-import { filmCategory, ligthTheme } from "@/theme";
+import {  ligthTheme } from "@/theme";
+import { filmCategory } from "@/types";
 
 interface FilmTopicButtonProps {
     film: filmCategory

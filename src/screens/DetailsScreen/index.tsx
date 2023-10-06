@@ -1,8 +1,8 @@
-import { View, TouchableOpacity, StatusBar, Image, Text, useColorScheme, FlatList, KeyboardAvoidingView, Platform } from "react-native";
+import { View, TouchableOpacity, StatusBar, Image, Text, useColorScheme, FlatList, KeyboardAvoidingView } from "react-native";
 import { styles } from "./styles";
 import VideoPlayer from "@/components/VideoPlayer";
 import { IMAGES } from "@assets/images";
-import { COMMENT_IS_REQUIRED, COMMENT_PLACE_HOLDER, COMMENT_TOO_LONG, GET_TICKET, LESS_TEXT, MAX_SYNOPSIS_LENGTH, MORE_TEXT, NAME_PLACE_HOLDER } from "@/constants";
+import { COMMENT_IS_REQUIRED, COMMENT_PLACE_HOLDER, COMMENT_TOO_LONG, GET_TICKET, LESS_TEXT, MAX_SYNOPSIS_LENGTH, MORE_TEXT } from "@/constants";
 import { ligthTheme } from "@/theme";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -109,8 +109,6 @@ function DetailScreen() {
                         style={styles.gradient}
                     />
                 </VideoPlayer>
-
-
             </View>
             <View style={[styles.descriptionContainer,
             { backgroundColor: theme.detailScreen.backgroundColor }]}>

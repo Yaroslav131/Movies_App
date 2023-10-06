@@ -5,6 +5,8 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import auth from '@react-native-firebase/auth';
 import { ligthTheme } from '@/theme';
 import Route from '@/route/Route';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 
 function App(): JSX.Element {
   const [initializing, setInitializing] = useState(true);
@@ -31,13 +33,11 @@ function App(): JSX.Element {
 
   // if (!user) {
   return (
-    <>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar backgroundColor={background}
         barStyle={theme === "light" ? "light-content" : "light-content"} />
       <Route />
-      
-      {/* <WelcomeScreen /> */}
-    </>
+      </GestureHandlerRootView>
   );
   // }
 

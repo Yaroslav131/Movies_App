@@ -8,7 +8,8 @@ import { TouchableWithoutFeedback } from 'react-native';
 interface VideoPlayerProps {
     children: React.ReactNode;
     centerButton?: React.ReactNode;
-    isPlayerRound: boolean
+    isPlayerRound: boolean,
+    video?: string
 }
 
 
@@ -16,7 +17,6 @@ function VideoPlayer(props: VideoPlayerProps) {
     const [isControlsVisible, setIsControlsVisible] = useState(true)
     const [paused, setPaused] = useState(true)
     const [isPosterShow, setIsPosterShow] = useState(true)
-
 
     function handleSetpPaused() {
         setPaused(!paused)
@@ -42,7 +42,7 @@ function VideoPlayer(props: VideoPlayerProps) {
         <View style={styles.playerConatiner}>
             <TouchableWithoutFeedback style={styles.playerWrapper} onPress={setControlsVisible}>
                 <Video
-                    source={require('@assets/videos/trailler.mp4')}
+                    source={props.video ? { uri: props.video } : require('@assets/videos/trailler.mp4')}
                     paused={paused}
                     style={[props.isPlayerRound ?
                         { borderRadius: 15, }

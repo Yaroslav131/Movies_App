@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     informContainer: {
-        justifyContent: "space-between",    
+        justifyContent: "space-between",
         paddingVertical: 5,
         flex: 2
     },
@@ -30,6 +30,13 @@ const styles = StyleSheet.create({
     runkContainer: {
         flexDirection: "row",
         gap: 3,
+    },
+    starImageContainer: {
+        height: 22,
+        width: 22,
+    },
+    starImage: {
+        flex: 1
     },
     moreButton: {
         flexDirection: "row",

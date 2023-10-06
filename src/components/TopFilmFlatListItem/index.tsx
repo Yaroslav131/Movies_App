@@ -37,7 +37,9 @@ function TopFilmFlatListItem(item: TopMovie) {
                     { color: theme.topScreen.color }]}>
                         {item.rating}
                     </Text>
-                    <Image source={IMAGES.starIcon} />
+                    <View style={styles.runkContainer}>
+                    <Image style={styles.starImageContainer} source={IMAGES.starIcon} />
+                    </View>
                 </View>
                 <TouchableOpacity
                     onPress={() => navigation.navigate("Details", { moive: item })}

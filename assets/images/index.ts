@@ -41,4 +41,8 @@ export const IMAGES = {
     starIcon: require('./starIcon.png'),
     arrowMore: require('./arrowMore.png'),
     thumbImage: require('./thumbImage.png'),
+    scrollIcon: require('./scrollIcon.png'),
+    reviewsRigthArrow: require('./reviewsRigthArrow.png'),
+    reviewsLeftArrow: require('./reviewsLeftArrow.png'),
+    cancelIcon: require('./cancelIcon.png'),
 };

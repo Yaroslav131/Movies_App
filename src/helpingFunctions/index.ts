@@ -1,9 +1,10 @@
-import { FilmCommentsType, FilmSession, Seat, TopMovie, passwordComplexityType } from "@/types";
+import { MONTH_NAMES } from "@/constants";
+import { FilmCommentsType, FilmSession, ListTicket, Seat, TopMovie, passwordComplexityType } from "@/types";
 import Sound from 'react-native-sound';
 import uuid from 'react-native-uuid';
 
 export function getId() {
-    return uuid.v4().toString();
+    return uuid.v1().toString();
 }
 
 export function checkPasswordComplexity(password: string): passwordComplexityType {
@@ -68,25 +69,25 @@ export function timeAgo(date: string): string {
     }
 }
 
-// export function playSound() {
-//     const soundFile = new Sound('comment_sound.mp3', Sound.MAIN_BUNDLE, error => {
-//         if (error) {
-//             console.log('Не удалось загрузить звук:', error);
-//         }
-//     });
+export function playSound() {
+    const soundFile = new Sound('comment_sound.mp3', Sound.MAIN_BUNDLE, error => {
+        if (error) {
+            console.log('Не удалось загрузить звук:', error);
+        }
+    });
 
-//     if (soundFile.isLoaded()) {
-//         soundFile.play(success => {
-//             if (success) {
-//                 console.log('Звук воспроизведен успешно');
-//             } else {
-//                 console.log('Не удалось воспроизвести звук');
-//             }
-//         });
-//     } else {
-//         console.log('Звук не загружен');
-//     }
-// }
+    if (soundFile.isLoaded()) {
+        soundFile.play(success => {
+            if (success) {
+                console.log('Звук воспроизведен успешно');
+            } else {
+                console.log('Не удалось воспроизвести звук');
+            }
+        });
+    } else {
+        console.log('Звук не загружен');
+    }
+}
 
 export function divideSeatsBySeatNumber(seats: Seat[]): [Seat[], Seat[]] {
     const seatsArray1: Seat[] = [];
@@ -239,4 +240,44 @@ export function getUniqueGenresAlphabetically(movies: TopMovie[]): string[] {
     const uniqueGenres = [...new Set(allGenres)].sort();
 
     return uniqueGenres;
+}
+
+
+export const handleCutText = (text: string, maxLength: number) => {
+    if (text.length > maxLength) {
+        return text.slice(0, maxLength) + '...';
+    }
+    return text;
+};
+
+
+
+export function filterUpcomingTickets(tickets: ListTicket[]): ListTicket[] {
+    const currentDate = new Date();
+    return tickets.filter((ticket) => new Date(ticket.date) > currentDate);
+}
+
+export function filterMissedTickets(tickets: ListTicket[]): ListTicket[] {
+    const currentDate = new Date();
+    return tickets.filter(
+        (ticket) => new Date(ticket.date) < currentDate && !ticket.past
+    );
+}
+
+export function filterPastTickets(tickets: ListTicket[]): ListTicket[] {
+    const currentDate = new Date();
+    return tickets.filter(
+        (ticket) => new Date(ticket.date) < currentDate && ticket.past
+    );
+}
+
+export function formatDateMonthYear(inputDate: string): string {
+    const parsedDate = new Date(inputDate);
+
+    const year = parsedDate.getFullYear();
+    const month = parsedDate.getMonth();
+
+    const formattedDate = `${MONTH_NAMES[month]} ${year}`;
+
+    return formattedDate;
 }

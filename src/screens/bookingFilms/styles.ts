@@ -4,9 +4,10 @@ const width = Dimensions.get("screen").width
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        width: "100%",
+        height: "100%",
         padding: 20,
-        justifyContent: "space-evenly"
+
     },
     header: {
         flexDirection: "row",
@@ -81,6 +82,9 @@ export const styles = StyleSheet.create({
     },
     bottomContainer: {
         flexDirection: "row",
+        position: "absolute",
+        bottom: 20,
+        alignSelf: "center"
     },
     priceContainer: {
         flex: 1
@@ -97,7 +101,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 10
+        borderRadius: 10,
     },
     buyButtonText: {
         fontFamily: "poppins-bold",

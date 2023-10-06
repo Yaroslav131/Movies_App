@@ -1,7 +1,5 @@
-import { formatDateToYYYYMMDD } from "@/helpingFunctions";
 import { FilmSession, Seat, SeatButtonType, filmCategory, sponsorsDataType } from "@/types";
 import { IMAGES } from "@assets/images";
-import { Dimensions } from "react-native";
 
 export const SPONSERS_DATA: sponsorsDataType[] = [
     {
@@ -58,6 +56,8 @@ export const FILM_NAME = "The Batman"
 export const BUY_TICKET = "Tickets Available"
 export const GET_TICKET = "Get Tickets"
 
+export const ABOUT = "About"
+
 export const FILM_CATEGORIES: filmCategory[] = [
     { value: "drama", label: "Drama" },
     { value: "comedy", label: "Comedy" },
@@ -66,7 +66,7 @@ export const FILM_CATEGORIES: filmCategory[] = [
     { value: "animation", label: "Animation" },
 ];
 
-export const MAX_SYNOPSIS_LENGTH = 100;
+export const MAX_SYNOPSIS_LENGTH = 50;
 export const LESS_TEXT = "less";
 export const MORE_TEXT = "more";
 
@@ -88,7 +88,6 @@ export const SCREEN = "Screen"
 
 export const SEAT_BUTTONS: SeatButtonType[] = ["Available", "Reserved", "Selected"]
 
-export const MOKING_PRICE = 15
 export const BOOK_NOW = "Book Now"
 export const CHOOSE_DAY = "Choose visiting day"
 
@@ -99,6 +98,7 @@ export const GENRE = "Genre"
 export const AUTHORS = "Authors"
 
 export const MORE = "More"
+export const READ_MORE_TEXT = "Read more"
 
 export const TOO_LONG = "Too long"
 
@@ -113,6 +113,20 @@ export const SELECT_GENRES = "Select genre"
 export const RESET = "RESET"
 
 export const FILM_RATING = `Film's rating`
+export const ACTORS = "Actors"
+export const REVIEWS = "REVIEWS"
+
+export const DELETE = "Delete"
+export const BACK="Back"
+
+export const MONTH_NAMES = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+export const CANCEL = "Cancel"
+
+export const MAX_REVIEWS_LENGTH = 200;
 
 export const MIN_FILTER_YEAR = 1920
 export const MAX_FILTER_YEAR = new Date().getFullYear()
@@ -120,20 +134,30 @@ export const MAX_FILTER_YEAR = new Date().getFullYear()
 export const MIN_FILTER_RANING = 0
 export const MAX_FILTER_RANING = 10
 
+function formatDateToYYYYMMDD(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+}
+
 export const mockFilmSessions: FilmSession[] = [
     {
         id: "1",
+        coast: 15,
         timeStart: "15:00",
         timeEnd: "17:00",
-        date: formatDateToYYYYMMDD(new Date()),
+        date:  formatDateToYYYYMMDD(new Date()),
         cinema: "Cinema City",
         seats: generateSeats(7, 8)
     },
     {
         id: "2",
+        coast: 15,
         timeStart: "18:30",
         timeEnd: "20:30",
-        date: formatDateToYYYYMMDD(new Date()),
+        date:  formatDateToYYYYMMDD(new Date()),
         cinema: "Movieplex",
         seats: generateSeats(7, 8)
     },
@@ -144,7 +168,7 @@ function generateSeats(rows: number, seatsPerRow: number): Seat[] {
     for (let row = 1; row <= rows; row++) {
         for (let seatNumber = 1; seatNumber <= seatsPerRow; seatNumber++) {
             seats.push({
-                isAvailable: false,
+                isAvailable: true,
                 row,
                 ticketId: "",
                 seatNumber
@@ -154,4 +178,5 @@ function generateSeats(rows: number, seatsPerRow: number): Seat[] {
     return seats;
 }
 
-export const NATIFICATIONS_DELAY = 24
+export const USER_ID = "fszMoiKgD1WnxjAazWhI4dVuvGB2"
+export const NATIFICATIONS_DELAY = 12

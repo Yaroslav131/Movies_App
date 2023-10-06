@@ -40,7 +40,7 @@ export const ligthTheme: Theme = {
         color: "#1E1F27",
     },
     tabNavigation: {
-        backgroundColor: '#16171F'
+        backgroundColor: '#16171F',
     },
     homeScreen: {
         backgroundColor: "#1E1F27",
@@ -109,6 +109,25 @@ export const ligthTheme: Theme = {
     detailTopScreen: {
         backgroundColor: "#1E1F27",
         color: "#FFF",
+        lineColor: "#D9D9D9",
+        titleColor: "#D98639"
+    },
+    customUpperTabButton: {
+        backgroundColor: "#1E1F27",
+        color: "#FFF",
+        activeColor: "#D98639"
+    },
+    ticketScreen: {
+        backgroundColor: "#1E1F27",
+        color: "#FFF",
+        itemBackgroundColor: "#767678E5",
+        buttonBackgroundColor: "#D98639",
+        cancelButtonColor: "#000000"
+    },
+    deleteTicketModal: {
+        backgroundColor: "#2E2E2E",
+        color: "#FFF",
+        submitButton: "#D98639"
     }
 }
 

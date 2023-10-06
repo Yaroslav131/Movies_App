@@ -54,7 +54,7 @@ export interface Theme {
         color: string,
     };
     tabNavigation: {
-        backgroundColor: string
+        backgroundColor: string,
     };
     homeScreen: {
         backgroundColor: string,
@@ -121,8 +121,27 @@ export interface Theme {
         resetButtonColor: string
     },
     detailTopScreen: {
-        backgroundColor:string,
+        backgroundColor: string,
         color: string,
+        lineColor: string,
+        titleColor: string
+    },
+    customUpperTabButton: {
+        backgroundColor: string,
+        color: string,
+        activeColor: string
+    },
+    ticketScreen: {
+        backgroundColor: string,
+        color: string,
+        itemBackgroundColor: string,
+        buttonBackgroundColor: string,
+        cancelButtonColor: string
+    },
+    deleteTicketModal: {
+        backgroundColor: string,
+        color: string,
+        submitButton: string
     }
 }
 
@@ -157,6 +176,7 @@ export type UserType = {
 
 export interface FilmSession {
     id: string,
+    coast: number,
     timeStart: string,
     timeEnd: string,
     date: string,
@@ -172,6 +192,8 @@ export interface Seat {
 }
 
 export interface Ticket {
+    past: boolean,
+    ticketId: string,
     ticketCount: number,
     filmId: string,
     sessionId: string
@@ -199,4 +221,32 @@ export interface DropButtonItem {
     value: string
 }
 
+export interface FilmDitails {
+    imdbid: string;
+    numVotes: number;
+    people: {
+        category: string;
+        characters: string[] | null;
+        job: string | null;
+        peopleid: string;
+    }[];
+    plotSummary: string;
+    quotes: string[];
+    reviews: string[];
+    title: string;
+    trailerUrl: string[];
+}
+
 export type SeatButtonType = "Available" | "Reserved" | "Selected"
+
+export type TicketFilterType = "upcoming" | "past" | "missed"
+
+export interface ListTicket {
+    past: boolean,
+    title: string,
+    date: string,
+    ticketId: string,
+    seatCount: number,
+    coast: number,
+    poster: string
+}
