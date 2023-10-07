@@ -72,8 +72,8 @@ describe('convertCommentsObjectToArray', () => {
     };
 
     const expectedArray: FilmCommentsType[] = [
-      { comment: 'Comment 1', userid: 'user1', date: '2023-01-01' },
-      { comment: 'Comment 2', userid: 'user2', date: '2023-01-02' },
+      { comment: 'Comment 1', userId: 'user1', date: '2023-01-01' },
+      { comment: 'Comment 2', userId: 'user2', date: '2023-01-02' },
     ];
 
     expect(convertCommentsObjectToArray(commentsObject)).toEqual(expectedArray);

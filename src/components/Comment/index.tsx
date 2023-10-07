@@ -15,11 +15,11 @@ function Comment(props: CommentProps) {
   const [currentUser, setCurrentUser] = useState<UserType | null>(null);
 
   useEffect(() => {
-    getUserById(props.item.userid)
+    getUserById(props.item.userId)
       .then((user) => {
         setCurrentUser(user);
       });
-  }, [props.item.userid]);
+  }, [props.item.userId]);
 
   return (
     <View style={styles.commemtContainer}>

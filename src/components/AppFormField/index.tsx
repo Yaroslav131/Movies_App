@@ -20,6 +20,14 @@ function AppFormField(props: any) {
 
   const theme = useAppSelector((state) => state.theme.value);
 
+  const handleTextChange = (text: string) => {
+    if (name === 'password') {
+      onChangePassword(text);
+    }
+
+    onChange(name)(text);
+  };
+
   return (
     <View style={styles.container}>
       {hasError && <Text style={styles.errorStyle}>{errors[name]}</Text>}
@@ -29,13 +37,7 @@ function AppFormField(props: any) {
           <Image style={styles.image} source={props.image} />
         </View>
         <TextInput
-          onChangeText={(text) => {
-            if (name === 'password') {
-              onChangePassword(text);
-            }
-
-            onChange(name)(text);
-          }}
+          onChangeText={handleTextChange}
           placeholderTextColor={theme.SingInput.placeholderTextColor}
           placeholder={placeholder}
           onBlur={() => {
@@ -47,8 +49,8 @@ function AppFormField(props: any) {
           value={value}
           {...inputProps}
           style={[styles.input,
-            { color: theme.SingInput.textColor },
-            { borderColor: theme.SingInput.borderColor }]}
+          { color: theme.SingInput.textColor },
+          { borderColor: theme.SingInput.borderColor }]}
         />
       </View>
     </View>

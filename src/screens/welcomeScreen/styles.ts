@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     width: '70%',
     fontFamily: 'inriaSans-lightItalic',
   },
-  alreadyAccText: {
+  alreadyText: {
     fontFamily: 'inter-regular',
     fontSize: 15,
     fontStyle: 'italic',
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: 1,
-    width: '100%',
     gap: 20,
     justifyContent: 'center',
     alignItems: 'center',

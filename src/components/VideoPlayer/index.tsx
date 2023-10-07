@@ -2,7 +2,7 @@ import Video from 'react-native-video';
 import {
   Image, TouchableOpacity, View, TouchableWithoutFeedback,
 } from 'react-native';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { IMAGES } from '@assets/images';
 import styles from './styles';
 
@@ -18,19 +18,19 @@ function VideoPlayer(props: VideoPlayerProps) {
   const [paused, setPaused] = useState(true);
   const [isPosterShow, setIsPosterShow] = useState(true);
 
-  function handleSetpPaused() {
-    setPaused(!paused);
+  const handleSetPaused = useCallback(() => {
+    setPaused((prevPaused) => !prevPaused);
     setIsPosterShow(false);
 
     if (paused) {
       handleHiddenButtons();
     }
-  }
+  }, [paused]);
 
   function setControlsVisible() {
     if (!paused) {
       setIsControlsVisible(true);
-      handleSetpPaused();
+      handleSetPaused();
     }
   }
 
@@ -69,7 +69,7 @@ function VideoPlayer(props: VideoPlayerProps) {
 
         <View style={styles.centerButtonContainer}>
           <TouchableOpacity
-            onPress={handleSetpPaused}
+            onPress={handleSetPaused}
             style={[styles.playButton, { display: paused ? 'flex' : 'none' }]}
           >
             <Image source={IMAGES.ellipsePlay} />

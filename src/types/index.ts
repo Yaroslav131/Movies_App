@@ -10,37 +10,21 @@ export interface SingInput {
     touched: any
 }
 
+interface CommonTheme {
+    backgroundColor: string;
+    color: string;
+}
+
 export interface Theme {
-    errorBoudary: {
-        backgroundColor: string;
-        color: string;
-    },
+    errorBoudary: CommonTheme;
     singUpButton: {
-        addAcc: {
-            backgroundColor: string;
-            color: string;
-        };
-        googleAcc: {
-            backgroundColor: string;
-            color: string;
-        };
-        facebookAcc: {
-            backgroundColor: string;
-            color: string;
-        };
-        gitHubAcc: {
-            backgroundColor: string;
-            color: string;
-        };
+        addAcc: CommonTheme;
+        googleAcc: CommonTheme;
+        facebookAcc: CommonTheme;
+        gitHubAcc: CommonTheme;
     };
-    welcomScreen: {
-        backgroundColor: string;
-        color: string;
-    };
-    modals: {
-        backgroundColor: string;
-        color: string;
-    };
+    welcomScreen: CommonTheme;
+    modals: CommonTheme;
     SingInput: {
         placeholderTextColor: string;
         textColor: string;
@@ -52,113 +36,102 @@ export interface Theme {
         color: string;
     };
     statusBar: {
-        color: string,
+        color: string;
     };
-    tabNavigation: {
-        backgroundColor: string,
-    };
-    homeScreen: {
-        backgroundColor: string,
-        color: string
-    },
-    filmTopicButton: {
-        backgroundColor: string,
-        color: string
-    },
-    horizontalSwiper: {
-        backgroundColor: string,
-        color: string
-    },
+    tabNavigation: CommonTheme;
+    homeScreen: CommonTheme;
+    filmTopicButton: CommonTheme;
+    horizontalSwiper: CommonTheme;
     detailScreen: {
-        backgroundColor: string,
-        buttonBackgroundColor: string,
-        color: string,
-        iconBackgroundColor: string,
+        backgroundColor: string;
+        buttonBackgroundColor: string;
+        color: string;
+        iconBackgroundColor: string;
         transparentColor: string;
-    },
+    };
     commentFormField: {
         placeholderTextColor: string;
         textColor: string;
         borderColor: string;
-    },
+    };
     bookingFilms: {
-        backgroundColor: string,
-        color: string,
-        borderColor: string,
-        sessionButtonColor: string,
-        buyButton: string
-    },
+        backgroundColor: string;
+        color: string;
+        borderColor: string;
+        sessionButtonColor: string;
+        buyButton: string;
+    };
     seatButton: {
-        reserved: string,
-        selected: string
-        available: string,
-        borderColor: string
-    },
+        reserved: string;
+        selected: string;
+        available: string;
+        borderColor: string;
+    };
     calendar: {
-        backgroundColor: string,
-        textSectionTitleColor: string,
-        dayTextColor: string,
-        selectedDayBackgroundColor: string,
-        textDisabledColor: string,
-        monthTextColor: string,
-        disableBackground: string,
-        selectedBackground: string,
-        dateBackground: string,
-        color: string
-    },
+        backgroundColor: string;
+        textSectionTitleColor: string;
+        dayTextColor: string;
+        selectedDayBackgroundColor: string;
+        textDisabledColor: string;
+        monthTextColor: string;
+        disableBackground: string;
+        selectedBackground: string;
+        dateBackground: string;
+        color: string;
+    };
     topScreen: {
-        backgroundColor: string,
-        color: string,
-        searchContainer: string,
-        inputColor: string,
-        moreButton: string
-    },
+        backgroundColor: string;
+        color: string;
+        searchContainer: string;
+        inputColor: string;
+        moreButton: string;
+    };
     filterModal: {
-        backgroundColor: string,
-        color: string,
-        outboundColor: string,
-        inboundColor: string,
-        borderColor: string,
-        resetButtonColor: string
-    },
+        backgroundColor: string;
+        color: string;
+        outboundColor: string;
+        inboundColor: string;
+        borderColor: string;
+        resetButtonColor: string;
+    };
     detailTopScreen: {
-        backgroundColor: string,
-        color: string,
-        lineColor: string,
-        titleColor: string
-    },
+        backgroundColor: string;
+        color: string;
+        lineColor: string;
+        titleColor: string;
+    };
     customUpperTabButton: {
-        backgroundColor: string,
-        color: string,
-        activeColor: string
-    },
+        backgroundColor: string;
+        color: string;
+        activeColor: string;
+    };
     ticketScreen: {
-        backgroundColor: string,
-        color: string,
-        itemBackgroundColor: string,
-        buttonBackgroundColor: string,
-        cancelButtonColor: string
-    },
+        backgroundColor: string;
+        color: string;
+        itemBackgroundColor: string;
+        buttonBackgroundColor: string;
+        cancelButtonColor: string;
+    };
     deleteTicketModal: {
-        backgroundColor: string,
-        color: string,
-        submitButton: string
-    },
+        backgroundColor: string;
+        color: string;
+        submitButton: string;
+    };
     profileScreen: {
-        backgroundColor: string,
-        color: string,
-        menuBackgroundColor: string,
-        whiteButton: string,
-        whiteButtonText: string,
-        blackButton: string,
-        blackButtonText: string,
-    },
+        backgroundColor: string;
+        color: string;
+        menuBackgroundColor: string;
+        whiteButton: string;
+        whiteButtonText: string;
+        blackButton: string;
+        blackButtonText: string;
+    };
     settingModal: {
-        trackColorFalse: string
-        trackColorTrue: string
-        thumbColorIsEnabledTrue: string
-        thumbColorIsEnabledFalse: string
-    }
+        trackColorFalse: string;
+        trackColorTrue: string;
+        thumbColorIsEnabledTrue: string;
+        thumbColorIsEnabledFalse: string;
+    };
 }
 
 export interface LanguageDictionary {
@@ -269,7 +242,7 @@ export interface Movie {
 
 export type FilmCommentsType = {
     comment: string,
-    userid: string,
+    userId: string,
     date: string
 }
 

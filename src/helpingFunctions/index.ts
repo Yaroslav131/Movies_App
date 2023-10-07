@@ -43,7 +43,7 @@ export function convertCommentsObjectToArray(
   >): FilmCommentsType[] {
   return Object.keys(commentsObject).map((key) => ({
     comment: commentsObject[key].comment,
-    userid: commentsObject[key].userId,
+    userId: commentsObject[key].userId,
     date: commentsObject[key].data.toString(),
   }));
 }

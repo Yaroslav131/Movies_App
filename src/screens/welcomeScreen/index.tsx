@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import { IMAGES } from '@assets/images';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styles from './styles';
 import SingUpButton from '@/components/SingUpButton';
 import ModalContainer from '@/components/ModalContainer';
@@ -36,12 +36,12 @@ function WelcomeScreen() {
 
   const translations = languageDictionary[currentLanguage];
 
-  function handleToggleModel() {
-    setIsModalOpen(!isModalOpen);
-  }
+  const handleToggleModal = useCallback(() => {
+    setIsModalOpen((prevState) => !prevState);
+  }, []);
 
   function handleCreateAccount() {
-    handleToggleModel();
+    handleToggleModal();
     handleSetModalContent(<SingModal
       title={translations.SIGNUP_CREATE_ACCOUNT_TEXT}
       type="SingUp"
@@ -50,7 +50,7 @@ function WelcomeScreen() {
   }
 
   function handleLogin() {
-    handleToggleModel();
+    handleToggleModal();
     handleSetModalContent(<SingModal
       title={translations.SIGNIN_TEXT}
       type="SingIn"
@@ -130,7 +130,7 @@ function WelcomeScreen() {
             renderItem={renderSingUpItem}
             keyExtractor={keyExtractor}
           />
-          <Text style={[styles.alreadyAccText, { color: theme.welcomScreen.color }]}>
+          <Text style={[styles.alreadyText, { color: theme.welcomScreen.color }]}>
             {translations.ALREADY_HAS_ACCOUNT_TEXT}
             <TouchableWithoutFeedback onPress={handleLogin}>
               <Text style={styles.loginText}>{translations.LOGIN_TEXT}</Text>
@@ -153,7 +153,7 @@ function WelcomeScreen() {
 
       <ModalContainer
         isModalVisible={isModalOpen}
-        toggleModal={handleToggleModel}
+        toggleModal={handleToggleModal}
       >
         {modalContent}
       </ModalContainer>
