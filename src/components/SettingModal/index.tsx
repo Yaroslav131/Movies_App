@@ -4,20 +4,20 @@ import {
   Text,
   View,
 } from 'react-native';
-import { IMAGES } from '@assets/images';
-import { Switch } from 'react-native-gesture-handler';
 import { useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
-import { useDispatch } from 'react-redux';
+import { IMAGES } from '@assets/images';
+import { Switch } from 'react-native-gesture-handler';
 import toggleNotificationPermissions from '@/notifications';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import {
   OFF, ON, languageDictionary, languages,
 } from '@/constants';
-import styles from './styles';
+
 import { changeLanguage } from '@/slices/languageSlice';
 import { LanguagesType } from '@/types';
 
+import styles from './styles'
 interface SettingModalProps {
     onPress: () => void,
 }

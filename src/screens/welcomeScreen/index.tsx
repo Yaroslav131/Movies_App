@@ -9,7 +9,7 @@ import {
 import { IMAGES } from '@assets/images';
 import React, { useState } from 'react';
 import styles from './styles';
-import SingUpButton from '@/components/singUpButton';
+import SingUpButton from '@/components/SingUpButton';
 import ModalContainer from '@/components/ModalContainer';
 import SingModal from '@/components/SingModal';
 import { signInWithGoogle, onFacebookButtonPress } from '@/api/firebase/authFirebase';

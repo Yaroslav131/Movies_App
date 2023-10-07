@@ -95,7 +95,6 @@ function SingModal({ onPress, type, title }: SingModalProps) {
             onPress();
           }}
         >
-
           <Field
             image={IMAGES.yourName}
             component={AppFormField}
@@ -171,7 +170,6 @@ function SingModal({ onPress, type, title }: SingModalProps) {
           <AppFormSubmitButton title={translations.SIGNIN_BUTTON_TEXT} />
         </AppForm>
       )}
-
     </View>
   );
 }

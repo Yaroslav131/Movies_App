@@ -11,6 +11,10 @@ export interface SingInput {
 }
 
 export interface Theme {
+    errorBoudary: {
+        backgroundColor: string;
+        color: string;
+    },
     singUpButton: {
         addAcc: {
             backgroundColor: string;

@@ -8,6 +8,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
 import store from '@/store/store';
 import { useAppSelector } from '@/hooks';
+import ErrorBoundary from './src/screens/ErrorBoundary';
 
 
 function App(): JSX.Element {
@@ -28,12 +29,13 @@ function App(): JSX.Element {
 
   if (initializing) return <></>;
 
-  return (
+  return (<ErrorBoundary>
     <Provider store={store}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         {!user ? <WelcomeScreen /> : <Route />}
       </GestureHandlerRootView>
     </Provider>
+  </ErrorBoundary>
   );
 }
 

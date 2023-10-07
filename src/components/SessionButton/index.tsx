@@ -2,12 +2,11 @@ import {
   TouchableOpacity, Text, View, Image,
 } from 'react-native';
 import { IMAGES } from '@assets/images';
-import { styles } from './styles';
-
 import { FilmSession } from '@/types';
 import { countAvailableSeatsInSession } from '@/helpingFunctions';
 import { languageDictionary } from '@/constants';
 import { useAppSelector } from '@/hooks';
+import { styles } from './styles';
 
 interface SessionButtonProps {
     session: FilmSession

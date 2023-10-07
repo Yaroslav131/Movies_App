@@ -1,6 +1,10 @@
 import { Theme } from '@/types';
 
 export const darkTheme: Theme = {
+  errorBoudary: {
+    backgroundColor: '#1E1F27',
+    color: '#FFF',
+  },
   settingModal: {
     trackColorFalse: '#767577',
     trackColorTrue: '#81b0ff',
@@ -148,6 +152,10 @@ export const darkTheme: Theme = {
 };
 
 export const lightTheme = {
+  errorBoudary: {
+    backgroundColor: '#FFF',
+    color: '#1E1F27',
+  },
   settingModal: {
     trackColorFalse: '#767577',
     trackColorTrue: '#81b0ff',
