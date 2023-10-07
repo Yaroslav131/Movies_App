@@ -1,72 +1,83 @@
-import { Text, View, useColorScheme, StatusBar } from "react-native";
-import styles from "./styles";
-import { ligthTheme } from "@/theme";
-import { COMING_SOON_TEXT, FILM_CATEGORIES, NOW_SHOWING_TEXT } from "@/constants";
-import FilmTopicButton from "@/components/FilmTopicButton";
-import { useEffect, useState } from "react";
+import { Text, View, StatusBar } from 'react-native';
+import { useEffect, useState } from 'react';
+import styles from './styles';
 
-import VideoPlayer from "@/components/VideoPlayer";
-import HorizontalSwiper from "@/components/HorizontalSwiper";
-import { fetchDataByCategory } from "@/api/rapid";
-import { Movie, filmCategory } from "@/types";
+import FilmTopicButton from '@/components/FilmTopicButton';
 
-import MainVideoControls from "@/components/MainVideoControls";
+import VideoPlayer from '@/components/VideoPlayer';
+import HorizontalSwiper from '@/components/HorizontalSwiper';
+import { fetchDataByCategory } from '@/api/rapid';
+import { Movie, filmCategory } from '@/types';
+
+import MainVideoControls from '@/components/MainVideoControls';
+import { languageDictionary } from '@/constants';
+import { useAppSelector } from '@/hooks';
 
 function HomeScreen() {
-    const theme = useColorScheme() === "dark" ? ligthTheme : ligthTheme
-    const [chosenTopic, setChosenTopic] = useState<filmCategory>(FILM_CATEGORIES[0])
-    const [movies, setMovies] = useState<Movie[] | null>(null)
+  const theme = useAppSelector((state) => state.theme.value);
 
-    useEffect(() => {
-        fetchData(chosenTopic)
-    }, [])
+  const currentLanguage = useAppSelector((state) => state.language).value;
 
-    async function fetchData(film: filmCategory) {
-        const respons = await fetchDataByCategory(film.value)
-        setMovies(respons.splice(0, 7))
-    }
+  const translations = languageDictionary[currentLanguage];
 
-    function handleSetChosenTopic(film: filmCategory) {
-        setChosenTopic(film)
-        fetchData(film)
-    }
+  const [chosenTopic, setChosenTopic] = useState<filmCategory>(translations.FILM_CATEGORIES[0]);
+  const [movies, setMovies] = useState<Movie[] | null>(null);
 
-    return (
-        <>
-            <StatusBar backgroundColor={theme.homeScreen.backgroundColor} />
-            <View style={[styles.container,
-            { backgroundColor: theme.homeScreen.backgroundColor }]}>
-                <View style={styles.topContainer}>
-                    <Text style={[styles.titleText,
-                    { color: theme.homeScreen.color }]}>
-                        {COMING_SOON_TEXT}
-                    </Text>
-                    <View style={styles.videoPlayerConatiner}>
-                        <VideoPlayer isPlayerRound={true}>
-                            {movies && <MainVideoControls movie={movies[0]} />}
-                        </VideoPlayer>
-                    </View>
-                    <View style={styles.topicContainer}>
-                        {FILM_CATEGORIES.map((x, index) =>
-                            <FilmTopicButton
-                                onClick={handleSetChosenTopic}
-                                key={index}
-                                chosenTopic={chosenTopic}
-                                film={x} />)}
-                    </View>
+  useEffect(() => {
+    fetchData(chosenTopic);
+  }, []);
 
-                </View>
-                <View style={styles.bottomContainer}>
-                    <Text style={[styles.titleText,
-                    { color: theme.homeScreen.color }]}>
-                        {NOW_SHOWING_TEXT}
-                    </Text>
+  async function fetchData(film: filmCategory) {
+    const respons = await fetchDataByCategory(film.value);
+    setMovies(respons.splice(0, 7));
+  }
 
-                    {movies && <HorizontalSwiper movies={movies} />}
-                </View>
-            </View>
-        </>
-    );
+  function handleSetChosenTopic(film: filmCategory) {
+    setChosenTopic(film);
+    fetchData(film);
+  }
+
+  return (
+    <>
+      <StatusBar backgroundColor={theme.homeScreen.backgroundColor} />
+      <View style={[styles.container,
+        { backgroundColor: theme.homeScreen.backgroundColor }]}
+      >
+        <View style={styles.topContainer}>
+          <Text style={[styles.titleText,
+            { color: theme.homeScreen.color }]}
+          >
+            {translations.COMING_SOON_TEXT}
+          </Text>
+          <View style={styles.videoPlayerConatiner}>
+            <VideoPlayer isPlayerRound>
+              {movies && <MainVideoControls movie={movies[0]} />}
+            </VideoPlayer>
+          </View>
+          <View style={styles.topicContainer}>
+            {translations.FILM_CATEGORIES.map((x, index) => (
+              <FilmTopicButton
+                onClick={handleSetChosenTopic}
+                key={index}
+                chosenTopic={chosenTopic}
+                film={x}
+              />
+            ))}
+          </View>
+
+        </View>
+        <View style={styles.bottomContainer}>
+          <Text style={[styles.titleText,
+            { color: theme.homeScreen.color }]}
+          >
+            {translations.NOW_SHOWING_TEXT}
+          </Text>
+
+          {movies && <HorizontalSwiper movies={movies} />}
+        </View>
+      </View>
+    </>
+  );
 }
 
 export default HomeScreen;

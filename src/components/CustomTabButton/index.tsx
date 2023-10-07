@@ -8,17 +8,23 @@ interface CustomTabButtonProps {
     focused: boolean,
 }
 
-const CustomTabButton = ({ choosenImage, image, focused }: CustomTabButtonProps) => (
+function CustomTabButton({ choosenImage, image, focused }: CustomTabButtonProps) {
+  return (
     <View style={styles.container}>
-        <View style={[styles.imageContainer]}>
-            <Image style={styles.imageStyle}
-                source={focused ? choosenImage : image} />
-        </View>
-        <View style={styles.dotContainer}>
-            <Image style={{ display: focused ? "flex" : "none" }}
-                source={IMAGES.chosenEllipse} />
-        </View>
-    </View >
-);
+      <View style={[styles.imageContainer]}>
+        <Image
+          style={styles.imageStyle}
+          source={focused ? choosenImage : image}
+        />
+      </View>
+      <View style={styles.dotContainer}>
+        <Image
+          style={{ display: focused ? 'flex' : 'none' }}
+          source={IMAGES.chosenEllipse}
+        />
+      </View>
+    </View>
+  );
+}
 
 export default CustomTabButton;

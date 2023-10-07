@@ -1,8 +1,8 @@
-import { formatDateToYYYYMMDD, isDateInRange } from "@/helpingFunctions";
-import { ligthTheme } from "@/theme";
-import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, useColorScheme } from "react-native";
-import { styles } from "./style";
+import React, { useEffect, useState } from 'react';
+import { Text, TouchableOpacity } from 'react-native';
+import { formatDateToYYYYMMDD, isDateInRange } from '@/helpingFunctions';
+import { styles } from './style';
+import { useAppSelector } from '@/hooks';
 
 interface DayButtonProps {
     day: number,
@@ -13,43 +13,46 @@ interface DayButtonProps {
     onPress: (date: string) => void,
 }
 
-type DateButtonType = 'disabled' | 'selected' | "available"
+type DateButtonType = 'disabled' | 'selected' | 'available'
 
-function DayButton({ onPress, date, maxDate, minDate, day, selectedDate }: DayButtonProps) {
-    const theme = useColorScheme() === "dark" ? ligthTheme : ligthTheme
+function DayButton({
+  onPress, date, maxDate, minDate, day, selectedDate,
+}: DayButtonProps) {
+  const theme = useAppSelector((state) => state.theme.value);
+  const [state, setState] = useState<DateButtonType>(isDateInRange(date, minDate, maxDate) ? 'available' : 'disabled');
 
-    const [state, setState] = useState<DateButtonType>(isDateInRange(date, minDate, maxDate) ? "available" : "disabled")
+  useEffect(() => {
+    if (date !== formatDateToYYYYMMDD(selectedDate) && state === 'selected') {
+      setState('available');
+    } else if (date === formatDateToYYYYMMDD(selectedDate)) {
+      setState('selected');
+    }
+  }, []);
 
-    useEffect(() => {
-        if (date !== formatDateToYYYYMMDD(selectedDate) && state === "selected") {
-            setState("available")
-        }
-        else if (date === formatDateToYYYYMMDD(selectedDate)) {
-            setState("selected")
-        }
-    }, [])
-
-    return (
-        <TouchableOpacity
-            onPress={() => { state !== 'disabled' && onPress(date) }}
-            style={[
-                styles.dateContainer,
-                {
-                    backgroundColor: state === 'disabled'
-                        ? theme.calendar.disableBackground
-                        : state === 'selected'
-                            ? theme.calendar.selectedBackground
-                            : theme.calendar.dateBackground,
-                },
-            ]}
-        >
-            <Text style={{
-                color: state === 'disabled'
-                    ? theme.calendar.textDisabledColor
-                    : theme.calendar.dayTextColor,
-            }}>{day}</Text>
-        </TouchableOpacity>
-    );
+  return (
+    <TouchableOpacity
+      onPress={() => { state !== 'disabled' && onPress(date); }}
+      style={[
+        styles.dateContainer,
+        {
+          backgroundColor: state === 'disabled'
+            ? theme.calendar.disableBackground
+            : state === 'selected'
+              ? theme.calendar.selectedBackground
+              : theme.calendar.dateBackground,
+        },
+      ]}
+    >
+      <Text style={{
+        color: state === 'disabled'
+          ? theme.calendar.textDisabledColor
+          : theme.calendar.dayTextColor,
+      }}
+      >
+        {day}
+      </Text>
+    </TouchableOpacity>
+  );
 }
 
 export default React.memo(DayButton);

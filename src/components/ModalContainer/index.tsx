@@ -10,16 +10,18 @@ interface ModalContainerProps {
 function ModalContainer({
   isModalVisible,
   toggleModal,
-  children }: ModalContainerProps) {
+  children,
+}: ModalContainerProps) {
   return (
     <Container>
       <ModalWrapper
         isVisible={isModalVisible}
         backdropOpacity={0.7}
-        backdropColor='#1E1F27'
+        backdropColor="#1E1F27"
         onBackdropPress={toggleModal}
         avoidKeyboard
-        useNativeDriver={true}>
+        useNativeDriver
+      >
         {children}
       </ModalWrapper>
     </Container>

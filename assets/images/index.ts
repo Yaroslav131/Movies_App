@@ -45,4 +45,5 @@ export const IMAGES = {
     reviewsRigthArrow: require('./reviewsRigthArrow.png'),
     reviewsLeftArrow: require('./reviewsLeftArrow.png'),
     cancelIcon: require('./cancelIcon.png'),
+    userAvatar: require('./userAvatar.png'),
 };

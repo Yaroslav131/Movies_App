@@ -1,10 +1,6 @@
-import { ImageProps } from "react-native";
+import { ImageProps } from 'react-native';
 
-export interface sponsorsDataType {
-    image: ImageProps;
-}
-
-export interface singInput {
+export interface SingInput {
     onChangeText: (e: string | React.ChangeEvent<any>) => void
     onBlur: (e: any) => void
     value: string
@@ -39,8 +35,9 @@ export interface Theme {
     };
     modals: {
         backgroundColor: string;
+        color: string;
     };
-    singInput: {
+    SingInput: {
         placeholderTextColor: string;
         textColor: string;
         borderColor: string;
@@ -142,10 +139,113 @@ export interface Theme {
         backgroundColor: string,
         color: string,
         submitButton: string
+    },
+    profileScreen: {
+        backgroundColor: string,
+        color: string,
+        menuBackgroundColor: string,
+        whiteButton: string,
+        whiteButtonText: string,
+        blackButton: string,
+        blackButtonText: string,
+    },
+    settingModal: {
+        trackColorFalse: string
+        trackColorTrue: string
+        thumbColorIsEnabledTrue: string
+        thumbColorIsEnabledFalse: string
     }
 }
 
-export type passwordComplexityType = "Low" | "Medium" | "High" | "Invalid"
+export interface LanguageDictionary {
+    NOTIFICATIONS: string;
+    WELCOME_TEXT: string;
+    SIGNUP_CREATE_ACCOUNT_TEXT: string;
+    SIGNIN_TEXT: string;
+    SIGNIN_BUTTON_TEXT: string;
+    SIGNUP_BUTTON_TEXT: string;
+    SIGNUP_CONTINUE_WITH_GOOGLE_TEXT: string;
+    SIGNUP_CONTINUE_WITH_FACEBOOK_TEXT: string;
+    SIGNUP_SIGNUP_WITH_GITHUB_TEXT: string;
+    ALREADY_HAS_ACCOUNT_TEXT: string;
+    LOGIN_TEXT: string;
+    VERSION_TEXT: string;
+    CREATE_ACC_TEXT: string;
+    NAME_PLACE_HOLDER: string;
+    SERNAME_PLACE_HOLDER: string;
+    EMAIL_PLACE_HOLDER: string;
+    PASSWORD_PLACE_HOLDER: string;
+    CREATE_PASSWORD_PLACE_HOLDER: string;
+    NAME_IS_REQUIRED: string;
+    EMAIL_IS_REQUIRED: string;
+    VALID_EMAIL: string;
+    PASSWORD_IS_REQUIRED: string;
+    PASSWORD_SMALL_LETTER: string;
+    PASSWORD_CAPITAL_LETTER: string;
+    PASSWORD_NUMBER: string;
+    PASSWORD_MIN_LENGTH: (min: number) => string;
+    PASSWORD_DIFFICULTY_TEXT: string;
+    COMING_SOON_TEXT: string;
+    NOW_SHOWING_TEXT: string;
+    FILM_NAME: string;
+    BUY_TICKET: string;
+    GET_TICKET: string;
+    ABOUT: string;
+    FILM_CATEGORIES: filmCategory[];
+    LESS_TEXT: string;
+    MORE_TEXT: string;
+    COMMENTS: string;
+    COMMENT_IS_REQUIRED: string;
+    COMMENT_PLACE_HOLDER: string;
+    COMMENT_TOO_LONG: string;
+    SEND: string;
+    BOKKING_HEADER_TEXT: string;
+    SCHEDULE: string;
+    DATE: string;
+    CINEMA: string;
+    SEATS_AVAILABLE: string;
+    SEATS: string;
+    SCREEN: string;
+    SEAT_BUTTONS: SeatButtonType[];
+    BOOK_NOW: string;
+    CHOOSE_DAY: string;
+    SEARCH_MOVIE: string;
+    GENRE: string;
+    AUTHORS: string;
+    MORE: string;
+    READ_MORE_TEXT: string;
+    TOO_LONG: string;
+    FILTERS: string;
+    YEAR: string;
+    RAITING: string;
+    DIRECTORS: string;
+    SELECT_LANGUAGE: string;
+    SELECT_DIRECTORS: string;
+    GENRES: string;
+    SELECT_GENRES: string;
+    RESET: string;
+    FILM_RATING: string;
+    ACTORS: string;
+    REVIEWS: string;
+    DELETE: string;
+    BACK: string;
+    MONTH_NAMES: string[];
+    EDIT_PROFILE_INFO: string;
+    SETTINGS: string;
+    PRIVATE_POLICY: string;
+    LOG_OUT: string;
+    CANCEL: string;
+    WHITE: string;
+    BLACK: string;
+    EDIT_PROFILE: string;
+    CHANGE_PERSONAL_DATE: string;
+    CHANGE_PASSWORD: string;
+    EDIT: string;
+    ENTER_PASSWORD: string;
+    ENTER_NEW_PASSWORD: string;
+    PASSWORD_NOT_CORRECT: string;
+}
+export type passwordComplexityType = 'Low' | 'Medium' | 'High' | 'Invalid'
 
 export type filmCategory = {
     value: string;
@@ -170,6 +270,7 @@ export type FilmCommentsType = {
 }
 
 export type UserType = {
+    userId: string,
     firstName: string,
     lastName: string
 }
@@ -198,7 +299,6 @@ export interface Ticket {
     filmId: string,
     sessionId: string
 }
-
 
 export interface TopMovie {
     rank: number;
@@ -237,9 +337,9 @@ export interface FilmDitails {
     trailerUrl: string[];
 }
 
-export type SeatButtonType = "Available" | "Reserved" | "Selected"
+export type SeatButtonType = 'Available' | 'Reserved' | 'Selected'
 
-export type TicketFilterType = "upcoming" | "past" | "missed"
+export type TicketFilterType = 'upcoming' | 'past' | 'missed'
 
 export interface ListTicket {
     past: boolean,
@@ -250,3 +350,7 @@ export interface ListTicket {
     coast: number,
     poster: string
 }
+
+export type ThemeType = 'dark' | 'light'
+
+export type LanguagesType = 'en' | 'ru'

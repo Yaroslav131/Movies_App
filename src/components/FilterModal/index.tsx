@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
-import { Image, Text, TouchableOpacity, View, useColorScheme } from 'react-native';
-import { ligthTheme } from '@/theme';
+import React from 'react';
+import {
+  Image, Text, TouchableOpacity, View,
+} from 'react-native';
 import { IMAGES } from '@assets/images';
-import { DIRECTORS, FILTERS, GENRES, MAX_FILTER_RANING, MAX_FILTER_YEAR, MIN_FILTER_RANING, MIN_FILTER_YEAR, RAITING, RESET, SELECT_DIRECTORS, SELECT_GENRES, YEAR } from '@/constants';
+import { Dropdown } from 'react-native-element-dropdown';
 import { styles } from './styles';
 import Range from './Range';
-import { Dropdown } from 'react-native-element-dropdown';
 import { DropButtonItem } from '@/types';
+import {
+  MAX_FILTER_RANING, MAX_FILTER_YEAR, MIN_FILTER_RANING, MIN_FILTER_YEAR, languageDictionary,
+} from '@/constants';
+import { useAppSelector } from '@/hooks';
 
 interface FilterModalProps {
     onChangeYearsRage: (range: [number, number]) => void
@@ -23,106 +27,119 @@ interface FilterModalProps {
     selectedDirector: string
 }
 
-const FilterModal = (props: FilterModalProps) => {
-    const theme = useColorScheme() === "dark" ? ligthTheme : ligthTheme
+function FilterModal(props: FilterModalProps) {
+  const theme = useAppSelector((state) => state.theme.value);
+  const currentLanguage = useAppSelector((state) => state.language).value;
 
-    return (
-        <View style={[styles.container,
-        { backgroundColor: theme.filterModal.backgroundColor }]}>
-            <View style={styles.header}>
-                <Text style={[styles.headerTitle,
-                { color: theme.filterModal.color }]}>
-                    {FILTERS}
-                </Text>
-                <TouchableOpacity onPress={props.onClose} style={styles.headerImage}>
-                    <Image source={IMAGES.cancel} />
-                </TouchableOpacity>
-            </View>
+  const translations = languageDictionary[currentLanguage];
 
-            <View style={styles.itemContainer}>
-                <Text style={[styles.titleText,
-                { color: theme.filterModal.color }]}>
-                    {YEAR}
-                </Text>
-                <Range
-                    rage={props.yearsRage}
-                    minValue={MIN_FILTER_YEAR}
-                    maxValue={MAX_FILTER_YEAR}
-                    rangeStep={1}
-                    title={YEAR}
-                    onChange={props.onChangeYearsRage}
-                />
-            </View>
+  return (
+    <View style={[styles.container,
+      { backgroundColor: theme.filterModal.backgroundColor }]}
+    >
+      <View style={styles.header}>
+        <Text style={[styles.headerTitle,
+          { color: theme.filterModal.color }]}
+        >
+          {translations.FILTERS}
+        </Text>
+        <TouchableOpacity onPress={props.onClose} style={styles.headerImage}>
+          <Image source={IMAGES.cancel} />
+        </TouchableOpacity>
+      </View>
 
-            <View style={styles.itemContainer}>
-                <Text style={[styles.titleText,
-                { color: theme.filterModal.color }]}>
-                    {RAITING}
-                </Text>
-                <Range
-                    rage={props.rankingRage}
-                    minValue={MIN_FILTER_RANING}
-                    maxValue={MAX_FILTER_RANING}
-                    rangeStep={0.5}
-                    title={RAITING}
-                    onChange={props.onChangeRankinkRage}
-                />
-            </View>
+      <View style={styles.itemContainer}>
+        <Text style={[styles.titleText,
+          { color: theme.filterModal.color }]}
+        >
+          {translations.YEAR}
+        </Text>
+        <Range
+          rage={props.yearsRage}
+          minValue={MIN_FILTER_YEAR}
+          maxValue={MAX_FILTER_YEAR}
+          rangeStep={1}
+          title={translations.YEAR}
+          onChange={props.onChangeYearsRage}
+        />
+      </View>
 
-            <View style={styles.itemContainer}>
-                <Text style={[styles.titleText,
-                { color: theme.filterModal.color }]}>
-                    {DIRECTORS}
-                </Text>
-                <Dropdown
-                    style={[styles.dropdown,
-                    { borderColor: theme.filterModal.borderColor }]}
-                    placeholderStyle={[styles.placeholderStyle, { color: theme.filterModal.color }]}
-                    selectedTextStyle={[styles.selectedTextStyle, { color: theme.filterModal.color }]}
-                    data={props.directors}
-                    maxHeight={200}
-                    labelField="label"
-                    valueField="value"
-                    placeholder={SELECT_DIRECTORS}
-                    value={props.selectedDirector}
-                    onChange={item => {
-                        props.onChangeDirector(item.value)
-                    }}
-                />
-            </View>
+      <View style={styles.itemContainer}>
+        <Text style={[styles.titleText,
+          { color: theme.filterModal.color }]}
+        >
+          {translations.RAITING}
+        </Text>
+        <Range
+          rage={props.rankingRage}
+          minValue={MIN_FILTER_RANING}
+          maxValue={MAX_FILTER_RANING}
+          rangeStep={0.5}
+          title={translations.RAITING}
+          onChange={props.onChangeRankinkRage}
+        />
+      </View>
 
-            <View style={styles.itemContainer}>
-                <Text style={[styles.titleText,
-                { color: theme.filterModal.color }]}>
-                    {GENRES}
-                </Text>
-                <Dropdown
-                    style={[styles.dropdown,
-                    { borderColor: theme.filterModal.borderColor }]}
-                    placeholderStyle={[styles.placeholderStyle, { color: theme.filterModal.color }]}
-                    selectedTextStyle={[styles.selectedTextStyle, { color: theme.filterModal.color }]}
-                    inputSearchStyle={styles.inputSearchStyle}
-                    data={props.genres}
-                    maxHeight={200}
-                    labelField="label"
-                    valueField="value"
-                    placeholder={SELECT_GENRES}
-                    value={props.selectedGenre}
-                    onChange={item => {
-                        props.onChangeGenre(item.value)
-                    }}
-                />
-            </View>
-            <TouchableOpacity
-            onPress={props.handleResetFilter}
-            style={[styles.resetButton,
-            { backgroundColor: theme.filterModal.resetButtonColor }]}>
-                <Text style={[styles.resetButtonText,
-                { color: theme.filterModal.color }]}>{RESET}</Text>
-            </TouchableOpacity>
-            <Image style={styles.logoImage} source={IMAGES.dateLogo} />
-        </View >
-    );
-};
+      <View style={styles.itemContainer}>
+        <Text style={[styles.titleText,
+          { color: theme.filterModal.color }]}
+        >
+          {translations.DIRECTORS}
+        </Text>
+        <Dropdown
+          style={[styles.dropdown,
+            { borderColor: theme.filterModal.borderColor }]}
+          placeholderStyle={[styles.placeholderStyle, { color: theme.filterModal.color }]}
+          selectedTextStyle={[styles.selectedTextStyle, { color: theme.filterModal.color }]}
+          data={props.directors}
+          maxHeight={200}
+          labelField="label"
+          valueField="value"
+          placeholder={translations.SELECT_DIRECTORS}
+          value={props.selectedDirector}
+          onChange={(item) => {
+            props.onChangeDirector(item.value);
+          }}
+        />
+      </View>
+
+      <View style={styles.itemContainer}>
+        <Text style={[styles.titleText,
+          { color: theme.filterModal.color }]}
+        >
+          {translations.GENRES}
+        </Text>
+        <Dropdown
+          style={[styles.dropdown,
+            { borderColor: theme.filterModal.borderColor }]}
+          placeholderStyle={[styles.placeholderStyle, { color: theme.filterModal.color }]}
+          selectedTextStyle={[styles.selectedTextStyle, { color: theme.filterModal.color }]}
+          inputSearchStyle={styles.inputSearchStyle}
+          data={props.genres}
+          maxHeight={200}
+          labelField="label"
+          valueField="value"
+          placeholder={translations.SELECT_GENRES}
+          value={props.selectedGenre}
+          onChange={(item) => {
+            props.onChangeGenre(item.value);
+          }}
+        />
+      </View>
+      <TouchableOpacity
+        onPress={props.handleResetFilter}
+        style={[styles.resetButton,
+          { backgroundColor: theme.filterModal.resetButtonColor }]}
+      >
+        <Text style={[styles.resetButtonText,
+          { color: theme.filterModal.color }]}
+        >
+          {translations.RESET}
+        </Text>
+      </TouchableOpacity>
+      <Image style={styles.logoImage} source={IMAGES.dateLogo} />
+    </View>
+  );
+}
 
 export default FilterModal;

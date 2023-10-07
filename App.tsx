@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar, Appearance } from 'react-native';
+import { StatusBar } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import auth from '@react-native-firebase/auth';
-import { ligthTheme } from '@/theme';
 import Route from '@/route/Route';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Provider } from 'react-redux';
+import store from '@/store/store';
+import { useAppSelector } from '@/hooks';
 
 
 function App(): JSX.Element {
@@ -26,26 +28,13 @@ function App(): JSX.Element {
 
   if (initializing) return <></>;
 
-  const theme = Appearance.getColorScheme()
-
-  const background = theme === "light" ? ligthTheme.statusBar.color
-    : ligthTheme.statusBar.color
-
-  // if (!user) {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <StatusBar backgroundColor={background}
-        barStyle={theme === "light" ? "light-content" : "light-content"} />
-      <Route />
+    <Provider store={store}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        {!user ? <WelcomeScreen /> : <Route />}
       </GestureHandlerRootView>
+    </Provider>
   );
-  // }
-
-  // return (
-  //   <View>
-  //     <Text>Welcome {user.email}</Text>
-  //   </View>
-  // );
 }
 
 
