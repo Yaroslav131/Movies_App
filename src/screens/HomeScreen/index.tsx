@@ -1,23 +1,18 @@
 import { Text, View, StatusBar } from 'react-native';
 import { useEffect, useState } from 'react';
-import styles from './styles';
-
 import FilmTopicButton from '@/components/FilmTopicButton';
-
 import VideoPlayer from '@/components/VideoPlayer';
 import HorizontalSwiper from '@/components/HorizontalSwiper';
 import { fetchDataByCategory } from '@/api/rapid';
 import { Movie, filmCategory } from '@/types';
-
 import MainVideoControls from '@/components/MainVideoControls';
 import { languageDictionary } from '@/constants';
 import { useAppSelector } from '@/hooks';
+import styles from './styles';
 
 function HomeScreen() {
   const theme = useAppSelector((state) => state.theme.value);
-
   const currentLanguage = useAppSelector((state) => state.language).value;
-
   const translations = languageDictionary[currentLanguage];
 
   const [chosenTopic, setChosenTopic] = useState<filmCategory>(translations.FILM_CATEGORIES[0]);
@@ -55,12 +50,12 @@ function HomeScreen() {
             </VideoPlayer>
           </View>
           <View style={styles.topicContainer}>
-            {translations.FILM_CATEGORIES.map((x, index) => (
+            {translations.FILM_CATEGORIES.map((film, index) => (
               <FilmTopicButton
                 onClick={handleSetChosenTopic}
                 key={index}
                 chosenTopic={chosenTopic}
-                film={x}
+                film={film}
               />
             ))}
           </View>

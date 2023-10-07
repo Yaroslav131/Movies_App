@@ -24,20 +24,15 @@ function DetailScreen() {
   const [expanded, setExpanded] = useState(false);
   const [currentUser, setCurrentUser] = useState<UserType>();
   const [filmComments, setFilmComments] = useState<FilmCommentsType[]>([]);
+  const theme = useAppSelector((state) => state.theme.value);
+  const currentLanguage = useAppSelector((state) => state.language).value;
+  const translations = languageDictionary[currentLanguage];
+
   const route = useRoute<RootRouteProps<'Details'>>();
   const movie = route.params.moive;
   const navigation = useNavigation<StackNavigation>();
 
-  const theme = useAppSelector((state) => state.theme.value);
-  const currentLanguage = useAppSelector((state) => state.language).value;
-
-  const translations = languageDictionary[currentLanguage];
-
   StatusBar.setHidden(true);
-
-  function updateFilmComments(filmComments: FilmCommentsType[]) {
-    setFilmComments(filmComments);
-  }
 
   useEffect(() => {
     async function fetchFilmDataAndComments(imdbId: string) {
@@ -64,6 +59,11 @@ function DetailScreen() {
       stopListening();
     };
   }, [movie.imdbid]);
+
+
+  function updateFilmComments(filmComments: FilmCommentsType[]) {
+    setFilmComments(filmComments);
+  }
 
   const toggleDescription = () => {
     setExpanded(!expanded);

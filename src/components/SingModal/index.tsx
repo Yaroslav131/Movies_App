@@ -6,10 +6,8 @@ import {
   Animated,
 } from 'react-native';
 import { Field } from 'formik';
-import { IMAGES } from '@assets/images';
 import { useEffect, useState } from 'react';
-import styles from './styles';
-
+import { IMAGES } from '@assets/images';
 import AppFormField from '../AppFormField';
 import AppForm from '../AppForm';
 import AppFormSubmitButton from '../AppFormSubmitButton';
@@ -19,6 +17,7 @@ import { passwordComplexityType } from '@/types';
 import { checkPasswordComplexity } from '@/helpingFunctions';
 import { languageDictionary } from '@/constants';
 import { useAppSelector } from '@/hooks';
+import styles from './styles';
 
 interface SingModalProps {
     title: string

@@ -1,17 +1,17 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Text } from 'react-native';
 import { IMAGES } from '@assets/images';
 import { RangeSlider } from '@react-native-assets/slider';
-import { styles } from './styles';
 import { useAppSelector } from '@/hooks';
+import { styles } from './styles';
 
 interface RangeProps {
-    onChange: (range: [number, number]) => void
-    rage: [number, number]
-    title: string,
-    rangeStep: number,
-    minValue: number,
-    maxValue: number,
+  onChange: (range: [number, number]) => void
+  rage: [number, number]
+  title: string,
+  rangeStep: number,
+  minValue: number,
+  maxValue: number,
 }
 
 function Range(props: RangeProps) {
@@ -44,7 +44,7 @@ function Range(props: RangeProps) {
         <>
           <Image source={IMAGES.thumbImage} />
           <Text style={[styles.rangeText,
-            { color: theme.filterModal.color }]}
+          { color: theme.filterModal.color }]}
           >
             {thumb.value}
           </Text>

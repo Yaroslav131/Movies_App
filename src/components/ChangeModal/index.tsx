@@ -6,8 +6,6 @@ import {
 } from 'react-native';
 import { Field } from 'formik';
 import { IMAGES } from '@assets/images';
-import styles from './styles';
-
 import AppFormField from '../AppFormField';
 import AppForm from '../AppForm';
 import AppFormSubmitButton from '../AppFormSubmitButton';
@@ -15,6 +13,7 @@ import { validationSingUpSchema } from './constans';
 import { updateProfile } from '@/api/firebase/authFirebase';
 import { languageDictionary } from '@/constants';
 import { useAppSelector } from '@/hooks';
+import styles from './styles';
 
 interface ChangeModalProps {
     onPress: () => void,

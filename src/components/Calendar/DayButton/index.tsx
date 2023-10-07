@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { formatDateToYYYYMMDD, isDateInRange } from '@/helpingFunctions';
-import { styles } from './style';
 import { useAppSelector } from '@/hooks';
-
-interface DayButtonProps {
-    day: number,
-    date: string,
-    minDate: string,
-    maxDate: string,
-    selectedDate: Date,
-    onPress: (date: string) => void,
-}
-
-type DateButtonType = 'disabled' | 'selected' | 'available'
+import { styles } from './style';
+import { DateButtonType, DayButtonProps } from './types';
 
 function DayButton({
   onPress, date, maxDate, minDate, day, selectedDate,

@@ -1,10 +1,10 @@
 import {
-  View, Image, TextInput, Text,
+  View, TextInput, Text,
 } from 'react-native';
 import { useFormikContext } from 'formik';
-import styles from './styles';
 import UserAvatar from '../UserAvatar';
 import { useAppSelector } from '@/hooks';
+import styles from './styles';
 
 function CommentFormField(props: any) {
   const {
@@ -44,10 +44,9 @@ function CommentFormField(props: any) {
           value={value}
           {...inputProps}
           style={[styles.input,
-            { color: theme.commentFormField.textColor },
-            { borderColor: theme.commentFormField.borderColor }]}
+          { color: theme.commentFormField.textColor },
+          { borderColor: theme.commentFormField.borderColor }]}
         />
-
       </View>
     </View>
   );

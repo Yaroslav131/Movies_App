@@ -3,12 +3,12 @@ import {
 } from 'react-native';
 import { IMAGES } from '@assets/images';
 import { useNavigation } from '@react-navigation/native';
-import styles from './styles';
 import { toUpperCase } from '@/helpingFunctions';
 import { TopMovie } from '@/types';
-import { StackNavigation } from '@/route/TopFilmRoot/TopFilmStack';
 import { languageDictionary } from '@/constants';
 import { useAppSelector } from '@/hooks';
+import { StackNavigation } from '@/route/TopFilmRoot/types';
+import styles from './styles';
 
 function TopFilmFlatListItem(item: TopMovie) {
   const navigation = useNavigation<StackNavigation>();

@@ -99,7 +99,7 @@ function WelcomeScreen() {
     },
   ];
 
-  const sponsoresImages = SPONSERS_DATA.map((x, index) => <Image key={index} source={x.image} />);
+  const sponsoresImages = SPONSERS_DATA.map((image, index) => <Image key={index} source={image} />);
 
   const renderSingUpItem = ({ item }: { item: SingUpButtonData }) => (
     <SingUpButton

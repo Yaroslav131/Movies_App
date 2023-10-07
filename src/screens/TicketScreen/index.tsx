@@ -3,20 +3,18 @@ import {
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import styles from './styles';
-import { RootRouteProps } from '@/route/TicketRoot/TicketRoute';
 import { getFilmSession, getTickets, handleDeleteTicket } from '@/api/firebase/filmFirebase';
 import { getFilmByTitle, getMoviesInfo } from '@/api/rapid';
 import {
   filterMissedTickets, filterPastTickets, filterUpcomingTickets, formatDateMonthYear,
 } from '@/helpingFunctions';
 import { ListTicket } from '@/types';
-
 import TicketFlatListItem from '@/components/TicketFlatListItem';
 import ModalContainer from '@/components/ModalContainer';
 import DeleteTicketModal from '@/components/DeleteTicketModal';
 import { useAppSelector } from '@/hooks';
-
+import { RootRouteProps } from '@/route/TicketRoot/types';
+import styles from './styles';
 interface SectionListData {
     title: string,
     data: ListTicket[]
@@ -41,17 +39,17 @@ function TicketScreen() {
 
     const tickets = await getTickets();
 
-    const listTickets = await Promise.all(tickets.map(async (x) => {
-      const session = await getFilmSession(x.filmId, x.sessionId);
-      const film = await getMoviesInfo(x.filmId);
+    const listTickets = await Promise.all(tickets.map(async (ticket) => {
+      const session = await getFilmSession(ticket.filmId, ticket.sessionId);
+      const film = await getMoviesInfo(ticket.filmId);
       const filmInfo = await getFilmByTitle(film?.title ?? '');
       const flatListTicket: ListTicket = {
-        past: x.past,
+        past: ticket.past,
         date: session?.date ?? '',
-        coast: (session?.coast ?? 0) * x.ticketCount,
+        coast: (session?.coast ?? 0) * ticket.ticketCount,
         poster: filmInfo?.imageurl[0] ?? '',
-        seatCount: x.ticketCount,
-        ticketId: x.ticketId,
+        seatCount: ticket.ticketCount,
+        ticketId: ticket.ticketId,
         title: film?.title ?? '',
       };
       return flatListTicket;

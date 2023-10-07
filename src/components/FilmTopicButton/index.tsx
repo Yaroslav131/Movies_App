@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity } from 'react-native';
-import styles from './styles';
 import { filmCategory } from '@/types';
 import { useAppSelector } from '@/hooks';
+import styles from './styles';
 
 interface FilmTopicButtonProps {
     film: filmCategory

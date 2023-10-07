@@ -1,8 +1,8 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { useFormikContext } from 'formik';
-import styles from './styles';
 import { useAppSelector } from '@/hooks';
+import styles from './styles';
 
 interface AppFormSubmitButtonProps {
     title: string;

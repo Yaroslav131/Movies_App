@@ -2,16 +2,14 @@ import {
   FlatList, Image, Text, TouchableOpacity, View,
   ScrollView,
 } from 'react-native';
-import { IMAGES } from '@assets/images';
 import { useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { styles } from './styles';
-import { RootRouteProps, StackNavigation } from '@/route/HomeStack/HomeStack';
+import { IMAGES } from '@assets/images';
 import { FilmSession, Seat } from '@/types';
-import SessionButton from '@/components/SessionButton';
 import {
   isSeatInArray, divideSeatsBySeatNumber, formatDate, getFilmSessionsByDate, updateSeatsInFilmSessions, getId,
 } from '@/helpingFunctions';
+import SessionButton from '@/components/SessionButton';
 import SeatButtonType from '@/components/SeatButtonType';
 import ModalContainer from '@/components/ModalContainer';
 import MyCalendar from '@/components/Calendar';
@@ -19,6 +17,9 @@ import { getFilmSessions, handleBuyTicket, handleUpdateSession } from '@/api/fir
 import { onDisplayNotification } from '@/notifications';
 import { languageDictionary, mockFilmSessions } from '@/constants';
 import { useAppSelector } from '@/hooks';
+import { RootRouteProps, StackNavigation } from '@/route/HomeStack/types';
+
+import { styles } from './styles';
 
 function BookingFilms() {
   const theme = useAppSelector((state) => state.theme.value);
@@ -28,19 +29,16 @@ function BookingFilms() {
   const [chosenSession, setChosenSession] = useState<string>('');
   const [chosenSeats, setChosenSeats] = useState<Seat[]>([]);
   const [isDateModalVisible, setIsDateModalVisible] = useState(false);
+  const [seats, setSeats] = useState<[Seat[], Seat[]]>([[], []]);
 
   const route = useRoute<RootRouteProps<'Booking'>>();
   const movie = route.params.moive;
   const navigation = useNavigation<StackNavigation>();
 
-  const [seats, setSeats] = useState<[Seat[], Seat[]]>([[], []]);
-
   const chosenSeatsCount = chosenSeats ? chosenSeats.length : 0;
-  const chosenSessionObject = sessions.find((x) => x.id === chosenSession);
+  const chosenSessionObject = sessions.find((session) => session.id === chosenSession);
   const totalPrice = chosenSessionObject ? chosenSeatsCount * chosenSessionObject.coast : 0;
-
   const currentLanguage = useAppSelector((state) => state.language).value;
-
   const translations = languageDictionary[currentLanguage];
 
   useEffect(() => {
@@ -53,7 +51,7 @@ function BookingFilms() {
     }
 
     if (todaySessions.length != 0) {
-      setSeats(divideSeatsBySeatNumber(todaySessions.find((x) => x.id === chosenSession)!.seats));
+      setSeats(divideSeatsBySeatNumber(todaySessions.find((session) => session.id === chosenSession)!.seats));
       setChosenSeats([]);
     } else {
       setSeats([[], []]);
@@ -88,17 +86,17 @@ function BookingFilms() {
     setIsDateModalVisible(!isDateModalVisible);
   }
 
-  function handlePressSeat(seat: Seat) {
-    if (chosenSeats && isSeatInArray(seat, chosenSeats)) {
+  function handlePressSeat(inputSeat: Seat) {
+    if (chosenSeats && isSeatInArray(inputSeat, chosenSeats)) {
       const sortedSeats = chosenSeats
-        .filter((x) => !(x.row === seat.row && x.seatNumber === seat.seatNumber));
+        .filter((seat) => !(seat.row === inputSeat.row && seat.seatNumber === inputSeat.seatNumber));
 
       setChosenSeats(sortedSeats);
-    } else if (seat.isAvailable) {
+    } else if (inputSeat.isAvailable) {
       if (chosenSeats) {
-        setChosenSeats([...chosenSeats, seat]);
+        setChosenSeats([...chosenSeats, inputSeat]);
       } else {
-        setChosenSeats([seat]);
+        setChosenSeats([inputSeat]);
       }
     }
   }
@@ -119,7 +117,7 @@ function BookingFilms() {
       const ticketId = getId();
       const updatedSessions = updateSeatsInFilmSessions(ticketId, sessions, chosenSession, chosenSeats);
 
-      const session = sessions.find((x) => x.id === chosenSession);
+      const session = sessions.find((session) => session.id === chosenSession);
       handleUpdateSession(movie.imdbid, updatedSessions);
       handleBuyTicket(ticketId, movie.imdbid, chosenSession, chosenSeats.length);
       onDisplayNotification(new Date(session!.date), movie.title, session!.timeStart);
@@ -150,7 +148,7 @@ function BookingFilms() {
   return (
     <>
       <View style={[styles.container,
-        { backgroundColor: theme.bookingFilms.backgroundColor }]}
+      { backgroundColor: theme.bookingFilms.backgroundColor }]}
       >
         <View style={styles.header}>
           <TouchableOpacity
@@ -161,7 +159,7 @@ function BookingFilms() {
           </TouchableOpacity>
           <View style={styles.headerTextContainer}>
             <Text style={[styles.headerText,
-              { color: theme.bookingFilms.color }]}
+            { color: theme.bookingFilms.color }]}
             >
               {translations.BOKKING_HEADER_TEXT}
             </Text>
@@ -169,13 +167,13 @@ function BookingFilms() {
         </View>
         <View style={[styles.scheduleContainer]}>
           <Text style={[styles.title,
-            { color: theme.bookingFilms.color }]}
+          { color: theme.bookingFilms.color }]}
           >
             {translations.SCHEDULE}
           </Text>
           <View style={[styles.datepickerContainer]}>
             <Text style={[styles.dateTitle,
-              { color: theme.bookingFilms.color }]}
+            { color: theme.bookingFilms.color }]}
             >
               {translations.DATE}
               :
@@ -197,12 +195,12 @@ function BookingFilms() {
         />
         <View style={styles.seatContainer}>
           <Text style={[styles.title,
-            { color: theme.bookingFilms.color }]}
+          { color: theme.bookingFilms.color }]}
           >
             {translations.SEATS}
           </Text>
           <Text style={[styles.screenText,
-            { color: theme.bookingFilms.color }]}
+          { color: theme.bookingFilms.color }]}
           >
             {translations.SCREEN}
           </Text>
@@ -231,20 +229,20 @@ function BookingFilms() {
             />
           </ScrollView>
           <View style={styles.seatButtonsConainer}>
-            {translations.SEAT_BUTTONS.map((x, index) => <SeatButtonType text={x} type={x} key={index} />)}
+            {translations.SEAT_BUTTONS.map((seat, index) => <SeatButtonType text={seat} type={seat} key={index} />)}
           </View>
         </View>
         <View style={styles.bottomContainer}>
           <View style={styles.priceContainer}>
             <Text style={[styles.seatsCounter,
-              { color: theme.bookingFilms.color }]}
+            { color: theme.bookingFilms.color }]}
             >
               {chosenSeats?.length}
               {' '}
               {translations.SEATS}
             </Text>
             <Text style={[styles.priceText,
-              { color: theme.bookingFilms.color }]}
+            { color: theme.bookingFilms.color }]}
             >
               {totalPrice}
               {' '}
@@ -254,10 +252,10 @@ function BookingFilms() {
           <TouchableOpacity
             onPress={() => { onSubmitBuy(); }}
             style={[styles.buyButton,
-              { backgroundColor: theme.bookingFilms.buyButton }]}
+            { backgroundColor: theme.bookingFilms.buyButton }]}
           >
             <Text style={[styles.buyButtonText,
-              { color: theme.bookingFilms.color }]}
+            { color: theme.bookingFilms.color }]}
             >
               {translations.BOOK_NOW}
             </Text>

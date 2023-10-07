@@ -56,12 +56,12 @@ function DetailTopScreen() {
     lightVibrantColor: images?.platform === 'android' ? images.lightVibrant : theme.detailTopScreen.backgroundColor,
   };
 
-  const actorsString = filmDitails?.people.map((x) => {
-    if (x.category === 'actor' || x.category === 'actress') {
-      return x.characters?.join(', ');
+  const actorsString = filmDitails?.people.map((person) => {
+    if (person.category === 'actor' || person.category === 'actress') {
+      return person.characters?.join(', ');
     }
     return '';
-  }).filter((x) => x != '').join(', ');
+  }).filter((person) => person != '').join(', ');
 
   useEffect(() => {
     getMoviesInfo(movie.imdbid).then((result) => {
@@ -219,7 +219,8 @@ function DetailTopScreen() {
                 style={styles.content}
               >
                 <View style={styles.playerContainer}>
-                  <VideoPlayer isPlayerRound={true} />
+                  <VideoPlayer isPlayerRound={true} >
+                  </VideoPlayer>
                 </View>
 
                 <Text style={[styles.informText,

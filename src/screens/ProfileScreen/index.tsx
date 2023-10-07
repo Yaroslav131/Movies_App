@@ -5,7 +5,6 @@ import { IMAGES } from '@assets/images';
 import { useEffect, useState } from 'react';
 import Snackbar from 'react-native-snackbar';
 import styles from './styles';
-import { lightTheme } from '@/theme';
 import { getCurrentUser, handleSignOut } from '@/api/firebase/authFirebase';
 import { UserType } from '@/types';
 import { handleCutText } from '@/helpingFunctions';
@@ -18,20 +17,17 @@ import { setDarkTheme, setLightTheme } from '@/slices/themeSlice';
 import SettingModal from '@/components/SettingModal';
 
 interface settingButton {
-    onPress: () => void,
-    title: string
+  onPress: () => void,
+  title: string
 }
 
 function ProfileScreen() {
   const theme = useAppSelector((state) => state.theme.value);
   const dispatch = useAppDispatch();
-
   const currentLanguage = useAppSelector((state) => state.language).value;
-
   const translations = languageDictionary[currentLanguage];
 
   const [user, setUser] = useState<UserType | null>(null);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContant] = useState(<></>);
 
@@ -63,10 +59,10 @@ function ProfileScreen() {
       <TouchableOpacity
         onPress={onPress}
         style={[styles.menuButton,
-          { backgroundColor: theme.profileScreen.menuBackgroundColor }]}
+        { backgroundColor: theme.profileScreen.menuBackgroundColor }]}
       >
         <Text style={[styles.menuButtonText,
-          { color: theme.ticketScreen.color }]}
+        { color: theme.ticketScreen.color }]}
         >
           {title}
         </Text>
@@ -93,20 +89,22 @@ function ProfileScreen() {
     <>
       <StatusBar backgroundColor={theme.ticketScreen.backgroundColor} />
       <View style={[styles.container,
-        { backgroundColor: theme.profileScreen.backgroundColor }]}
+      { backgroundColor: theme.profileScreen.backgroundColor }]}
       >
         <View style={styles.topContainer}>
           <Image source={IMAGES.userAvatar} />
           <View style={styles.userInfoContainer}>
             <Text style={[styles.nameText,
-              { color: theme.profileScreen.color }]}
+            { color: theme.profileScreen.color }]}
             >
               {user?.firstName}
               {' '}
               {user?.lastName}
             </Text>
-            {/* <Text style={[styles.idText,
-                        { color: theme.profileScreen.color }]}>USER ID: {handleCutText(user?.userId!, 10)}</Text> */}
+            <Text style={[styles.idText,
+            { color: theme.profileScreen.color }]}>
+              USER ID: {handleCutText(user?.userId!, 10)}
+            </Text>
           </View>
         </View>
         <View style={styles.bottomContainer}>
@@ -121,11 +119,11 @@ function ProfileScreen() {
             <TouchableOpacity
               onPress={() => { dispatch(setLightTheme()); }}
               style={[styles.themeButton,
-                styles.themeButtonLeft,
-                { backgroundColor: theme.profileScreen.whiteButton }]}
+              styles.themeButtonLeft,
+              { backgroundColor: theme.profileScreen.whiteButton }]}
             >
               <Text style={[styles.themeButtonText,
-                { color: theme.profileScreen.whiteButtonText }]}
+              { color: theme.profileScreen.whiteButtonText }]}
               >
                 {translations.WHITE}
               </Text>
@@ -133,11 +131,11 @@ function ProfileScreen() {
             <TouchableOpacity
               onPress={() => { dispatch(setDarkTheme()); }}
               style={[styles.themeButton,
-                styles.themeButtonRight,
-                { backgroundColor: theme.profileScreen.blackButton }]}
+              styles.themeButtonRight,
+              { backgroundColor: theme.profileScreen.blackButton }]}
             >
               <Text style={[styles.themeButtonText,
-                { color: theme.profileScreen.blackButtonText }]}
+              { color: theme.profileScreen.blackButtonText }]}
               >
                 {translations.BLACK}
               </Text>

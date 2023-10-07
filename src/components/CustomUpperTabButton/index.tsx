@@ -28,7 +28,7 @@ const CustomTabBar: React.FC<CustomTabBarProps> = ({ state, descriptors, navigat
             navigation.navigate(route.name);
           }
         };
-
+        
         return (
           <TouchableOpacity
             activeOpacity={1}

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { getUserById } from '@/api/firebase/authFirebase';
 import { FilmCommentsType, Theme, UserType } from '@/types';
-import { styles } from './styles';
 import { timeAgo } from '@/helpingFunctions';
 import UserAvatar from '../UserAvatar';
+import { styles } from './styles';
 
 interface CommentProps {
     item: FilmCommentsType

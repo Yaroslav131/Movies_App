@@ -2,29 +2,29 @@ import React from 'react';
 import {
   Image, Text, TouchableOpacity, View,
 } from 'react-native';
-import { IMAGES } from '@assets/images';
 import { Dropdown } from 'react-native-element-dropdown';
-import { styles } from './styles';
+import { IMAGES } from '@assets/images';
 import Range from './Range';
 import { DropButtonItem } from '@/types';
 import {
   MAX_FILTER_RANING, MAX_FILTER_YEAR, MIN_FILTER_RANING, MIN_FILTER_YEAR, languageDictionary,
 } from '@/constants';
 import { useAppSelector } from '@/hooks';
+import { styles } from './styles';
 
 interface FilterModalProps {
-    onChangeYearsRage: (range: [number, number]) => void
-    onChangeRankinkRage: (range: [number, number]) => void
-    yearsRage: [number, number]
-    rankingRage: [number, number]
-    onClose: () => void,
-    onChangeDirector: (director: string) => void
-    onChangeGenre: (genre: string) => void
-    directors: DropButtonItem[],
-    genres: DropButtonItem[]
-    handleResetFilter: () => void
-    selectedGenre: string
-    selectedDirector: string
+  onChangeYearsRage: (range: [number, number]) => void
+  onChangeRankinkRage: (range: [number, number]) => void
+  yearsRage: [number, number]
+  rankingRage: [number, number]
+  onClose: () => void,
+  onChangeDirector: (director: string) => void
+  onChangeGenre: (genre: string) => void
+  directors: DropButtonItem[],
+  genres: DropButtonItem[]
+  handleResetFilter: () => void
+  selectedGenre: string
+  selectedDirector: string
 }
 
 function FilterModal(props: FilterModalProps) {
@@ -35,11 +35,11 @@ function FilterModal(props: FilterModalProps) {
 
   return (
     <View style={[styles.container,
-      { backgroundColor: theme.filterModal.backgroundColor }]}
+    { backgroundColor: theme.filterModal.backgroundColor }]}
     >
       <View style={styles.header}>
         <Text style={[styles.headerTitle,
-          { color: theme.filterModal.color }]}
+        { color: theme.filterModal.color }]}
         >
           {translations.FILTERS}
         </Text>
@@ -50,7 +50,7 @@ function FilterModal(props: FilterModalProps) {
 
       <View style={styles.itemContainer}>
         <Text style={[styles.titleText,
-          { color: theme.filterModal.color }]}
+        { color: theme.filterModal.color }]}
         >
           {translations.YEAR}
         </Text>
@@ -66,7 +66,7 @@ function FilterModal(props: FilterModalProps) {
 
       <View style={styles.itemContainer}>
         <Text style={[styles.titleText,
-          { color: theme.filterModal.color }]}
+        { color: theme.filterModal.color }]}
         >
           {translations.RAITING}
         </Text>
@@ -82,13 +82,13 @@ function FilterModal(props: FilterModalProps) {
 
       <View style={styles.itemContainer}>
         <Text style={[styles.titleText,
-          { color: theme.filterModal.color }]}
+        { color: theme.filterModal.color }]}
         >
           {translations.DIRECTORS}
         </Text>
         <Dropdown
           style={[styles.dropdown,
-            { borderColor: theme.filterModal.borderColor }]}
+          { borderColor: theme.filterModal.borderColor }]}
           placeholderStyle={[styles.placeholderStyle, { color: theme.filterModal.color }]}
           selectedTextStyle={[styles.selectedTextStyle, { color: theme.filterModal.color }]}
           data={props.directors}
@@ -105,13 +105,13 @@ function FilterModal(props: FilterModalProps) {
 
       <View style={styles.itemContainer}>
         <Text style={[styles.titleText,
-          { color: theme.filterModal.color }]}
+        { color: theme.filterModal.color }]}
         >
           {translations.GENRES}
         </Text>
         <Dropdown
           style={[styles.dropdown,
-            { borderColor: theme.filterModal.borderColor }]}
+          { borderColor: theme.filterModal.borderColor }]}
           placeholderStyle={[styles.placeholderStyle, { color: theme.filterModal.color }]}
           selectedTextStyle={[styles.selectedTextStyle, { color: theme.filterModal.color }]}
           inputSearchStyle={styles.inputSearchStyle}
@@ -129,10 +129,10 @@ function FilterModal(props: FilterModalProps) {
       <TouchableOpacity
         onPress={props.handleResetFilter}
         style={[styles.resetButton,
-          { backgroundColor: theme.filterModal.resetButtonColor }]}
+        { backgroundColor: theme.filterModal.resetButtonColor }]}
       >
         <Text style={[styles.resetButtonText,
-          { color: theme.filterModal.color }]}
+        { color: theme.filterModal.color }]}
         >
           {translations.RESET}
         </Text>

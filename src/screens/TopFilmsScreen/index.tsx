@@ -194,9 +194,9 @@ function TopFilmsScreen() {
           selectedGenre={genre}
           handleResetFilter={handleResetFilter}
           directors={getUniqueDirectorsAlphabetically(topMovies)
-            .map((x) => ({ label: x, value: x } as DropButtonItem))}
+            .map((director) => ({ label: director, value: director } as DropButtonItem))}
           genres={getUniqueGenresAlphabetically(topMovies)
-            .map((x) => ({ label: x, value: x } as DropButtonItem))}
+            .map((genre) => ({ label: genre, value: genre } as DropButtonItem))}
           onChangeDirector={onChangeDirector}
           onChangeGenre={onChangeGenre}
           rankingRage={rankingRage}

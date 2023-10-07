@@ -83,7 +83,7 @@ export function handleBuyTicket(tickedId: string, filmId: string, sessionId: str
     ticketCount,
   };
 
-  getCurrentUserId().then((x) => {
+  getCurrentUserId().then((user) => {
     try {
       firebase
         .app()

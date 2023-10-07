@@ -5,9 +5,9 @@ import {
   View,
 } from 'react-native';
 import { IMAGES } from '@assets/images';
-import styles from './styles';
 import { languageDictionary } from '@/constants';
 import { useAppSelector } from '@/hooks';
+import styles from './styles';
 
 interface DeleteTicketModalProps {
     onCloseModal: () => void,

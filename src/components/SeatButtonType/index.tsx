@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native';
-import { styles } from './styles';
 import { SeatButtonType } from '@/types';
 import { useAppSelector } from '@/hooks';
+import { styles } from './styles';
 
 interface SeatButtonProps {
     type: SeatButtonType,

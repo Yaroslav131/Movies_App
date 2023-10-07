@@ -6,24 +6,24 @@ import {
 } from 'react';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import { useNavigation } from '@react-navigation/native';
-import styles from './styles';
 import { getLenghtOffset, getMiddleIndex, getMiddleOffset } from '@/helpingFunctions';
 import { Movie } from '@/types';
-import { StackNavigation } from '@/route/HomeStack/HomeStack';
 import { useAppSelector } from '@/hooks';
+import { StackNavigation } from '@/route/HomeStack/types';
+import styles from './styles';
 
 const { width } = Dimensions.get('screen');
 
 interface ItemProps {
-    filmId?: string,
-    image?: string,
-    title?: string,
-    topics?: string[],
-    id: string
+  filmId?: string,
+  image?: string,
+  title?: string,
+  topics?: string[],
+  id: string
 }
 
 interface HorizontalSwiperProps {
-    movies: Movie[]
+  movies: Movie[]
 }
 
 function HorizontalSwiper(props: HorizontalSwiperProps) {
@@ -42,13 +42,17 @@ function HorizontalSwiper(props: HorizontalSwiperProps) {
   const [focusedItemIndex, setfocusedItemIndex] = useState(middleIndex);
   const flatListRef = useRef<FlatList>(null);
 
+  useEffect(() => {
+    scrollToMiddle();
+  }, []);
+
   function handleSetMovies() {
-    const fetchedMovies = props.movies.map((x, index) => ({
+    const fetchedMovies = props.movies.map((movie, index) => ({
       id: index.toString(),
-      filmId: x.imdbid,
-      image: x.imageurl[0],
-      title: x.title,
-      topics: x.genre,
+      filmId: movie.imdbid,
+      image: movie.imageurl[0],
+      title: movie.title,
+      topics: movie.genre,
     }));
 
     return [{ id: 'sideItemWidth' }, ...fetchedMovies, { id: 'sideItemWidth' }];
@@ -57,10 +61,6 @@ function HorizontalSwiper(props: HorizontalSwiperProps) {
   const scrollToMiddle = () => {
     flatListRef.current?.scrollToOffset({ offset: middleOffset, animated: false });
   };
-
-  useEffect(() => {
-    scrollToMiddle();
-  }, []);
 
   const onSwipeLeft = () => {
     if (scrollOffset + itemWidth < scrollOffsetLength) {
@@ -85,7 +85,7 @@ function HorizontalSwiper(props: HorizontalSwiperProps) {
   };
 
   function handleNavigateToFilm(id: string) {
-    navigation.navigate('Details', { moive: props.movies.find((x) => x.imdbid == id)! });
+    navigation.navigate('Details', { moive: props.movies.find((movie) => movie.imdbid == id)! });
   }
 
   const renderItem = ({ item }: { item: ItemProps }) => (
@@ -98,8 +98,8 @@ function HorizontalSwiper(props: HorizontalSwiperProps) {
       <View
         key={item.id}
         style={[styles.itemContainer,
-          { width: item.id === 'sideItemWidth' ? sideItemWidth : itemWidth },
-          item.id === focusedItemIndex.toString() ? styles.focusedContainer : styles.smallContainer,
+        { width: item.id === 'sideItemWidth' ? sideItemWidth : itemWidth },
+        item.id === focusedItemIndex.toString() ? styles.focusedContainer : styles.smallContainer,
         ]}
       >
         {item.id !== 'sideItemWidth' ? (
@@ -136,13 +136,13 @@ function HorizontalSwiper(props: HorizontalSwiperProps) {
         />
       </GestureRecognizer>
       <View style={styles.topicsContainer}>
-        {movies[focusedItemIndex + 1].topics?.map((x, index) => (
+        {movies[focusedItemIndex + 1].topics?.map((topic, index) => (
           <View
             key={index}
             style={[styles.topics,
-              { backgroundColor: theme.horizontalSwiper.backgroundColor }]}
+            { backgroundColor: theme.horizontalSwiper.backgroundColor }]}
           >
-            <Text style={[styles.topicsText, { color: theme.horizontalSwiper.color }]}>{x}</Text>
+            <Text style={[styles.topicsText, { color: theme.horizontalSwiper.color }]}>{topic}</Text>
           </View>
         ))}
       </View>

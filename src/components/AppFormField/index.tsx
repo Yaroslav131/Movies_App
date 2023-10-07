@@ -1,8 +1,8 @@
 import {
   View, Image, TextInput, Text,
 } from 'react-native';
-import styles from './styles';
 import { useAppSelector } from '@/hooks';
+import styles from './styles';
 
 function AppFormField(props: any) {
   const {

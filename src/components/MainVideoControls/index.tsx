@@ -4,10 +4,10 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
-import { StackNavigation } from '@/route/HomeStack/HomeStack';
 import { Movie } from '@/types';
 import { languageDictionary } from '@/constants';
 import { useAppSelector } from '@/hooks';
+import { StackNavigation } from '@/route/HomeStack/types';
 
 interface MainVideoControlsProps {
     movie: Movie

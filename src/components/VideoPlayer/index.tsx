@@ -2,15 +2,15 @@ import Video from 'react-native-video';
 import {
   Image, TouchableOpacity, View, TouchableWithoutFeedback,
 } from 'react-native';
-import { IMAGES } from '@assets/images';
 import { useState } from 'react';
+import { IMAGES } from '@assets/images';
 import styles from './styles';
 
 interface VideoPlayerProps {
-    children: React.ReactNode;
-    centerButton?: React.ReactNode;
-    isPlayerRound: boolean,
-    video?: string
+  children: React.ReactNode;
+  centerButton?: React.ReactNode;
+  isPlayerRound: boolean,
+  video?: string
 }
 
 function VideoPlayer(props: VideoPlayerProps) {
@@ -54,7 +54,7 @@ function VideoPlayer(props: VideoPlayerProps) {
       </TouchableWithoutFeedback>
 
       <View style={[styles.poster,
-        { display: isPosterShow ? 'flex' : 'none' }]}
+      { display: isPosterShow ? 'flex' : 'none' }]}
       >
         <Image
           style={[props.isPlayerRound
