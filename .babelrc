@@ -1,0 +1,14 @@
+{
+    "plugins": ["@babel/plugin-transform-react-jsx-source",   
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "./src" ,
+          "@assets": "./assets" ,
+          "@globalStyles": "./globalStyles" 
+        }
+      }
+    ]
+  ]
+  }
